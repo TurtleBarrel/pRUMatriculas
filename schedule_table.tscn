@@ -1,0 +1,234 @@
+[gd_scene format=3 uid="uid://blsel7v2i4j1m"]
+
+[ext_resource type="Script" uid="uid://ctl273seechpq" path="res://table_sections_container.gd" id="1_fv8mu"]
+[ext_resource type="Theme" uid="uid://l2pbyshw56vg" path="res://themes/schedule_table.tres" id="2_ednj3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ednj3"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.18039216, 0.18039216, 0.18039216, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+corner_detail = 5
+
+[node name="Table" type="PanelContainer" unique_id=1503008307]
+custom_maximum_size = Vector2(-1, 250)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ednj3")
+script = ExtResource("1_fv8mu")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=1085792944]
+custom_minimum_size = Vector2(0, 75)
+layout_mode = 2
+horizontal_scroll_mode = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="ScrollContainer" unique_id=2006303983]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="sec_column" type="VBoxContainer" parent="ScrollContainer/HBoxContainer" unique_id=95187130]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+
+[node name="Section" type="Label" parent="ScrollContainer/HBoxContainer/sec_column" unique_id=118355359]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme = ExtResource("2_ednj3")
+text = "Section"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="sec_scroller" type="ScrollContainer" parent="ScrollContainer/HBoxContainer/sec_column" unique_id=2008622683]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="sec_container" type="VBoxContainer" parent="ScrollContainer/HBoxContainer/sec_column/sec_scroller" unique_id=581793159]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="----------------" type="VSeparator" parent="ScrollContainer/HBoxContainer" unique_id=71686115]
+layout_mode = 2
+theme = ExtResource("2_ednj3")
+theme_override_constants/separation = 3
+
+[node name="cap_column" type="VBoxContainer" parent="ScrollContainer/HBoxContainer" unique_id=1117112978]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.07
+
+[node name="Capacity" type="Label" parent="ScrollContainer/HBoxContainer/cap_column" unique_id=288091595]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme = ExtResource("2_ednj3")
+text = "Cap."
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 5
+
+[node name="cap_scroller" type="ScrollContainer" parent="ScrollContainer/HBoxContainer/cap_column" unique_id=1904467551]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="cap_container" type="VBoxContainer" parent="ScrollContainer/HBoxContainer/cap_column/cap_scroller" unique_id=782373131]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="----------------2" type="VSeparator" parent="ScrollContainer/HBoxContainer" unique_id=332992427]
+layout_mode = 2
+theme = ExtResource("2_ednj3")
+theme_override_constants/separation = 3
+
+[node name="cred_column" type="VBoxContainer" parent="ScrollContainer/HBoxContainer" unique_id=787058920]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.07
+
+[node name="Credits" type="Label" parent="ScrollContainer/HBoxContainer/cred_column" unique_id=370159334]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+theme = ExtResource("2_ednj3")
+text = "Crds."
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 5
+
+[node name="cred_scroller" type="ScrollContainer" parent="ScrollContainer/HBoxContainer/cred_column" unique_id=248050746]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="cred_container" type="VBoxContainer" parent="ScrollContainer/HBoxContainer/cred_column/cred_scroller" unique_id=1246937024]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="----------------3" type="VSeparator" parent="ScrollContainer/HBoxContainer" unique_id=1765961602]
+layout_mode = 2
+theme = ExtResource("2_ednj3")
+theme_override_constants/separation = 3
+
+[node name="meet_column" type="VBoxContainer" parent="ScrollContainer/HBoxContainer" unique_id=452890821]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+
+[node name="Meetings" type="Label" parent="ScrollContainer/HBoxContainer/meet_column" unique_id=1835303661]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.4
+theme = ExtResource("2_ednj3")
+text = "Meetings"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 5
+
+[node name="meet_scroller" type="ScrollContainer" parent="ScrollContainer/HBoxContainer/meet_column" unique_id=779162999]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="meet_container" type="VBoxContainer" parent="ScrollContainer/HBoxContainer/meet_column/meet_scroller" unique_id=745634556]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="----------------4" type="VSeparator" parent="ScrollContainer/HBoxContainer" unique_id=888495584]
+layout_mode = 2
+theme = ExtResource("2_ednj3")
+theme_override_constants/separation = 3
+
+[node name="prof_column" type="VBoxContainer" parent="ScrollContainer/HBoxContainer" unique_id=525639358]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+
+[node name="Professors" type="Label" parent="ScrollContainer/HBoxContainer/prof_column" unique_id=1759306846]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.3
+theme = ExtResource("2_ednj3")
+text = "Professors"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 5
+
+[node name="prof_scroller" type="ScrollContainer" parent="ScrollContainer/HBoxContainer/prof_column" unique_id=102991116]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 3
+
+[node name="prof_container" type="VBoxContainer" parent="ScrollContainer/HBoxContainer/prof_column/prof_scroller" unique_id=691243785]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="----------------5" type="VSeparator" parent="ScrollContainer/HBoxContainer" unique_id=876535653]
+layout_mode = 2
+theme = ExtResource("2_ednj3")
+theme_override_constants/separation = 3
+
+[node name="x_column" type="VBoxContainer" parent="ScrollContainer/HBoxContainer" unique_id=953179729]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="Deselect" type="Button" parent="ScrollContainer/HBoxContainer/x_column" unique_id=735878289]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_stretch_ratio = 0.01
+theme = ExtResource("2_ednj3")
+disabled = true
+text = "x"
+
+[node name="x_scroller" type="ScrollContainer" parent="ScrollContainer/HBoxContainer/x_column" unique_id=912622333]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/scrollbar_h_separation = 5
+horizontal_scroll_mode = 0
+vertical_scroll_mode = 4
+
+[node name="x_container" type="VBoxContainer" parent="ScrollContainer/HBoxContainer/x_column/x_scroller" unique_id=1981241976]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3

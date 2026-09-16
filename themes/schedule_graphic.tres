@@ -1,0 +1,46 @@
+[gd_resource type="Theme" format=3 uid="uid://bx8iwm3wkdkr4"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ttlma"]
+bg_color = Color(0.40298524, 0.40298522, 0.40298513, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x85u3"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.2513019, 0.25130188, 0.25130185, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ado33"]
+content_margin_left = 20.0
+content_margin_top = 20.0
+content_margin_right = 20.0
+content_margin_bottom = 20.0
+bg_color = Color(0.1273711, 0.12737113, 0.12737104, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_e3nly"]
+color = Color(0.40392157, 0.40392157, 0.40392157, 1)
+grow_begin = 0.0
+grow_end = 0.0
+thickness = 4
+vertical = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3nly"]
+bg_color = Color(0.22238228, 0.2223823, 0.22238225, 1)
+
+[resource]
+Label/styles/normal = SubResource("StyleBoxFlat_ttlma")
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_x85u3")
+SchedulePanel/base_type = &"PanelContainer"
+SchedulePanel/styles/panel = SubResource("StyleBoxFlat_ado33")
+VSeparator/styles/separator = SubResource("StyleBoxLine_e3nly")
+weekday_panel/base_type = &"PanelContainer"
+weekday_panel/styles/panel = SubResource("StyleBoxFlat_e3nly")

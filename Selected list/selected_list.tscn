@@ -1,0 +1,504 @@
+[gd_scene format=3 uid="uid://ub5tgfq2qn0e"]
+
+[ext_resource type="Script" uid="uid://dgvekpxdisjj" path="res://Selected list/selected_list.gd" id="1_d55sg"]
+[ext_resource type="Theme" uid="uid://bh1xdi21olgqf" path="res://themes/course_list.tres" id="1_vlrll"]
+[ext_resource type="Script" uid="uid://g5ou221gau87" path="res://Selected list/section_columns.gd" id="2_o75n0"]
+[ext_resource type="Texture2D" uid="uid://c4vo3mnlby74r" path="res://Images/gear_white_filled.png" id="3_mvvhf"]
+[ext_resource type="Texture2D" uid="uid://dhbsit6q2488o" path="res://Images/search_icon.png" id="3_pit1c"]
+[ext_resource type="Script" uid="uid://cskhq702q3x7r" path="res://Selected list/selected_code_search.gd" id="3_t6p15"]
+[ext_resource type="Theme" uid="uid://bo3hdnimo24sr" path="res://themes/buttons.tres" id="4_wrwl7"]
+[ext_resource type="Script" uid="uid://b7eo4ltqmmnsp" path="res://Selected list/column_toggles.gd" id="5_qswpn"]
+[ext_resource type="Texture2D" uid="uid://djqgf7u6t6gn3" path="res://Images/always_on_top_1.png" id="6_qr2w5"]
+[ext_resource type="Theme" uid="uid://cd8hbje483fr1" path="res://themes/selected_list.tres" id="6_qswpn"]
+[ext_resource type="Texture2D" uid="uid://e4f8wj4uohht" path="res://Images/Pop_out_1.png" id="6_uupy0"]
+[ext_resource type="PackedScene" uid="uid://bncjgt6egjpfa" path="res://Selected list/time_filter_setter.tscn" id="7_uupy0"]
+[ext_resource type="Script" uid="uid://drgpk5utajsw7" path="res://Selected list/day_filter_button.gd" id="8_g3c1a"]
+[ext_resource type="Script" uid="uid://bt0o0phxree3r" path="res://Selected list/column_titles.gd" id="10_mukrn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u1046"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0in5w"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_iin66"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l6f38"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ert5w"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_uupy0"]
+content_margin_left = 0.0
+content_margin_top = 4.0
+content_margin_right = 0.0
+content_margin_bottom = 4.0
+color = Color(0.5, 0.5, 0.5, 1)
+thickness = 2
+vertical = true
+
+[node name="MarginContainer" type="MarginContainer" unique_id=2081907664]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -766.0
+offset_top = 1.0
+offset_bottom = 1.0
+grow_horizontal = 0
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_d55sg")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=1904584272]
+layout_mode = 2
+theme = ExtResource("1_vlrll")
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer" unique_id=863642075]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer" unique_id=267991602]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Header" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=773051681]
+layout_mode = 2
+
+[node name="selected_code_search" type="LineEdit" parent="PanelContainer/MarginContainer/VBoxContainer/Header" unique_id=723544295]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Search by course code"
+right_icon = ExtResource("3_pit1c")
+icon_expand_mode = 1
+script = ExtResource("3_t6p15")
+
+[node name="window_on_top_toggle" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Header" unique_id=511747877]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Keep window on top"
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_wrwl7")
+theme_type_variation = &"blue_toggle"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_u1046")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_u1046")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_u1046")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_u1046")
+toggle_mode = true
+icon = ExtResource("6_qr2w5")
+expand_icon = true
+
+[node name="pop_out_button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Header" unique_id=1874435597]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+tooltip_text = "Pop out to new window"
+mouse_default_cursor_shape = 2
+theme_override_icons/icon = ExtResource("6_uupy0")
+toggle_mode = true
+expand_icon = true
+
+[node name="toggle_options" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Header" unique_id=1251020023]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Hide or show settings"
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_wrwl7")
+theme_type_variation = &"blue_toggle"
+theme_override_icons/icon = ExtResource("3_mvvhf")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_0in5w")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_iin66")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_l6f38")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_ert5w")
+toggle_mode = true
+expand_icon = true
+
+[node name="Option_tabs" type="TabContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=549102691]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("6_qswpn")
+current_tab = 0
+tab_1/title = "Columns"
+
+[node name="List options" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs" unique_id=1212291917]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="options_row_1" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options" unique_id=1703299467]
+layout_mode = 2
+
+[node name="Hide disabled" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_1" unique_id=638716430]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Hide manually disabled sections"
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_wrwl7")
+theme_type_variation = &"blue_toggle"
+text = "Hide disabled"
+
+[node name="Hide conflicting" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_1" unique_id=1064794730]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Hide sections that don't fit in schedule"
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_wrwl7")
+theme_type_variation = &"blue_toggle"
+text = "Hide conflicting"
+
+[node name="Section previews" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_1" unique_id=273211702]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Show where sections would go in the schedule before selecting them"
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_wrwl7")
+theme_type_variation = &"blue_toggle"
+text = "Preview on hover"
+
+[node name="options_row_2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options" unique_id=1053396352]
+layout_mode = 2
+
+[node name="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=1515852246 node_paths=PackedStringArray("selected_list") instance=ExtResource("7_uupy0")]
+layout_mode = 2
+selected_list = NodePath("../../../../../../..")
+
+[node name="PanelContainer2" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=30223119 node_paths=PackedStringArray("selected_list") instance=ExtResource("7_uupy0")]
+layout_mode = 2
+mode = "Latest"
+selected_list = NodePath("../../../../../../..")
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=2008699581]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxLine_uupy0")
+
+[node name="sun" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=1084845468]
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+focus_mode = 3
+theme = ExtResource("4_wrwl7")
+theme_type_variation = &"blue_toggle"
+disabled = true
+toggle_mode = true
+button_pressed = true
+text = "D"
+script = ExtResource("8_g3c1a")
+metadata/day_num = 0
+
+[node name="mon" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=1714856940]
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_wrwl7")
+theme_type_variation = &"blue_toggle"
+toggle_mode = true
+button_pressed = true
+text = "L"
+script = ExtResource("8_g3c1a")
+metadata/day_num = 1
+
+[node name="tue" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=1117483356]
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_wrwl7")
+theme_type_variation = &"blue_toggle"
+toggle_mode = true
+button_pressed = true
+text = "M"
+script = ExtResource("8_g3c1a")
+metadata/day_num = 2
+
+[node name="wed" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=1492072680]
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_wrwl7")
+theme_type_variation = &"blue_toggle"
+toggle_mode = true
+button_pressed = true
+text = "W"
+script = ExtResource("8_g3c1a")
+metadata/day_num = 3
+
+[node name="thu" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=1835865583]
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_wrwl7")
+theme_type_variation = &"blue_toggle"
+toggle_mode = true
+button_pressed = true
+text = "J"
+script = ExtResource("8_g3c1a")
+metadata/day_num = 4
+
+[node name="fri" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=952232498]
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_wrwl7")
+theme_type_variation = &"blue_toggle"
+toggle_mode = true
+button_pressed = true
+text = "V"
+script = ExtResource("8_g3c1a")
+metadata/day_num = 5
+
+[node name="sat" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=255822779]
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+focus_mode = 3
+theme = ExtResource("4_wrwl7")
+theme_type_variation = &"blue_toggle"
+disabled = true
+toggle_mode = true
+button_pressed = true
+text = "S"
+script = ExtResource("8_g3c1a")
+metadata/day_num = 6
+
+[node name="Column_toggles" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs" unique_id=1312466654]
+visible = false
+layout_mode = 2
+script = ExtResource("5_qswpn")
+metadata/_tab_index = 1
+metadata/_tab_name = "Columns"
+
+[node name="caps" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles" unique_id=1836736124]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_wrwl7")
+theme_type_variation = &"blue_toggle"
+toggle_mode = true
+button_pressed = true
+text = "Capacities"
+
+[node name="creds" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles" unique_id=1581791056]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_wrwl7")
+theme_type_variation = &"blue_toggle"
+toggle_mode = true
+button_pressed = true
+text = "Credits"
+
+[node name="rooms" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles" unique_id=70321925]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_wrwl7")
+theme_type_variation = &"blue_toggle"
+toggle_mode = true
+button_pressed = true
+text = "Rooms"
+
+[node name="schedules" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles" unique_id=1324704176]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_wrwl7")
+theme_type_variation = &"blue_toggle"
+toggle_mode = true
+button_pressed = true
+text = "Schedules"
+
+[node name="times" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles" unique_id=1239674183]
+visible = false
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_wrwl7")
+theme_type_variation = &"blue_toggle"
+toggle_mode = true
+button_pressed = true
+text = "Times"
+
+[node name="profs" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles" unique_id=155053229]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_wrwl7")
+theme_type_variation = &"blue_toggle"
+toggle_mode = true
+button_pressed = true
+text = "Professors"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1287699541]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+
+[node name="column_titles_margins" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer" unique_id=2144135192]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 79
+theme_override_constants/margin_bottom = 0
+script = ExtResource("10_mukrn")
+
+[node name="column_titles" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/column_titles_margins" unique_id=1430139630]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+theme_override_constants/separation = 0
+
+[node name="sec" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/column_titles_margins/column_titles" unique_id=214525977]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.08
+text = "Sec."
+
+[node name="capacities" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/column_titles_margins/column_titles" unique_id=1051115011]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+text = "Cap."
+horizontal_alignment = 1
+
+[node name="credits" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/column_titles_margins/column_titles" unique_id=1696366698]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.05
+text = "Crd."
+horizontal_alignment = 1
+
+[node name="rooms" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/column_titles_margins/column_titles" unique_id=457760916]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.1
+text = "Room"
+horizontal_alignment = 1
+
+[node name="days" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/column_titles_margins/column_titles" unique_id=328128553]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.08
+text = "Days"
+horizontal_alignment = 1
+
+[node name="times" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/column_titles_margins/column_titles" unique_id=1095225581]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.2
+text = "Times"
+horizontal_alignment = 1
+
+[node name="professors" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer/column_titles_margins/column_titles" unique_id=904238573]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.35
+text = "Prof."
+horizontal_alignment = 1
+
+[node name="Scroller_entries" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1523839297]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Scroller_entries" unique_id=496474482]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 10
+
+[node name="columns" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Scroller_entries/VBoxContainer" unique_id=1636822376]
+visible = false
+layout_mode = 2
+script = ExtResource("2_o75n0")
+
+[node name="section_label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Scroller_entries/VBoxContainer/columns" unique_id=1083830586]
+custom_minimum_size = Vector2(100, 0)
+custom_maximum_size = Vector2(100, -1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.33
+text = "Sec."
+
+[node name="capacity_label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Scroller_entries/VBoxContainer/columns" unique_id=263676463]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+custom_maximum_size = Vector2(80, -1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.33
+text = "Cap."
+
+[node name="credits_label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Scroller_entries/VBoxContainer/columns" unique_id=1341458637]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+custom_maximum_size = Vector2(80, -1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 0.33
+text = "Crds."
+
+[node name="schedule_label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Scroller_entries/VBoxContainer/columns" unique_id=1029196404]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+custom_maximum_size = Vector2(200, -1)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 1.17
+text = "Schedule"
+horizontal_alignment = 1
+
+[node name="professor_label" type="Label" parent="PanelContainer/MarginContainer/VBoxContainer/Scroller_entries/VBoxContainer/columns" unique_id=1402182335]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_stretch_ratio = 1.17
+text = "Professor"
+
+[node name="MarginContainer" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Scroller_entries/VBoxContainer" unique_id=1829721805]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="selected" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Scroller_entries/VBoxContainer/MarginContainer" unique_id=764453969]
+unique_name_in_owner = true
+layout_mode = 2
+
+[connection signal="text_changed" from="PanelContainer/MarginContainer/VBoxContainer/Header/selected_code_search" to="PanelContainer/MarginContainer/VBoxContainer/Header/selected_code_search" method="_on_text_changed"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Header/window_on_top_toggle" to="." method="_on_window_on_top_toggle_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Header/pop_out_button" to="." method="_on_toggle_position_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Header/pop_out_button" to="." method="_on_pop_out_button_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Header/toggle_options" to="." method="_on_toggle_options_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Header/toggle_options" to="PanelContainer/MarginContainer/VBoxContainer/Header/toggle_options" method="_on_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_1/Hide disabled" to="." method="_on_hide_disabled_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_1/Hide conflicting" to="." method="_on_hide_conflicting_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_1/Section previews" to="." method="_on_section_previews_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/sun" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/sun" method="_on_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/mon" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/mon" method="_on_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/tue" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/tue" method="_on_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/wed" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/wed" method="_on_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/thu" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/thu" method="_on_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/fri" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/fri" method="_on_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/sat" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/sat" method="_on_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles/caps" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles" method="_on_caps_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles/creds" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles" method="_on_creds_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles/rooms" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles" method="_on_rooms_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles/schedules" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles" method="_on_days_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles/times" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles" method="_on_times_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles/profs" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles" method="_on_profs_toggled"]

@@ -1,0 +1,106 @@
+[gd_scene format=3 uid="uid://y5c3dqwhaowv"]
+
+[ext_resource type="Theme" uid="uid://bl68b40boahif" path="res://themes/course_entry.tres" id="1_v4hkh"]
+[ext_resource type="Script" uid="uid://b8tn4xushhdxm" path="res://Course list/course_entry.gd" id="2_p8foi"]
+[ext_resource type="Texture2D" uid="uid://vo0c1u2b3hq6" path="res://Images/star_icon.png" id="3_hd2og"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4v7s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mm5i1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kr702"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 15.0
+content_margin_bottom = 4.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hd2og"]
+content_margin_bottom = 3.0
+
+[node name="Panel_container" type="PanelContainer" unique_id=1067826339]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 31.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_v4hkh")
+script = ExtResource("2_p8foi")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=300469830]
+layout_mode = 2
+theme_override_constants/margin_right = 22
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1764895140]
+custom_maximum_size = Vector2(-1, 31)
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Pin" type="Button" parent="MarginContainer/HBoxContainer" unique_id=1593694656]
+custom_minimum_size = Vector2(25, 15)
+custom_maximum_size = Vector2(25, 15)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+tooltip_text = "Pin course"
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme_override_colors/icon_pressed_color = Color(0.52156866, 0.8039216, 1, 1)
+theme_override_colors/icon_hover_color = Color(0.8352941, 0.89411765, 1, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.69411767, 0.8117647, 1, 1)
+theme_override_icons/icon = ExtResource("3_hd2og")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_mm5i1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_mm5i1")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_mm5i1")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_mm5i1")
+toggle_mode = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="Select" type="CheckBox" parent="MarginContainer/HBoxContainer" unique_id=1334024377]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kr702")
+text = "CODE"
+metadata/col_name = "code"
+
+[node name="credits" type="Label" parent="MarginContainer/HBoxContainer" unique_id=1053569202]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 0)
+custom_maximum_size = Vector2(40, -1)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_stretch_ratio = 0.2
+text = "CRDS"
+horizontal_alignment = 1
+metadata/col_name = "credits"
+
+[node name="name" type="Label" parent="MarginContainer/HBoxContainer" unique_id=850209132]
+unique_name_in_owner = true
+layout_mode = 2
+text = "NAME"
+horizontal_alignment = 1
+metadata/col_name = "name"
+
+[node name="remove_course" type="Button" parent="." unique_id=1223650426]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 0)
+custom_maximum_size = Vector2(-1, 20)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme_override_colors/font_disabled_color = Color(0.5401943, 0.5401943, 0.5401941, 1)
+theme_override_styles/normal = SubResource("StyleBoxEmpty_hd2og")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_hd2og")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_hd2og")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_hd2og")
+text = "x"
+
+[connection signal="toggled" from="MarginContainer/HBoxContainer/Pin" to="." method="_on_pin_toggled"]
+[connection signal="toggled" from="MarginContainer/HBoxContainer/Select" to="." method="_on_select_toggled"]
+[connection signal="pressed" from="remove_course" to="." method="_on_remove_course_pressed"]

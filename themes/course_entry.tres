@@ -1,0 +1,12 @@
+[gd_resource type="Theme" format=3 uid="uid://bl68b40boahif"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_utjpf"]
+content_margin_right = 4.0
+bg_color = Color(0.38473427, 0.3847343, 0.38473418, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[resource]
+PanelContainer/styles/panel = SubResource("StyleBoxFlat_utjpf")

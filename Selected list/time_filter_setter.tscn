@@ -1,0 +1,119 @@
+[gd_scene format=3 uid="uid://bncjgt6egjpfa"]
+
+[ext_resource type="Script" uid="uid://bpqemmbp3qcsv" path="res://Selected list/time_filter_setter.gd" id="1_jusyo"]
+[ext_resource type="Theme" uid="uid://cgp1at5q4pl2l" path="res://themes/time_select.tres" id="2_hcaea"]
+[ext_resource type="Theme" uid="uid://bo3hdnimo24sr" path="res://themes/buttons.tres" id="3_hcaea"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wk78w"]
+content_margin_left = 3.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 3.0
+bg_color = Color(0.41521448, 0.4152145, 0.41521448, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.6039216, 0.75686276, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.17068034, 0.1706804, 0.17068028, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="ButtonGroup" id="ButtonGroup_jgm8e"]
+
+[node name="PanelContainer" type="PanelContainer" unique_id=1515852246]
+offset_right = 274.0
+offset_bottom = 48.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_wk78w")
+script = ExtResource("1_jusyo")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=151760500]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="toggle" type="CheckButton" parent="HBoxContainer" unique_id=1810537945]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Toggle filter"
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_hcaea")
+theme_type_variation = &"check_button_plain"
+text = "Earliest"
+
+[node name="Entry_nodes" type="HBoxContainer" parent="HBoxContainer" unique_id=1185624612]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HBoxContainer/Entry_nodes" unique_id=585881133]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/Entry_nodes/PanelContainer" unique_id=212164344]
+layout_mode = 2
+
+[node name="hour_entry" type="LineEdit" parent="HBoxContainer/Entry_nodes/PanelContainer/HBoxContainer" unique_id=926910775]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("2_hcaea")
+alignment = 2
+max_length = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/Entry_nodes/PanelContainer/HBoxContainer" unique_id=266173748]
+layout_mode = 2
+text = ":"
+
+[node name="minute_entry" type="LineEdit" parent="HBoxContainer/Entry_nodes/PanelContainer/HBoxContainer" unique_id=2122269567]
+unique_name_in_owner = true
+layout_mode = 2
+focus_mode = 1
+theme = ExtResource("2_hcaea")
+max_length = 2
+
+[node name="am" type="Button" parent="HBoxContainer/Entry_nodes" unique_id=1594749852]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Toggle filter"
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_hcaea")
+theme_type_variation = &"am_pm"
+toggle_mode = true
+button_pressed = true
+button_group = SubResource("ButtonGroup_jgm8e")
+text = "am"
+
+[node name="pm" type="Button" parent="HBoxContainer/Entry_nodes" unique_id=1253707127]
+unique_name_in_owner = true
+layout_mode = 2
+tooltip_text = "Toggle filter"
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("3_hcaea")
+theme_type_variation = &"am_pm"
+toggle_mode = true
+button_group = SubResource("ButtonGroup_jgm8e")
+text = "pm"
+
+[connection signal="toggled" from="HBoxContainer/toggle" to="." method="_on_toggle_toggled"]
+[connection signal="focus_exited" from="HBoxContainer/Entry_nodes/PanelContainer/HBoxContainer/hour_entry" to="." method="_on_hour_entry_focus_exited"]
+[connection signal="text_changed" from="HBoxContainer/Entry_nodes/PanelContainer/HBoxContainer/hour_entry" to="." method="_on_hour_entry_text_changed"]
+[connection signal="text_submitted" from="HBoxContainer/Entry_nodes/PanelContainer/HBoxContainer/hour_entry" to="." method="_on_hour_entry_text_submitted"]
+[connection signal="focus_exited" from="HBoxContainer/Entry_nodes/PanelContainer/HBoxContainer/minute_entry" to="." method="_on_minute_entry_focus_exited"]
+[connection signal="text_changed" from="HBoxContainer/Entry_nodes/PanelContainer/HBoxContainer/minute_entry" to="." method="_on_minute_entry_text_changed"]
+[connection signal="text_submitted" from="HBoxContainer/Entry_nodes/PanelContainer/HBoxContainer/minute_entry" to="." method="_on_minute_entry_text_submitted"]
+[connection signal="pressed" from="HBoxContainer/Entry_nodes/am" to="." method="_on_am_pressed"]
+[connection signal="pressed" from="HBoxContainer/Entry_nodes/pm" to="." method="_on_pm_pressed"]

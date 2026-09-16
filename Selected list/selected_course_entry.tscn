@@ -1,0 +1,143 @@
+[gd_scene format=3 uid="uid://1iosp7l2gf2g"]
+
+[ext_resource type="Script" uid="uid://vm3wjwa134jy" path="res://Selected list/selected_course_entry.gd" id="1_glm0s"]
+[ext_resource type="Script" uid="uid://cxfrlx14blei1" path="res://Selected list/disabled_panel_button.gd" id="2_amlo5"]
+[ext_resource type="Theme" uid="uid://d1ejdmj5ans8b" path="res://themes/selected_entry.tres" id="2_cjgsh"]
+[ext_resource type="Texture2D" uid="uid://e4f8wj4uohht" path="res://Images/Pop_out_1.png" id="3_6x5y2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6xbs4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_e5xbi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bhlxt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_amlo5"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.15343648, 0.15343651, 0.15343648, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cjgsh"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6x5y2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5wbvi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kvbv8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kyepj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5n6p5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v3ag0"]
+
+[node name="PanelContainer" type="PanelContainer" unique_id=817210837]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 207.0
+grow_horizontal = 2
+size_flags_horizontal = 3
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_6xbs4")
+script = ExtResource("1_glm0s")
+
+[node name="FoldableContainer" type="FoldableContainer" parent="." unique_id=1558561278]
+layout_mode = 2
+focus_mode = 3
+theme = ExtResource("2_cjgsh")
+title = "course code"
+
+[node name="section_scroller" type="ScrollContainer" parent="FoldableContainer" unique_id=6539246]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_e5xbi")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bhlxt")
+vertical_scroll_mode = 0
+
+[node name="sections" type="VBoxContainer" parent="FoldableContainer/section_scroller" unique_id=562846338]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Right_side" type="HBoxContainer" parent="." unique_id=380523413]
+custom_minimum_size = Vector2(0, 31)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+theme_override_constants/separation = 15
+
+[node name="disabled_panel_button" type="PanelContainer" parent="Right_side" unique_id=230983254]
+custom_minimum_size = Vector2(40, 0)
+custom_maximum_size = Vector2(-1, 22)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+tooltip_text = "Enable all"
+mouse_default_cursor_shape = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_amlo5")
+script = ExtResource("2_amlo5")
+
+[node name="disabled" type="HBoxContainer" parent="Right_side/disabled_panel_button" unique_id=1549395313]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="disabled_icon" type="Panel" parent="Right_side/disabled_panel_button/disabled" unique_id=1599969899]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(10, 10)
+custom_maximum_size = Vector2(10, 10)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_cjgsh")
+
+[node name="disabled_count" type="Label" parent="Right_side/disabled_panel_button/disabled" unique_id=1406837414]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 10
+theme_override_font_sizes/font_size = 12
+
+[node name="Pop out" type="Button" parent="Right_side" unique_id=1972534183]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(22, 22)
+layout_mode = 2
+tooltip_text = "Pop out to new window"
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6x5y2")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_5wbvi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kvbv8")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_kyepj")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_5n6p5")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v3ag0")
+toggle_mode = true
+icon = ExtResource("3_6x5y2")
+expand_icon = true
+
+[node name="Remove" type="Button" parent="Right_side" unique_id=1054160176]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+tooltip_text = "Deselect course"
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_cjgsh")
+text = "x"
+
+[connection signal="mouse_entered" from="Right_side/disabled_panel_button" to="Right_side/disabled_panel_button" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="Right_side/disabled_panel_button" to="Right_side/disabled_panel_button" method="_on_mouse_exited"]
+[connection signal="toggled" from="Right_side/Pop out" to="." method="_on_pop_out_toggled"]
+[connection signal="pressed" from="Right_side/Remove" to="." method="_on_remove_pressed"]

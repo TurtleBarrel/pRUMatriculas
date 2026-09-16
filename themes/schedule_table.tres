@@ -1,0 +1,31 @@
+[gd_resource type="Theme" format=3 uid="uid://l2pbyshw56vg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7rc83"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.40603793, 0.40603796, 0.40603784, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_d5wgw"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_g4v7s"]
+color = Color(0.40392157, 0.40392157, 0.40392157, 1)
+thickness = 3
+vertical = true
+
+[resource]
+Button/colors/font_hover_color = Color(1, 0.5682914, 0.504426, 1)
+Button/colors/font_hover_pressed_color = Color(1, 0.6900766, 0.6406601, 1)
+Button/styles/disabled = SubResource("StyleBoxFlat_7rc83")
+Button/styles/focus = SubResource("StyleBoxFlat_7rc83")
+Button/styles/hover = SubResource("StyleBoxFlat_7rc83")
+Button/styles/hover_pressed = SubResource("StyleBoxFlat_7rc83")
+Button/styles/normal = SubResource("StyleBoxFlat_7rc83")
+Button/styles/pressed = SubResource("StyleBoxFlat_7rc83")
+Label/styles/focus = SubResource("StyleBoxEmpty_d5wgw")
+Label/styles/normal = SubResource("StyleBoxFlat_7rc83")
+VSeparator/constants/separation = 4
+VSeparator/styles/separator = SubResource("StyleBoxLine_g4v7s")
