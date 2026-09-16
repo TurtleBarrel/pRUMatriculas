@@ -1,0 +1,525 @@
+[gd_scene format=3 uid="uid://popadkrf02gi"]
+
+[ext_resource type="Script" uid="uid://bohjlnb600rd" path="res://Course list/course_list.gd" id="1_5w7v7"]
+[ext_resource type="Theme" uid="uid://bh1xdi21olgqf" path="res://themes/course_list.tres" id="2_jtl8d"]
+[ext_resource type="Texture2D" uid="uid://dhbsit6q2488o" path="res://Images/search_icon.png" id="3_f6nkj"]
+[ext_resource type="Script" uid="uid://dwj23mulb1l3c" path="res://Course list/course_search.gd" id="3_fle51"]
+[ext_resource type="Script" uid="uid://c5j3g13bt260x" path="res://Course list/list_split_container.gd" id="4_kqdee"]
+[ext_resource type="Texture2D" uid="uid://cnaejo0x7qq43" path="res://Images/files_icon.png" id="5_t1mx4"]
+[ext_resource type="Script" uid="uid://bb17es7va31no" path="res://Course list/remove_subjects.gd" id="6_5ayeu"]
+[ext_resource type="Texture2D" uid="uid://cv5s6b5d2fc4u" path="res://Images/left_arrow_icon.png" id="6_f6nkj"]
+[ext_resource type="Theme" uid="uid://bo3hdnimo24sr" path="res://themes/buttons.tres" id="7_hmsm6"]
+[ext_resource type="Script" uid="uid://dytab0ri14c12" path="res://Course list/subject_entry.gd" id="7_qvqpi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mm5i1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kr702"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1mx4"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.22238228, 0.2223823, 0.22238225, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r1jxw"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.1254902, 0.1254902, 0.1254902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ayeu"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.38473427, 0.3847343, 0.38473418, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2lyom"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cjyrv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_016b7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ljl2l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_57qmd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5s0fj"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3gngh"]
+bg_color = Color(0.1254902, 0.1254902, 0.1254902, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_f6nkj"]
+bg_color = Color(0.1273711, 0.12737113, 0.12737104, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_g4v7s"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_yf5fn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t1mx4"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 15.0
+content_margin_bottom = 0.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+bg_color = Color(0.4117647, 0.4117647, 0.4117647, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_kqdee"]
+content_margin_right = 2.0
+bg_color = Color(0.2509804, 0.2509804, 0.2509804, 1)
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+
+[node name="MarginContainer" type="MarginContainer" unique_id=1218029534]
+custom_minimum_size = Vector2(450, 0)
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_right = 20.0
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 2
+theme = ExtResource("2_jtl8d")
+theme_override_constants/margin_right = 0
+script = ExtResource("1_5w7v7")
+metadata/_edit_use_anchors_ = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=997361617]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="list" type="PanelContainer" parent="HBoxContainer" unique_id=409298986]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_jtl8d")
+
+[node name="List" type="VBoxContainer" parent="HBoxContainer/list" unique_id=1667012195]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 4
+
+[node name="List header margins" type="MarginContainer" parent="HBoxContainer/list/List" unique_id=643479491]
+layout_mode = 2
+theme_override_constants/margin_bottom = 5
+
+[node name="List options" type="HBoxContainer" parent="HBoxContainer/list/List/List header margins" unique_id=607729914]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer/list/List/List header margins/List options" unique_id=1215465129]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="search" type="LineEdit" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer" unique_id=1344840012]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("2_jtl8d")
+placeholder_text = "Search courses "
+right_icon = ExtResource("3_f6nkj")
+icon_expand_mode = 1
+script = ExtResource("3_fle51")
+
+[node name="adders" type="HBoxContainer" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer" unique_id=166549953]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="add_subject" type="LineEdit" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/adders" unique_id=1350655125]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Add subject (MATH)"
+keep_editing_on_text_submit = true
+
+[node name="add_course" type="LineEdit" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/adders" unique_id=775478088]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Add course (MATH 101)"
+keep_editing_on_text_submit = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer" unique_id=635529822]
+layout_mode = 2
+
+[node name="file_select_button" type="Button" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer" unique_id=112534479]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme_override_colors/font_disabled_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+theme_override_colors/icon_disabled_color = Color(0.8745098, 0.8745098, 0.8745098, 1)
+text = "Select file..."
+icon = ExtResource("5_t1mx4")
+expand_icon = true
+
+[node name="remove_subjects" type="Button" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer" unique_id=1990388441]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 6
+text = "Remove subjects..."
+script = ExtResource("6_5ayeu")
+
+[node name="subjects_window" type="Window" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects" unique_id=1432512117]
+unique_name_in_owner = true
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(400, 400)
+visible = false
+wrap_controls = true
+transient = true
+unresizable = true
+borderless = true
+always_on_top = true
+popup_window = true
+popup_wm_hint = true
+minimize_disabled = true
+maximize_disabled = true
+theme_override_styles/embedded_border = SubResource("StyleBoxEmpty_mm5i1")
+theme_override_styles/embedded_unfocused_border = SubResource("StyleBoxEmpty_kr702")
+
+[node name="Subjects_box" type="PanelContainer" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window" unique_id=596102482]
+custom_minimum_size = Vector2(400, 400)
+theme_override_styles/panel = SubResource("StyleBoxFlat_t1mx4")
+metadata/_tab_index = 0
+
+[node name="Subjects_vbox" type="VBoxContainer" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box" unique_id=1368855285]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Subjects_header" type="Label" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox" unique_id=42451151]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Select subjects to remove:
+(Will not removed selected or pinned courses)"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox" unique_id=4868114]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_r1jxw")
+horizontal_scroll_mode = 0
+
+[node name="Subjects_container" type="GridContainer" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox/ScrollContainer" unique_id=1457517701]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 4
+
+[node name="subject_template" type="PanelContainer" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox/ScrollContainer/Subjects_container" unique_id=195243939]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_5ayeu")
+script = ExtResource("7_qvqpi")
+
+[node name="subject_check" type="CheckBox" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox/ScrollContainer/Subjects_container/subject_template" unique_id=1057292333]
+layout_mode = 2
+text = "subject"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox" unique_id=1639170449]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="cancel" type="Button" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox/HBoxContainer" unique_id=1711882988]
+layout_mode = 2
+theme = ExtResource("7_hmsm6")
+theme_type_variation = &"simple_press_button"
+text = "Cancel"
+
+[node name="remove" type="Button" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox/HBoxContainer" unique_id=848129947]
+layout_mode = 2
+theme = ExtResource("7_hmsm6")
+theme_type_variation = &"simple_press_button"
+text = "Remove selected"
+
+[node name="display_names_toggle" type="CheckBox" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer" unique_id=288152722]
+layout_mode = 2
+size_flags_horizontal = 8
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_2lyom")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_cjyrv")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_016b7")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_ljl2l")
+button_pressed = true
+text = "Names"
+
+[node name="TabContainer" type="TabContainer" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer" unique_id=1548343655]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxEmpty_57qmd")
+theme_override_styles/tabbar_background = SubResource("StyleBoxEmpty_5s0fj")
+current_tab = 0
+clip_tabs = false
+tabs_visible = false
+switch_on_drag_hover = false
+use_hidden_tabs_for_min_size = true
+
+[node name="progress_container" type="Control" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/TabContainer" unique_id=1875152868]
+unique_name_in_owner = true
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="course_list_progress" type="ProgressBar" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/TabContainer/progress_container" unique_id=653455805]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 8)
+custom_maximum_size = Vector2(-1, 8)
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+max_value = 1.0
+show_percentage = false
+
+[node name="title_label" type="Label" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/TabContainer" unique_id=642509663]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_3gngh")
+horizontal_alignment = 1
+metadata/_tab_index = 1
+
+[node name="List body margins" type="MarginContainer" parent="HBoxContainer/list/List" unique_id=293701336]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/margin_top = 0
+
+[node name="Pin_split" type="VSplitContainer" parent="HBoxContainer/list/List/List body margins" unique_id=714958064]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_jtl8d")
+split_offsets = PackedInt32Array(-270)
+split_offset = -270
+script = ExtResource("4_kqdee")
+
+[node name="Box_pinned" type="VBoxContainer" parent="HBoxContainer/list/List/List body margins/Pin_split" unique_id=343572346]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="column_titles_panel" type="PanelContainer" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_pinned" unique_id=2112629922]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f6nkj")
+
+[node name="column_titles_margin" type="MarginContainer" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_pinned/column_titles_panel" unique_id=1886341985]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 0
+
+[node name="Column_titles_scroller_pinned" type="ScrollContainer" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_pinned/column_titles_panel/column_titles_margin" unique_id=1238944830]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yf5fn")
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+
+[node name="List column titles" type="HBoxContainer" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_pinned/column_titles_panel/column_titles_margin/Column_titles_scroller_pinned" unique_id=280401871]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Code_title_pinned" type="Label" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_pinned/column_titles_panel/column_titles_margin/Column_titles_scroller_pinned/List column titles" unique_id=1567336649]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_t1mx4")
+text = "Code"
+horizontal_alignment = 1
+metadata/col_name = "code"
+
+[node name="Creds_title_pinned" type="Label" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_pinned/column_titles_panel/column_titles_margin/Column_titles_scroller_pinned/List column titles" unique_id=964845852]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Crds."
+horizontal_alignment = 1
+metadata/col_name = "credits"
+
+[node name="Name_title_pinned" type="Label" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_pinned/column_titles_panel/column_titles_margin/Column_titles_scroller_pinned/List column titles" unique_id=1621405942]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Name"
+horizontal_alignment = 1
+metadata/col_name = "name"
+
+[node name="Scroller_pinned" type="ScrollContainer" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_pinned" unique_id=763550946]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+vertical_scroll_mode = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_pinned/Scroller_pinned" unique_id=1796667348]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Entries_pinned" type="VBoxContainer" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_pinned/Scroller_pinned/MarginContainer" unique_id=284562263]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Box_unpinned" type="VBoxContainer" parent="HBoxContainer/list/List/List body margins/Pin_split" unique_id=2071328231]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="colum_titles_panel" type="PanelContainer" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_unpinned" unique_id=1802534118]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_f6nkj")
+
+[node name="column_titles_margin" type="MarginContainer" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_unpinned/colum_titles_panel" unique_id=677035751]
+layout_mode = 2
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 0
+
+[node name="Column_titles_scroller_unpinned" type="ScrollContainer" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_unpinned/colum_titles_panel/column_titles_margin" unique_id=192783819]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_g4v7s")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_yf5fn")
+horizontal_scroll_mode = 3
+vertical_scroll_mode = 0
+
+[node name="List column titles" type="HBoxContainer" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_unpinned/colum_titles_panel/column_titles_margin/Column_titles_scroller_unpinned" unique_id=1661117289]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Code_title_unpinned" type="Label" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_unpinned/colum_titles_panel/column_titles_margin/Column_titles_scroller_unpinned/List column titles" unique_id=1730785991]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_t1mx4")
+text = "Code"
+horizontal_alignment = 1
+metadata/col_name = "code"
+
+[node name="Creds_title_unpinned" type="Label" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_unpinned/colum_titles_panel/column_titles_margin/Column_titles_scroller_unpinned/List column titles" unique_id=1944880800]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Crds."
+horizontal_alignment = 1
+metadata/col_name = "credits"
+
+[node name="Name_title_unpinned" type="Label" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_unpinned/colum_titles_panel/column_titles_margin/Column_titles_scroller_unpinned/List column titles" unique_id=119328857]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Name"
+horizontal_alignment = 1
+metadata/col_name = "name"
+
+[node name="Scroller_unpinned" type="ScrollContainer" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_unpinned" unique_id=74511112]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_jtl8d")
+vertical_scroll_mode = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_unpinned/Scroller_unpinned" unique_id=1073397787]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Entries_unpinned" type="VBoxContainer" parent="HBoxContainer/list/List/List body margins/Pin_split/Box_unpinned/Scroller_unpinned/MarginContainer" unique_id=387702982]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="HBoxContainer/list" unique_id=1368310452]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 3
+theme_override_constants/margin_bottom = 0
+
+[node name="Panel" type="Panel" parent="HBoxContainer/list/MarginContainer" unique_id=1911614400]
+custom_minimum_size = Vector2(4, 75)
+custom_maximum_size = Vector2(4, 75)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="hide_button_margin" type="MarginContainer" parent="HBoxContainer" unique_id=1158320691]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 40
+theme_override_constants/margin_right = 0
+theme_override_constants/margin_bottom = 0
+
+[node name="Hide list" type="Button" parent="HBoxContainer/hide_button_margin" unique_id=1602593582]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(20, 35)
+layout_mode = 2
+size_flags_vertical = 0
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme_override_icons/icon = ExtResource("6_f6nkj")
+theme_override_styles/normal = SubResource("StyleBoxFlat_kqdee")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_kqdee")
+theme_override_styles/hover = SubResource("StyleBoxFlat_kqdee")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_kqdee")
+theme_override_styles/focus = SubResource("StyleBoxFlat_kqdee")
+toggle_mode = true
+expand_icon = true
+
+[connection signal="text_changed" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/search" to="HBoxContainer/list/List/List header margins/List options/VBoxContainer/search" method="_on_text_changed"]
+[connection signal="text_submitted" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/adders/add_subject" to="." method="_on_add_subject_text_submitted"]
+[connection signal="text_submitted" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/adders/add_course" to="." method="_on_add_course_text_submitted"]
+[connection signal="pressed" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/file_select_button" to="." method="_on_file_select_button_pressed"]
+[connection signal="pressed" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects" to="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects" method="_on_pressed"]
+[connection signal="pressed" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox/HBoxContainer/cancel" to="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects" method="_on_cancel_pressed"]
+[connection signal="pressed" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox/HBoxContainer/remove" to="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects" method="_on_remove_pressed"]
+[connection signal="toggled" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/display_names_toggle" to="." method="_on_display_names_toggle_toggled"]
+[connection signal="drag_ended" from="HBoxContainer/list/List/List body margins/Pin_split" to="HBoxContainer/list/List/List body margins/Pin_split" method="_on_drag_ended"]
+[connection signal="drag_started" from="HBoxContainer/list/List/List body margins/Pin_split" to="HBoxContainer/list/List/List body margins/Pin_split" method="_on_drag_started"]
+[connection signal="toggled" from="HBoxContainer/hide_button_margin/Hide list" to="." method="_on_hide_list_toggled"]

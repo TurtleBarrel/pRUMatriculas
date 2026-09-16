@@ -1,0 +1,67 @@
+[gd_scene format=3 uid="uid://cr3yjkrg8gkng"]
+
+[ext_resource type="Theme" uid="uid://bx8iwm3wkdkr4" path="res://themes/schedule_graphic.tres" id="1_bsaoa"]
+[ext_resource type="Script" uid="uid://d8lxx1wdiiyn" path="res://Schedule/schedule_column.gd" id="2_tke7r"]
+[ext_resource type="Script" uid="uid://qwtwswwj8u64" path="res://Schedule/schedule_block_container.gd" id="3_itqya"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_e3nly"]
+bg_color = Color(0.61745477, 0.61745477, 0.6174547, 0.6039216)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4jr1h"]
+content_margin_left = 5.0
+bg_color = Color(0.22352941, 0.22352941, 0.22352941, 1)
+
+[node name="weekday_node" type="PanelContainer" unique_id=2050962960]
+anchors_preset = 9
+anchor_bottom = 1.0
+offset_right = 100.0
+grow_vertical = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_bsaoa")
+theme_type_variation = &"weekday_panel"
+script = ExtResource("2_tke7r")
+day = "test"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1381556223]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="VBoxContainer" unique_id=476164870]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+text_overrun_behavior = 1
+
+[node name="time_column" type="Control" parent="VBoxContainer" unique_id=990885383]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("3_itqya")
+
+[node name="hour_line" type="Panel" parent="VBoxContainer/time_column" unique_id=1008603590]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_e3nly")
+metadata/source = true
+
+[node name="time_label" type="Label" parent="VBoxContainer/time_column" unique_id=214190191]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.5
+offset_right = 20.5
+offset_bottom = 23.0
+grow_horizontal = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_4jr1h")
+text = "time"
+metadata/source = true

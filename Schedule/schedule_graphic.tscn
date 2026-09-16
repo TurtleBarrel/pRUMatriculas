@@ -1,0 +1,318 @@
+[gd_scene format=3 uid="uid://0uvfg2x3shuo"]
+
+[ext_resource type="Script" uid="uid://b2i1qe2qjkp2j" path="res://Schedule/schedule_graphic.gd" id="1_ao6mf"]
+[ext_resource type="PackedScene" uid="uid://cr3yjkrg8gkng" path="res://Schedule/weekday_column.tscn" id="2_7q8y2"]
+[ext_resource type="Theme" uid="uid://bx8iwm3wkdkr4" path="res://themes/schedule_graphic.tres" id="2_l63jy"]
+[ext_resource type="Texture2D" uid="uid://e4f8wj4uohht" path="res://Images/Pop_out_1.png" id="3_l63jy"]
+[ext_resource type="Texture2D" uid="uid://uqco87o4a2wo" path="res://Images/table_icon_1.png" id="4_016b7"]
+[ext_resource type="Texture2D" uid="uid://djqgf7u6t6gn3" path="res://Images/always_on_top_1.png" id="4_ljl2l"]
+[ext_resource type="Theme" uid="uid://bo3hdnimo24sr" path="res://themes/buttons.tres" id="4_qowor"]
+[ext_resource type="Texture2D" uid="uid://c4vo3mnlby74r" path="res://Images/gear_white_filled.png" id="5_2lyom"]
+[ext_resource type="PackedScene" uid="uid://dbn4cipt76thq" path="res://Schedule/start_end_override_setter.tscn" id="6_2lyom"]
+[ext_resource type="PackedScene" uid="uid://blsel7v2i4j1m" path="res://schedule_table.tscn" id="6_cjyrv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qvqpi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_52iyn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l63jy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cjyrv"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_016b7"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ljl2l"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u1046"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qowor"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.17641908, 0.17641911, 0.17641902, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2lyom"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6402972, 0.6402971, 0.6402973, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+content_margin_left = 5.0
+content_margin_top = 0.0
+content_margin_right = 5.0
+content_margin_bottom = 10.0
+bg_color = Color(0.40392157, 0.40392157, 0.40392157, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="schedule_graph_node" type="MarginContainer" unique_id=1592528605]
+custom_minimum_size = Vector2(1000, 1010)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_bottom = 10
+script = ExtResource("1_ao6mf")
+
+[node name="graphic_background" type="PanelContainer" parent="." unique_id=1137794524]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_l63jy")
+
+[node name="MarginContainer" type="MarginContainer" parent="graphic_background" unique_id=1975172801]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="graphic_background/MarginContainer" unique_id=1679023787]
+layout_mode = 2
+
+[node name="Header" type="HBoxContainer" parent="graphic_background/MarginContainer/VBoxContainer" unique_id=341578707]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 20
+
+[node name="window_on_top_toggle" type="Button" parent="graphic_background/MarginContainer/VBoxContainer/Header" unique_id=1608704385]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Keep window on top"
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_qowor")
+theme_type_variation = &"blue_toggle"
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qvqpi")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qvqpi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_qvqpi")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_qvqpi")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qvqpi")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_qvqpi")
+toggle_mode = true
+icon = ExtResource("4_ljl2l")
+expand_icon = true
+
+[node name="table_toggle" type="Button" parent="graphic_background/MarginContainer/VBoxContainer/Header" unique_id=1525003155]
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Hide or show table."
+focus_mode = 3
+theme = ExtResource("4_qowor")
+theme_type_variation = &"blue_toggle"
+theme_override_icons/icon = ExtResource("4_016b7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_52iyn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_52iyn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_52iyn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_52iyn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_52iyn")
+toggle_mode = true
+button_pressed = true
+expand_icon = true
+
+[node name="Window_toggle" type="Button" parent="graphic_background/MarginContainer/VBoxContainer/Header" unique_id=989707165]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "'Pop out to new window'"
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme_override_icons/icon = ExtResource("3_l63jy")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_l63jy")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_l63jy")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_l63jy")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_l63jy")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_l63jy")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_l63jy")
+toggle_mode = true
+expand_icon = true
+
+[node name="toggle_options" type="Button" parent="graphic_background/MarginContainer/VBoxContainer/Header" unique_id=1232506217]
+custom_minimum_size = Vector2(25, 25)
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Hide or show settings"
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_qowor")
+theme_type_variation = &"blue_toggle"
+theme_override_icons/icon = ExtResource("5_2lyom")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_cjyrv")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_016b7")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ljl2l")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_u1046")
+toggle_mode = true
+button_pressed = true
+expand_icon = true
+
+[node name="Graph_options" type="PanelContainer" parent="graphic_background/MarginContainer/VBoxContainer" unique_id=1915949613]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(40, 50)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qowor")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="graphic_background/MarginContainer/VBoxContainer/Graph_options" unique_id=1061990344]
+layout_mode = 2
+vertical_scroll_mode = 0
+scroll_horizontal_by_default = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="graphic_background/MarginContainer/VBoxContainer/Graph_options/ScrollContainer" unique_id=959589416]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Weekend toggle panel" type="PanelContainer" parent="graphic_background/MarginContainer/VBoxContainer/Graph_options/ScrollContainer/HBoxContainer" unique_id=1553097437]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2lyom")
+
+[node name="Weekend toggle" type="CheckButton" parent="graphic_background/MarginContainer/VBoxContainer/Graph_options/ScrollContainer/HBoxContainer/Weekend toggle panel" unique_id=1105783135]
+unique_name_in_owner = true
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme = ExtResource("4_qowor")
+theme_type_variation = &"check_button_plain"
+text = "Weekends"
+
+[node name="Start setter" parent="graphic_background/MarginContainer/VBoxContainer/Graph_options/ScrollContainer/HBoxContainer" unique_id=1837185167 node_paths=PackedStringArray("counterpart") instance=ExtResource("6_2lyom")]
+layout_mode = 2
+counterpart = NodePath("../End setter")
+
+[node name="End setter" parent="graphic_background/MarginContainer/VBoxContainer/Graph_options/ScrollContainer/HBoxContainer" unique_id=1534682099 node_paths=PackedStringArray("counterpart") instance=ExtResource("6_2lyom")]
+layout_mode = 2
+mode = "end"
+counterpart = NodePath("../Start setter")
+
+[node name="VSplitContainer" type="VSplitContainer" parent="graphic_background/MarginContainer/VBoxContainer" unique_id=986620163]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/autohide = 0
+split_offsets = PackedInt32Array(160)
+split_offset = 160
+
+[node name="Table" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer" unique_id=1503008307 instance=ExtResource("6_cjyrv")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer" unique_id=707388276]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="Columns" type="HBoxContainer" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer" unique_id=624234161]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="VSeparator" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=1467907214]
+layout_mode = 2
+theme = ExtResource("2_l63jy")
+
+[node name="Times" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=2050962960 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+day = "Time"
+is_time_column = true
+graph_node = NodePath("../../../../../../..")
+
+[node name="sun_left" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=1895705914]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_l63jy")
+
+[node name="Sunday" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=2113072952 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
+unique_name_in_owner = true
+layout_mode = 2
+day = "Sunday"
+graph_node = NodePath("../../../../../../..")
+
+[node name="VSeparator3" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=854923499]
+layout_mode = 2
+theme = ExtResource("2_l63jy")
+
+[node name="Monday" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=1052532664 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
+unique_name_in_owner = true
+layout_mode = 2
+day = "Monday"
+graph_node = NodePath("../../../../../../..")
+
+[node name="VSeparator4" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=1114563548]
+layout_mode = 2
+theme = ExtResource("2_l63jy")
+
+[node name="Tuesday" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=1335083990 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
+unique_name_in_owner = true
+layout_mode = 2
+day = "Tuesday"
+graph_node = NodePath("../../../../../../..")
+
+[node name="VSeparator5" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=253105871]
+layout_mode = 2
+theme = ExtResource("2_l63jy")
+
+[node name="Wednesday" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=389625784 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
+unique_name_in_owner = true
+layout_mode = 2
+day = "Wednesday"
+graph_node = NodePath("../../../../../../..")
+
+[node name="VSeparator6" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=361177457]
+layout_mode = 2
+theme = ExtResource("2_l63jy")
+
+[node name="Thursday" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=288448711 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
+unique_name_in_owner = true
+layout_mode = 2
+day = "Thursday"
+graph_node = NodePath("../../../../../../..")
+
+[node name="VSeparator7" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=1919553306]
+layout_mode = 2
+theme = ExtResource("2_l63jy")
+
+[node name="Friday" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=1931192077 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
+unique_name_in_owner = true
+layout_mode = 2
+day = "Friday"
+graph_node = NodePath("../../../../../../..")
+
+[node name="sat_left" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=9435270]
+unique_name_in_owner = true
+layout_mode = 2
+theme = ExtResource("2_l63jy")
+
+[node name="Saturday" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=1571073919 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
+unique_name_in_owner = true
+layout_mode = 2
+day = "Saturday"
+graph_node = NodePath("../../../../../../..")
+
+[node name="VSeparator9" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=1277177656]
+layout_mode = 2
+theme = ExtResource("2_l63jy")
+
+[connection signal="toggled" from="graphic_background/MarginContainer/VBoxContainer/Header/window_on_top_toggle" to="." method="_on_window_on_top_toggle_toggled"]
+[connection signal="toggled" from="graphic_background/MarginContainer/VBoxContainer/Header/table_toggle" to="." method="_on_table_toggle_toggled"]
+[connection signal="toggled" from="graphic_background/MarginContainer/VBoxContainer/Header/Window_toggle" to="." method="_on_window_toggle_toggled"]
+[connection signal="toggled" from="graphic_background/MarginContainer/VBoxContainer/Header/toggle_options" to="." method="_on_toggle_options_toggled"]
+[connection signal="toggled" from="graphic_background/MarginContainer/VBoxContainer/Graph_options/ScrollContainer/HBoxContainer/Weekend toggle panel/Weekend toggle" to="." method="_on_weekend_toggle_toggled"]

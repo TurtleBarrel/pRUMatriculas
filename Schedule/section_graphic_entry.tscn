@@ -1,0 +1,97 @@
+[gd_scene format=3 uid="uid://d3gvanju60gwk"]
+
+[ext_resource type="Script" uid="uid://k45t345p7dm8" path="res://Schedule/section_graphic_entry.gd" id="1_aiina"]
+[ext_resource type="Script" uid="uid://38kh3i55n4oc" path="res://Schedule/section_block_scroller.gd" id="2_6oqfu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_8a7y6"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6oqfu"]
+content_margin_left = 5.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8a7y6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nqffj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_duyae"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4i2yu"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6igx8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_s146a"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rqsc1"]
+
+[node name="section_graphic_entry" type="PanelContainer" unique_id=1578864558]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_8a7y6")
+script = ExtResource("1_aiina")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="." unique_id=402825974]
+layout_mode = 2
+horizontal_scroll_mode = 4
+vertical_scroll_mode = 4
+script = ExtResource("2_6oqfu")
+
+[node name="Control" type="Control" parent="ScrollContainer" unique_id=557119165]
+custom_minimum_size = Vector2(0, 47)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="labels" type="VBoxContainer" parent="ScrollContainer/Control" unique_id=1532669855]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 73.0
+offset_bottom = 1080.0
+size_flags_vertical = 3
+theme_override_constants/separation = 0
+
+[node name="code_sec" type="Label" parent="ScrollContainer/Control/labels" unique_id=102729452]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6oqfu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8a7y6")
+text = "code-sec"
+
+[node name="room" type="Label" parent="ScrollContainer/Control/labels" unique_id=940771197]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/normal = SubResource("StyleBoxEmpty_6oqfu")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_8a7y6")
+text = "room"
+
+[node name="deselect_margin" type="MarginContainer" parent="ScrollContainer/Control" unique_id=1629937294]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -9.0
+offset_bottom = 23.0
+grow_horizontal = 0
+theme_override_constants/margin_right = 7
+
+[node name="deselect" type="Button" parent="ScrollContainer/Control/deselect_margin" unique_id=2097458175]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_nqffj")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_duyae")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_4i2yu")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_6igx8")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_s146a")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_rqsc1")
+text = "x"
+
+[connection signal="pressed" from="ScrollContainer/Control/deselect_margin/deselect" to="." method="_on_deselect_pressed"]

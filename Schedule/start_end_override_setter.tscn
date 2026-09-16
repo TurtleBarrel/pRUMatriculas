@@ -1,0 +1,167 @@
+[gd_scene format=3 uid="uid://dbn4cipt76thq"]
+
+[ext_resource type="Script" uid="uid://bu2ynfekt76l" path="res://Schedule/start_end_override_setter.gd" id="1_p2kkp"]
+[ext_resource type="Theme" uid="uid://bo3hdnimo24sr" path="res://themes/buttons.tres" id="2_p2kkp"]
+[ext_resource type="Script" uid="uid://ba66vu0il4kmg" path="res://Schedule/time_display_override.gd" id="3_fd12p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cjyrv"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.6402972, 0.6402971, 0.6402973, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
+content_margin_left = 5.0
+content_margin_top = 2.0
+content_margin_right = 5.0
+content_margin_bottom = 2.0
+bg_color = Color(0.3425807, 0.34258068, 0.34258062, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ktvjv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_fd12p"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.2863166, 0.28631684, 0.28631672, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.52748, 0.52748007, 0.52747977, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4sk2r"]
+content_margin_left = 3.0
+content_margin_top = 3.0
+content_margin_right = 3.0
+content_margin_bottom = 3.0
+bg_color = Color(0.3485658, 0.34856573, 0.34856573, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.61420286, 0.6142028, 0.6142027, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_fd12p"]
+color = Color(0.26584634, 0.26584637, 0.26584622, 1)
+thickness = 3
+vertical = true
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fd12p"]
+
+[node name="PanelContainer" type="PanelContainer" unique_id=1837185167]
+theme_override_styles/panel = SubResource("StyleBoxFlat_cjyrv")
+script = ExtResource("1_p2kkp")
+
+[node name="start_override_container" type="HBoxContainer" parent="." unique_id=1874154503]
+layout_mode = 2
+
+[node name="Toggle_box" type="PanelContainer" parent="start_override_container" unique_id=768419119]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="start_override_container/Toggle_box" unique_id=1110348460]
+layout_mode = 2
+
+[node name="pretext" type="Label" parent="start_override_container/Toggle_box/HBoxContainer" unique_id=841741855]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_ktvjv")
+text = "Start time:"
+
+[node name="toggle_auto" type="Button" parent="start_override_container/Toggle_box/HBoxContainer" unique_id=869040157]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(90, 0)
+layout_mode = 2
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_p2kkp")
+theme_override_colors/font_color = Color(0.875, 0.875, 0.875, 1)
+theme_override_colors/font_pressed_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+theme_override_colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+theme_override_styles/normal = SubResource("StyleBoxFlat_fd12p")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_fd12p")
+theme_override_styles/hover = SubResource("StyleBoxFlat_4sk2r")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_4sk2r")
+toggle_mode = true
+text = "Automatic"
+
+[node name="VSeparator" type="VSeparator" parent="start_override_container" unique_id=1345645347]
+layout_mode = 2
+theme_override_styles/separator = SubResource("StyleBoxLine_fd12p")
+
+[node name="PanelContainer2" type="PanelContainer" parent="start_override_container" unique_id=1362447298]
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="start_override_container/PanelContainer2" unique_id=826587480]
+layout_mode = 2
+
+[node name="Margin_setter" type="HBoxContainer" parent="start_override_container/PanelContainer2/HBoxContainer" unique_id=586133373]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="margin_label" type="Label" parent="start_override_container/PanelContainer2/HBoxContainer/Margin_setter" unique_id=453226621]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fd12p")
+text = "Margin:"
+
+[node name="SpinBox_margin" type="SpinBox" parent="start_override_container/PanelContainer2/HBoxContainer/Margin_setter" unique_id=1159340225]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 12.0
+value = 1.0
+suffix = "hr"
+
+[node name="Time_setter" type="HBoxContainer" parent="start_override_container/PanelContainer2/HBoxContainer" unique_id=1088308201]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="time_label" type="Label" parent="start_override_container/PanelContainer2/HBoxContainer/Time_setter" unique_id=1147552317]
+custom_minimum_size = Vector2(65, 0)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxEmpty_fd12p")
+text = "Hour:"
+
+[node name="SpinBox_override" type="SpinBox" parent="start_override_container/PanelContainer2/HBoxContainer/Time_setter" unique_id=2107965169]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 24.0
+value = 1.0
+
+[node name="time_display_override" type="LineEdit" parent="start_override_container/PanelContainer2/HBoxContainer/Time_setter/SpinBox_override" unique_id=532424460]
+unique_name_in_owner = true
+layout_mode = 0
+offset_right = 68.5
+offset_bottom = 31.0
+max_length = 4
+emoji_menu_enabled = false
+select_all_on_focus = true
+script = ExtResource("3_fd12p")
+
+[connection signal="toggled" from="start_override_container/Toggle_box/HBoxContainer/toggle_auto" to="." method="_on_toggle_auto_toggled"]
+[connection signal="value_changed" from="start_override_container/PanelContainer2/HBoxContainer/Margin_setter/SpinBox_margin" to="." method="_on_spin_box_margin_value_changed"]
+[connection signal="value_changed" from="start_override_container/PanelContainer2/HBoxContainer/Time_setter/SpinBox_override" to="." method="_on_spin_box_override_value_changed"]
+[connection signal="text_changed" from="start_override_container/PanelContainer2/HBoxContainer/Time_setter/SpinBox_override/time_display_override" to="start_override_container/PanelContainer2/HBoxContainer/Time_setter/SpinBox_override/time_display_override" method="_on_text_changed"]
+[connection signal="text_submitted" from="start_override_container/PanelContainer2/HBoxContainer/Time_setter/SpinBox_override/time_display_override" to="start_override_container/PanelContainer2/HBoxContainer/Time_setter/SpinBox_override/time_display_override" method="_on_text_submitted"]

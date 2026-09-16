@@ -1,0 +1,132 @@
+[gd_scene format=3 uid="uid://c76arg1crwejv"]
+
+[ext_resource type="Script" uid="uid://sgswm68d7doh" path="res://main_screen.gd" id="1_7a4el"]
+[ext_resource type="PackedScene" uid="uid://popadkrf02gi" path="res://Course list/course_list.tscn" id="1_w0p2i"]
+[ext_resource type="PackedScene" uid="uid://ub5tgfq2qn0e" path="res://Selected list/selected_list.tscn" id="2_7a4el"]
+[ext_resource type="PackedScene" uid="uid://0uvfg2x3shuo" path="res://Schedule/schedule_graphic.tscn" id="3_kwhh3"]
+[ext_resource type="Script" uid="uid://cnfb06xyv5o6f" path="res://course_list_shade.gd" id="4_ywh4s"]
+[ext_resource type="Texture2D" uid="uid://dukwqdg83adr6" path="res://Images/100px blur.png" id="5_4sclt"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4sclt"]
+bg_color = Color(1, 1, 1, 1)
+
+[node name="Control" type="Control" unique_id=506640660]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_7a4el")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1233436817]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 0
+
+[node name="Schedule_scroller" type="ScrollContainer" parent="HBoxContainer" unique_id=168576975]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+horizontal_scroll_mode = 0
+
+[node name="Schedule_node" parent="HBoxContainer/Schedule_scroller" unique_id=271672865 instance=ExtResource("3_kwhh3")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(1000, 1020)
+layout_mode = 2
+
+[node name="selected_list" parent="HBoxContainer" unique_id=2081907664 instance=ExtResource("2_7a4el")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="course_list_resizer" type="HSplitContainer" parent="." unique_id=305492553]
+unique_name_in_owner = true
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+split_offsets = PackedInt32Array(-250)
+dragger_visibility = 1
+drag_area_offset = -133
+drag_area_highlight_in_editor = true
+split_offset = -250
+
+[node name="course_list_control" type="Control" parent="course_list_resizer" unique_id=107093634]
+custom_minimum_size = Vector2(500, 0)
+custom_maximum_size = Vector2(1200, -1)
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="course_list_shade" type="HBoxContainer" parent="course_list_resizer/course_list_control" unique_id=1575862894]
+modulate = Color(0, 0, 0, 0.58500004)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+script = ExtResource("4_ywh4s")
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="course_list_resizer/course_list_control/course_list_shade" unique_id=1391423339]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4sclt")
+
+[node name="TextureRect" type="TextureRect" parent="course_list_resizer/course_list_control/course_list_shade" unique_id=1697719500]
+layout_mode = 2
+mouse_filter = 2
+texture = ExtResource("5_4sclt")
+
+[node name="course_list_container" type="HBoxContainer" parent="course_list_resizer/course_list_control" unique_id=1085312684]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="course_list" parent="course_list_resizer/course_list_control/course_list_container" unique_id=1218029534 instance=ExtResource("1_w0p2i")]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(350, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="shade_spacer" type="Control" parent="course_list_resizer/course_list_control/course_list_container" unique_id=114162159]
+custom_minimum_size = Vector2(100, 0)
+custom_maximum_size = Vector2(100, -1)
+layout_mode = 2
+mouse_filter = 2
+
+[node name="course_list_spacer" type="Control" parent="course_list_resizer" unique_id=1183225107]
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+
+[node name="input_blocker" type="Panel" parent="." unique_id=633739107]
+unique_name_in_owner = true
+visible = false
+modulate = Color(1, 1, 1, 0)
+z_index = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_default_cursor_shape = 5
