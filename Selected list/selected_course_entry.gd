@@ -9,6 +9,8 @@ signal enable_all
 @onready var disabled_icon: Panel = %disabled_icon
 @onready var disabled_label: Label = %disabled_count
 @onready var pop_out_button: Button = %"Pop out"
+@onready var window_on_top_button: Button = %window_on_top_toggle
+
 @onready var section_scroller: ScrollContainer = %section_scroller
 
 
@@ -147,6 +149,8 @@ func alphabetize_unpinned_sections() -> void:
 
 
 func _on_pop_out_toggled(toggled_on: bool) -> void:
+	window_on_top_button.visible = toggled_on
+	
 	if toggled_on == true:
 		to_window()
 		pop_out_button.icon = load("uid://fgt0bd733r21")
@@ -155,4 +159,9 @@ func _on_pop_out_toggled(toggled_on: bool) -> void:
 		to_list()
 		pop_out_button.icon = load("uid://e4f8wj4uohht")
 		pop_out_button.tooltip_text = 'Pop out to new window'
-		
+		window_on_top_button.set_pressed_no_signal(false)
+
+func _on_window_on_top_toggle_toggled(toggled_on: bool) -> void:
+	get_window().hide()
+	get_window().always_on_top = toggled_on
+	get_window().show()

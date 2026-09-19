@@ -17,6 +17,7 @@ func _on_pressed() -> void:
 	window.popup_centered()
 	#gs.main_scene_node.input_blocker.modulate.a = 1
 	gs.main_scene_node.input_blocker.show()
+	gs.main_scene_node.input_blocker.mouse_default_cursor_shape = Control.CURSOR_ARROW
 	
 func _process(delta: float) -> void:
 	if removing_finished == false:
@@ -52,7 +53,7 @@ func _on_remove_pressed() -> void:
 	course_list_progress.value = 0
 	progress_container.show()
 	progress_container.modulate = Color.WHITE
-	
+	gs.main_scene_node.input_blocker.mouse_default_cursor_shape = Control.CURSOR_BUSY
 	removing_finished = false
 	
 func _on_cancel_pressed() -> void:
@@ -62,6 +63,7 @@ func close_window() -> void:
 	selected_to_remove.clear()
 	for subject_selector in subjects_container.get_children():
 		subject_selector.check_box.button_pressed = false
+	gs.main_scene_node.input_blocker.mouse_default_cursor_shape = Control.CURSOR_BUSY
 	gs.main_scene_node.input_blocker.modulate.a = 0
 	gs.main_scene_node.input_blocker.hide()
 	window.hide()

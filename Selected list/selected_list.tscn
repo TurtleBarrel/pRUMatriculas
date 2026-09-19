@@ -34,6 +34,20 @@ color = Color(0.5, 0.5, 0.5, 1)
 thickness = 2
 vertical = true
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qr2w5"]
+bg_color = Color(0.1273711, 0.12737113, 0.12737104, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s1u5x"]
+bg_color = Color(0.1273711, 0.12737113, 0.12737104, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [node name="MarginContainer" type="MarginContainer" unique_id=2081907664]
 anchors_preset = 11
 anchor_left = 1.0
@@ -339,6 +353,7 @@ text = "Professors"
 [node name="ScrollContainer" type="ScrollContainer" parent="PanelContainer/MarginContainer/VBoxContainer" unique_id=1287699541]
 custom_minimum_size = Vector2(0, 40)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_qr2w5")
 
 [node name="column_titles_margins" type="MarginContainer" parent="PanelContainer/MarginContainer/VBoxContainer/ScrollContainer" unique_id=2144135192]
 unique_name_in_owner = true
@@ -416,6 +431,7 @@ horizontal_alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_s1u5x")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Scroller_entries" unique_id=496474482]
 layout_mode = 2

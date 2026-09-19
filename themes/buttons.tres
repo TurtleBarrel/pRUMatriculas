@@ -1,7 +1,7 @@
 [gd_resource type="Theme" format=3 uid="uid://bo3hdnimo24sr"]
 
-[ext_resource type="StyleBox" uid="uid://1otcojtmqd2n" path="res://themes/toggle_normal_pannel.tres" id="1_5ulul"]
-[ext_resource type="StyleBox" uid="uid://dm5c86g2m5qm2" path="res://themes/toggle_pressed_pannel.tres" id="2_8eoxt"]
+[ext_resource type="StyleBox" uid="uid://1otcojtmqd2n" path="res://Resource files/toggle_normal_pannel.tres" id="1_5ulul"]
+[ext_resource type="StyleBox" uid="uid://dm5c86g2m5qm2" path="res://Resource files/toggle_pressed_pannel.tres" id="2_8eoxt"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wguna"]
 content_margin_left = 5.0

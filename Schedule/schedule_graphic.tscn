@@ -9,7 +9,8 @@
 [ext_resource type="Theme" uid="uid://bo3hdnimo24sr" path="res://themes/buttons.tres" id="4_qowor"]
 [ext_resource type="Texture2D" uid="uid://c4vo3mnlby74r" path="res://Images/gear_white_filled.png" id="5_2lyom"]
 [ext_resource type="PackedScene" uid="uid://dbn4cipt76thq" path="res://Schedule/start_end_override_setter.tscn" id="6_2lyom"]
-[ext_resource type="PackedScene" uid="uid://blsel7v2i4j1m" path="res://schedule_table.tscn" id="6_cjyrv"]
+[ext_resource type="PackedScene" uid="uid://blsel7v2i4j1m" path="res://Schedule/schedule_table.tscn" id="6_cjyrv"]
+
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qvqpi"]
 

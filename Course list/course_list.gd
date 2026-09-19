@@ -223,7 +223,11 @@ func _on_file_select_button_pressed() -> void:
 	file_dialogue.access = FileDialog.ACCESS_FILESYSTEM
 	file_dialogue.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 	file_dialogue.use_native_dialog = true
-	file_dialogue.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DOWNLOADS)
+	var last_loaded_path:String = files.get_data_file_path()
+	if last_loaded_path != 'ERROR':
+		file_dialogue.current_dir = last_loaded_path.get_base_dir()
+	else:
+		file_dialogue.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DOWNLOADS)
 	file_dialogue.add_filter(converter.file_filter_string, 'Data')
 	self.add_child(file_dialogue)
 	file_dialogue.popup_centered()

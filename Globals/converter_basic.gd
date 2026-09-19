@@ -17,11 +17,24 @@ func create_dicts(file_path:String) -> void:
 	var sections_info_JSON = JSON.new()
 	var error = sections_info_JSON.parse(json_text)
 	var file_data = sections_info_JSON.data ## Null if parse failed
-	if error != OK or file_data is Dictionary == false or file_data.has('data') == false: 
+	
+	var valid_JSON:bool = error == OK
+	var valid_format:bool = (file_data is Dictionary) and (file_data.has('data')) and (file_data['data'] is Dictionary) and (file_data['data'].size() != 0)
+	var course_sample = file_data['data'].values()[0]
+	var valid_courses = course_sample is Dictionary and course_sample.has('subject') and course_sample.has('name') and course_sample.has('sections') and course_sample['sections'] is Dictionary and course_sample['sections'].size() != 0
+	var sec_sample = course_sample['sections'].values()[0]
+	var valid_sections = sec_sample is Dictionary and sec_sample.has('rooms') and sec_sample.has('days') and sec_sample.has('times') and sec_sample.has('creds') and sec_sample.has('prof') and sec_sample.has('cap') and sec_sample.has('async') and sec_sample.has('times_num') and sec_sample.has('days_num')
+	
+	if not valid_JSON or not valid_format or not valid_courses or not valid_sections: 
 		## If file is not valid JSON or ...
 		## ... file is valid JSON but not valid for the app
-		print('err: ',sections_info_JSON.get_error_message())
-		print('err line: ',sections_info_JSON.get_error_line())
+		prints('JSON valid:', valid_JSON)
+		prints('JSON error:',sections_info_JSON.get_error_message())
+		prints('JSON error line:',sections_info_JSON.get_error_line())
+		prints('JSON Data format valid:',valid_format)
+		prints('Course dicts format valid:',valid_courses)
+		prints('Section dicts format valid:',valid_sections)
+		
 		files.invalid_file_loaded.emit()
 	else:
 		## If file is valid

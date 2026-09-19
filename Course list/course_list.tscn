@@ -11,49 +11,6 @@
 [ext_resource type="Theme" uid="uid://bo3hdnimo24sr" path="res://themes/buttons.tres" id="7_hmsm6"]
 [ext_resource type="Script" uid="uid://dytab0ri14c12" path="res://Course list/subject_entry.gd" id="7_qvqpi"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mm5i1"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kr702"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1mx4"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-bg_color = Color(0.22238228, 0.2223823, 0.22238225, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r1jxw"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-bg_color = Color(0.1254902, 0.1254902, 0.1254902, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ayeu"]
-content_margin_left = 5.0
-content_margin_right = 5.0
-bg_color = Color(0.38473427, 0.3847343, 0.38473418, 1)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2lyom"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cjyrv"]
@@ -100,6 +57,57 @@ content_margin_right = 2.0
 bg_color = Color(0.2509804, 0.2509804, 0.2509804, 1)
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mm5i1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1mx4"]
+content_margin_left = 10.0
+content_margin_top = 10.0
+content_margin_right = 10.0
+content_margin_bottom = 10.0
+bg_color = Color(0.22238228, 0.2223823, 0.22238225, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r1jxw"]
+content_margin_left = 5.0
+content_margin_top = 5.0
+content_margin_right = 5.0
+content_margin_bottom = 5.0
+bg_color = Color(0.1254902, 0.1254902, 0.1254902, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ayeu"]
+content_margin_left = 5.0
+content_margin_right = 5.0
+bg_color = Color(0.38473427, 0.3847343, 0.38473418, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qvqpi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nd7mx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_m7bhq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_r1jxw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_acsy5"]
 
 [node name="MarginContainer" type="MarginContainer" unique_id=1218029534]
 custom_minimum_size = Vector2(450, 0)
@@ -192,82 +200,6 @@ layout_mode = 2
 size_flags_horizontal = 6
 text = "Remove subjects..."
 script = ExtResource("6_5ayeu")
-
-[node name="subjects_window" type="Window" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects" unique_id=1432512117]
-unique_name_in_owner = true
-oversampling_override = 1.0
-initial_position = 1
-size = Vector2i(400, 400)
-visible = false
-wrap_controls = true
-transient = true
-unresizable = true
-borderless = true
-always_on_top = true
-popup_window = true
-popup_wm_hint = true
-minimize_disabled = true
-maximize_disabled = true
-theme_override_styles/embedded_border = SubResource("StyleBoxEmpty_mm5i1")
-theme_override_styles/embedded_unfocused_border = SubResource("StyleBoxEmpty_kr702")
-
-[node name="Subjects_box" type="PanelContainer" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window" unique_id=596102482]
-custom_minimum_size = Vector2(400, 400)
-theme_override_styles/panel = SubResource("StyleBoxFlat_t1mx4")
-metadata/_tab_index = 0
-
-[node name="Subjects_vbox" type="VBoxContainer" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box" unique_id=1368855285]
-layout_mode = 2
-theme_override_constants/separation = 10
-
-[node name="Subjects_header" type="Label" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox" unique_id=42451151]
-layout_mode = 2
-size_flags_vertical = 0
-text = "Select subjects to remove:
-(Will not removed selected or pinned courses)"
-horizontal_alignment = 1
-
-[node name="ScrollContainer" type="ScrollContainer" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox" unique_id=4868114]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_r1jxw")
-horizontal_scroll_mode = 0
-
-[node name="Subjects_container" type="GridContainer" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox/ScrollContainer" unique_id=1457517701]
-unique_name_in_owner = true
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-columns = 4
-
-[node name="subject_template" type="PanelContainer" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox/ScrollContainer/Subjects_container" unique_id=195243939]
-unique_name_in_owner = true
-visible = false
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_5ayeu")
-script = ExtResource("7_qvqpi")
-
-[node name="subject_check" type="CheckBox" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox/ScrollContainer/Subjects_container/subject_template" unique_id=1057292333]
-layout_mode = 2
-text = "subject"
-
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox" unique_id=1639170449]
-layout_mode = 2
-size_flags_horizontal = 8
-size_flags_vertical = 8
-
-[node name="cancel" type="Button" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox/HBoxContainer" unique_id=1711882988]
-layout_mode = 2
-theme = ExtResource("7_hmsm6")
-theme_type_variation = &"simple_press_button"
-text = "Cancel"
-
-[node name="remove" type="Button" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox/HBoxContainer" unique_id=848129947]
-layout_mode = 2
-theme = ExtResource("7_hmsm6")
-theme_type_variation = &"simple_press_button"
-text = "Remove selected"
 
 [node name="display_names_toggle" type="CheckBox" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer" unique_id=288152722]
 layout_mode = 2
@@ -512,14 +444,97 @@ theme_override_styles/focus = SubResource("StyleBoxFlat_kqdee")
 toggle_mode = true
 expand_icon = true
 
+[node name="subjects_window" type="Window" parent="." unique_id=1783661804]
+unique_name_in_owner = true
+oversampling_override = 1.0
+initial_position = 1
+size = Vector2i(400, 400)
+visible = false
+wrap_controls = true
+transient = true
+unresizable = true
+borderless = true
+always_on_top = true
+popup_window = true
+popup_wm_hint = true
+minimize_disabled = true
+maximize_disabled = true
+theme_override_styles/embedded_border = SubResource("StyleBoxEmpty_mm5i1")
+theme_override_styles/embedded_unfocused_border = SubResource("StyleBoxEmpty_mm5i1")
+
+[node name="Subjects_box" type="PanelContainer" parent="subjects_window" unique_id=1924278389]
+custom_minimum_size = Vector2(400, 400)
+offset_right = 400.0
+offset_bottom = 400.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_t1mx4")
+metadata/_tab_index = 0
+
+[node name="Subjects_vbox" type="VBoxContainer" parent="subjects_window/Subjects_box" unique_id=2144978989]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Subjects_header" type="Label" parent="subjects_window/Subjects_box/Subjects_vbox" unique_id=300053876]
+layout_mode = 2
+size_flags_vertical = 0
+text = "Select subjects to remove:
+(Will not removed selected or pinned courses)"
+horizontal_alignment = 1
+
+[node name="ScrollContainer" type="ScrollContainer" parent="subjects_window/Subjects_box/Subjects_vbox" unique_id=5540245]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_r1jxw")
+horizontal_scroll_mode = 0
+
+[node name="Subjects_container" type="GridContainer" parent="subjects_window/Subjects_box/Subjects_vbox/ScrollContainer" unique_id=555077590]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+columns = 4
+
+[node name="subject_template" type="PanelContainer" parent="subjects_window/Subjects_box/Subjects_vbox/ScrollContainer/Subjects_container" unique_id=1358191678]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_5ayeu")
+script = ExtResource("7_qvqpi")
+
+[node name="subject_check" type="CheckBox" parent="subjects_window/Subjects_box/Subjects_vbox/ScrollContainer/Subjects_container/subject_template" unique_id=1509550165]
+layout_mode = 2
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_qvqpi")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_nd7mx")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_m7bhq")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_r1jxw")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_acsy5")
+text = "subject"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="subjects_window/Subjects_box/Subjects_vbox" unique_id=242226394]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="cancel" type="Button" parent="subjects_window/Subjects_box/Subjects_vbox/HBoxContainer" unique_id=2015769603]
+layout_mode = 2
+theme = ExtResource("7_hmsm6")
+theme_type_variation = &"simple_press_button"
+text = "Cancel"
+
+[node name="remove" type="Button" parent="subjects_window/Subjects_box/Subjects_vbox/HBoxContainer" unique_id=8822520]
+layout_mode = 2
+theme = ExtResource("7_hmsm6")
+theme_type_variation = &"simple_press_button"
+text = "Remove selected"
+
 [connection signal="text_changed" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/search" to="HBoxContainer/list/List/List header margins/List options/VBoxContainer/search" method="_on_text_changed"]
 [connection signal="text_submitted" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/adders/add_subject" to="." method="_on_add_subject_text_submitted"]
 [connection signal="text_submitted" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/adders/add_course" to="." method="_on_add_course_text_submitted"]
 [connection signal="pressed" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/file_select_button" to="." method="_on_file_select_button_pressed"]
 [connection signal="pressed" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects" to="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects" method="_on_pressed"]
-[connection signal="pressed" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox/HBoxContainer/cancel" to="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects" method="_on_cancel_pressed"]
-[connection signal="pressed" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects/subjects_window/Subjects_box/Subjects_vbox/HBoxContainer/remove" to="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects" method="_on_remove_pressed"]
 [connection signal="toggled" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/display_names_toggle" to="." method="_on_display_names_toggle_toggled"]
 [connection signal="drag_ended" from="HBoxContainer/list/List/List body margins/Pin_split" to="HBoxContainer/list/List/List body margins/Pin_split" method="_on_drag_ended"]
 [connection signal="drag_started" from="HBoxContainer/list/List/List body margins/Pin_split" to="HBoxContainer/list/List/List body margins/Pin_split" method="_on_drag_started"]
 [connection signal="toggled" from="HBoxContainer/hide_button_margin/Hide list" to="." method="_on_hide_list_toggled"]
+[connection signal="pressed" from="subjects_window/Subjects_box/Subjects_vbox/HBoxContainer/cancel" to="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects" method="_on_cancel_pressed"]
+[connection signal="pressed" from="subjects_window/Subjects_box/Subjects_vbox/HBoxContainer/remove" to="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/remove_subjects" method="_on_remove_pressed"]

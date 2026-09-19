@@ -64,6 +64,10 @@ size_flags_horizontal = 0
 focus_mode = 3
 mouse_default_cursor_shape = 2
 theme_override_styles/normal = SubResource("StyleBoxEmpty_kr702")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_kr702")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_kr702")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_kr702")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_kr702")
 text = "CODE"
 metadata/col_name = "code"
 

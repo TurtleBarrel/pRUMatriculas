@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://blsel7v2i4j1m"]
 
-[ext_resource type="Script" uid="uid://ctl273seechpq" path="res://table_sections_container.gd" id="1_fv8mu"]
+[ext_resource type="Script" uid="uid://ctl273seechpq" path="res://Schedule/schedule_table.gd" id="1_fv8mu"]
 [ext_resource type="Theme" uid="uid://l2pbyshw56vg" path="res://themes/schedule_table.tres" id="2_ednj3"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ednj3"]
