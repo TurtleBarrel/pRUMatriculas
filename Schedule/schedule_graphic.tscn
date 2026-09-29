@@ -11,7 +11,6 @@
 [ext_resource type="PackedScene" uid="uid://dbn4cipt76thq" path="res://Schedule/start_end_override_setter.tscn" id="6_2lyom"]
 [ext_resource type="PackedScene" uid="uid://blsel7v2i4j1m" path="res://Schedule/schedule_table.tscn" id="6_cjyrv"]
 
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qvqpi"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_52iyn"]

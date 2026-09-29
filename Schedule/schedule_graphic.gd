@@ -31,7 +31,7 @@ func _ready() -> void:
 	weekend_toggle.button_pressed = false
 	weekend_toggle.toggled.emit(false)
 	window_on_top_toggle.hide()
-
+	parent_node = get_parent()
 
 	selected.selected_course_sections_added.connect(
 		func(code):
@@ -99,6 +99,8 @@ func _on_window_toggle_toggled(toggled_on: bool) -> void:
 		to_list(self.get_window())
 		pop_out_button.add_theme_icon_override('icon',load("uid://e4f8wj4uohht"))
 		pop_out_button.tooltip_text = 'Pop out to new window'
+		window_on_top_toggle.set_pressed_no_signal(false)
+		gs.reset_main_window_min_size()
 		
 
 func to_window() -> void:
@@ -106,7 +108,6 @@ func to_window() -> void:
 	#gs.main_scene_node.add_child(window)
 	GlobalScene.add_child(window)
 	
-	window.name = 'TESTWOW'
 	win_node = window
 	window.visible = false
 	window.force_native = true

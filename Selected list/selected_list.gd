@@ -63,6 +63,7 @@ func _ready() -> void:
 	section_previews.button_pressed = true
 	caps_button.button_pressed = false
 	
+	parent_node = get_parent()
 	gs.component_loaded.emit('selected_list')
 	
 func add_selected(code, course_node) -> void:
@@ -90,6 +91,7 @@ func _on_section_previews_toggled(toggled_on: bool) -> void:
 #region Window pop out
 func _on_pop_out_button_toggled(toggled_on: bool) -> void:
 	gs.selected_list_window_toggled.emit(toggled_on)
+	window_on_top_toggle.visible = toggled_on
 	if toggled_on == true:
 		to_window()
 		pop_out_button.icon = load("uid://fgt0bd733r21")
@@ -98,15 +100,15 @@ func _on_pop_out_button_toggled(toggled_on: bool) -> void:
 		to_list(self.get_window())
 		pop_out_button.icon = load("uid://e4f8wj4uohht")
 		pop_out_button.tooltip_text = 'Pop out to new window'
+		window_on_top_toggle.set_pressed_no_signal(false)
 
 func to_window() -> void:
 	var window = Window.new()
-	gs.main_scene_node.add_child(window)
+	GlobalScene.add_child(window)
 	
 	window.visible = false
 	window.force_native = true
 	window.min_size.y = 350
-	
 	
 	var scroller = ScrollContainer.new()
 	scroller.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -115,8 +117,6 @@ func to_window() -> void:
 	window.close_requested.connect(func(): pop_out_button.button_pressed = false)
 	window.popup_centered(Vector2i(self.size))
 	
-	
-	#self.reparent(window)
 	self.reparent(scroller)
 	self.position = Vector2(0,0)
 	self.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -128,7 +128,7 @@ func to_window() -> void:
 
 func to_list(window_node) -> void:
 	self.reparent(parent_node)
-	self.add_theme_constant_override('margin_left',40)
+	self.add_theme_constant_override('margin_left',10)
 	self.add_theme_constant_override('margin_top',10)
 	self.add_theme_constant_override('margin_right',0)
 	self.add_theme_constant_override('margin_bottom',10)
@@ -137,6 +137,6 @@ func to_list(window_node) -> void:
 
 
 func _on_window_on_top_toggle_toggled(toggled_on: bool) -> void:
-	gs.main_scene_node.get_window().hide()
-	gs.main_scene_node.get_window().always_on_top = toggled_on
-	gs.main_scene_node.get_window().show()
+	self.get_window().hide()
+	self.get_window().always_on_top = toggled_on
+	self.get_window().show()

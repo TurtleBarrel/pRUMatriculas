@@ -20,6 +20,7 @@ signal pins_changed(added:bool)
 @onready var remove_subjects: Button = %remove_subjects
 @onready var adders_container: HBoxContainer = %adders
 @onready var file_select_button: Button = %file_select_button
+@onready var subjects_container: GridContainer = %Subjects_container
 
 
 @onready var scroller_titles_pinned: ScrollContainer = %Column_titles_scroller_pinned
@@ -52,12 +53,13 @@ func _ready() -> void:
 	adders_container.hide()
 	progress_container.modulate.a = 0
 	progress_container.show()
+	
 	gs.component_loads_finished.connect(
 		func():
+			## Needs main_scene to be loaded (signal info_loaded affects input_blocker in this script) 
 			var file_path = files.get_data_file_path()
-			if file_path.is_absolute_path():
-				if FileAccess.file_exists(file_path):
-					load_file(file_path)
+			if file_path.is_absolute_path() and FileAccess.file_exists(file_path):
+				load_file(file_path, false)
 	)
 	
 	gs.info_loaded.connect(
@@ -115,10 +117,10 @@ func _ready() -> void:
 
 	
 func _process(_delta: float) -> void:
-	if Input.is_action_just_pressed("ui_up"): ## HACK
-		add_courses(gs.course_info_by_code.duplicate())
-		alphabetize_unpinned_courses()
-	
+	#if Input.is_action_just_pressed("ui_up"): ## HACK
+		#add_courses(gs.course_info_by_code.duplicate())
+		#alphabetize_unpinned_courses()
+	#
 	if adding_finished == false:
 		var start_time:float = Time.get_unix_time_from_system()
 		course_count_buffer = courses_to_add.size()
@@ -185,8 +187,6 @@ func add_courses(course_dicts_dupe) -> void:
 	course_count_initial = courses_to_add.size()
 	adding_finished = false
 	
-	
-	
 func finish_course_add() -> void:
 	progress_container.modulate.a = 0
 	if title_label.text.is_empty() == false:
@@ -233,14 +233,23 @@ func _on_file_select_button_pressed() -> void:
 	file_dialogue.popup_centered()
 	
 	file_dialogue.file_selected.connect(load_file)
-	
+func load_file(path, clear_loaded_courses:bool = true):
+	if clear_loaded_courses == true:
+		gs.added_course_codes.clear()
+		files.save_loaded_courses()
+	converter.create_dicts(path)
+
 func reset_list():
 	for course_entry in entries_pinned.get_children():
 		course_entry.queue_free()
 	for course_entry in entries_unpinned.get_children():
 		course_entry.queue_free()
-func load_file(path):
-	converter.create_dicts(path)
+	gs.course_nodes_by_code.clear()
+	gs.course_nodes_by_subject.clear()
+	for child in subjects_container.get_children():
+		child.queue_free()
+	
+
 	
 func pulse_file_select(color:Color) -> void:
 	var panel = StyleBoxFlat.new()

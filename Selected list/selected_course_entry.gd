@@ -100,7 +100,7 @@ func update_filter() -> void:
 
 func to_window() -> void:
 	var window = Window.new()
-	gs.main_scene_node.add_child(window)
+	GlobalScene.add_child(window)
 	window_node = window
 	window.visible = false
 	window.force_native = true

@@ -18,9 +18,6 @@ func _ready() -> void:
 			course_list_resizer.dragging_enabled = !hid
 	)
 	
-	graph_node.parent_node =  schedule_scroller
-	selected_list.parent_node = box_container
-	
 	gs.component_loaded.emit('main_screen')
 	
 func sched_window_toggled(windowed):
@@ -36,6 +33,6 @@ func sched_window_toggled(windowed):
 func set_window_min_size(selected_windowed):
 	if selected_windowed == true:
 		self.get_window().min_size.x = 800
-	else:
-		self.get_window().min_size.x = 1780
-	self.get_window().min_size.y = 350
+	#else:
+		#self.get_window().min_size.x = 1880
+	#self.get_window().min_size.y = 350

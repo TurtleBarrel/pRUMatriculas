@@ -13,6 +13,7 @@ config_version=5
 config/name="pRUMatricula"
 run/main_scene="uid://c76arg1crwejv"
 config/features=PackedStringArray("4.7", "GL Compatibility")
+boot_splash/show_image=false
 
 [autoload]
 

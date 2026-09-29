@@ -52,10 +52,10 @@ func create_dicts(file_path:String) -> void:
 			gs.course_info_by_subject.get_or_add(subject,{})
 			gs.course_info_by_subject[subject].get_or_add(code,formatted_courses[code])
 
-		#for code in dict_dict.keys():
+		#for code in formatted_courses.keys():
 			#print(code, ':')
-			#for sec in dict_dict[code]['sections']:
-				#print(sec,': ',dict_dict[code]['sections'][sec])
+			#for sec in formatted_courses[code]['sections']:
+				#print(sec,': ',formatted_courses[code]['sections'][sec])
 			#print()
 			
 		gs.course_info_by_code = formatted_courses
