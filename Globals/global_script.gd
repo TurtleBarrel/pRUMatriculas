@@ -9,7 +9,6 @@ signal schedule_window_toggled
 signal section_block_scrolled
 signal course_list_toggled
 signal weekends_toggled(toggled_on)
-signal override_changed()
 signal course_removed(code,subject,course_entry)
 signal data_title_set(title)
 
@@ -28,10 +27,13 @@ var main_window_min_size:Vector2i = Vector2i(1880,350)
 
 #func _process(delta: float) -> void:
 	#if Input.is_action_just_pressed("ui_accept"): ## HACK
-		#get_tree().root.content_scale_factor = 2
-		#print(DisplayServer.window_get_min_size())
-		#print(DisplayServer.window_get_size())
-		#print()
+		#get_tree().root.content_scale_factor += 0.2
+		##print(DisplayServer.window_get_min_size())
+		##print(DisplayServer.window_get_size())
+		##print()
+	#elif Input.is_action_just_pressed('ui_up'):
+		#get_tree().root.content_scale_factor -= 0.2
+
 
 func _ready() -> void:
 	component_loaded.connect(

@@ -60,7 +60,7 @@ grow_horizontal = 0
 grow_vertical = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
-theme_override_constants/margin_left = 10
+theme_override_constants/margin_left = 0
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
@@ -109,7 +109,6 @@ expand_icon = true
 
 [node name="pop_out_button" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Header" unique_id=1874435597]
 unique_name_in_owner = true
-visible = false
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 tooltip_text = "Pop out to new window"
@@ -142,61 +141,64 @@ theme = ExtResource("6_qswpn")
 current_tab = 0
 tab_1/title = "Columns"
 
-[node name="List options" type="VBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs" unique_id=1212291917]
+[node name="List options" type="HFlowContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs" unique_id=1062269989]
 layout_mode = 2
 metadata/_tab_index = 0
 
-[node name="options_row_1" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options" unique_id=1703299467]
-layout_mode = 2
-
-[node name="Hide disabled" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_1" unique_id=638716430]
+[node name="Hide disabled" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options" unique_id=638716430]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 tooltip_text = "Hide manually disabled sections"
 focus_mode = 3
 mouse_default_cursor_shape = 2
 theme = ExtResource("4_wrwl7")
 theme_type_variation = &"blue_toggle"
 text = "Hide disabled"
+alignment = 1
 
-[node name="Hide conflicting" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_1" unique_id=1064794730]
+[node name="Hide conflicting" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options" unique_id=1064794730]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 tooltip_text = "Hide sections that don't fit in schedule"
 focus_mode = 3
 mouse_default_cursor_shape = 2
 theme = ExtResource("4_wrwl7")
 theme_type_variation = &"blue_toggle"
 text = "Hide conflicting"
+alignment = 1
 
-[node name="Section previews" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_1" unique_id=273211702]
+[node name="Section previews" type="CheckButton" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options" unique_id=273211702]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 3
 tooltip_text = "Show where sections would go in the schedule before selecting them"
 focus_mode = 3
 mouse_default_cursor_shape = 2
 theme = ExtResource("4_wrwl7")
 theme_type_variation = &"blue_toggle"
 text = "Preview on hover"
+alignment = 1
 
-[node name="options_row_2" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options" unique_id=1053396352]
+[node name="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options" unique_id=1515852246 node_paths=PackedStringArray("selected_list") instance=ExtResource("7_uupy0")]
 layout_mode = 2
+selected_list = NodePath("../../../../../..")
 
-[node name="PanelContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=1515852246 node_paths=PackedStringArray("selected_list") instance=ExtResource("7_uupy0")]
-layout_mode = 2
-selected_list = NodePath("../../../../../../..")
-
-[node name="PanelContainer2" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=30223119 node_paths=PackedStringArray("selected_list") instance=ExtResource("7_uupy0")]
+[node name="PanelContainer2" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options" unique_id=30223119 node_paths=PackedStringArray("selected_list") instance=ExtResource("7_uupy0")]
 layout_mode = 2
 mode = "Latest"
-selected_list = NodePath("../../../../../../..")
+selected_list = NodePath("../../../../../..")
 
-[node name="VSeparator" type="VSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=2008699581]
+[node name="HBoxContainer" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options" unique_id=1995144390]
+layout_mode = 2
+
+[node name="VSeparator" type="VSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer" unique_id=2008699581]
 layout_mode = 2
 theme_override_constants/separation = 10
 theme_override_styles/separator = SubResource("StyleBoxLine_uupy0")
 
-[node name="sun" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=1084845468]
+[node name="sun" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer" unique_id=1084845468]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 focus_mode = 3
@@ -209,7 +211,7 @@ text = "D"
 script = ExtResource("8_g3c1a")
 metadata/day_num = 0
 
-[node name="mon" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=1714856940]
+[node name="mon" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer" unique_id=1714856940]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 focus_mode = 3
@@ -222,7 +224,7 @@ text = "L"
 script = ExtResource("8_g3c1a")
 metadata/day_num = 1
 
-[node name="tue" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=1117483356]
+[node name="tue" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer" unique_id=1117483356]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 focus_mode = 3
@@ -235,7 +237,7 @@ text = "M"
 script = ExtResource("8_g3c1a")
 metadata/day_num = 2
 
-[node name="wed" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=1492072680]
+[node name="wed" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer" unique_id=1492072680]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 focus_mode = 3
@@ -248,7 +250,7 @@ text = "W"
 script = ExtResource("8_g3c1a")
 metadata/day_num = 3
 
-[node name="thu" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=1835865583]
+[node name="thu" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer" unique_id=1835865583]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 focus_mode = 3
@@ -261,7 +263,7 @@ text = "J"
 script = ExtResource("8_g3c1a")
 metadata/day_num = 4
 
-[node name="fri" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=952232498]
+[node name="fri" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer" unique_id=952232498]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 focus_mode = 3
@@ -274,7 +276,7 @@ text = "V"
 script = ExtResource("8_g3c1a")
 metadata/day_num = 5
 
-[node name="sat" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2" unique_id=255822779]
+[node name="sat" type="Button" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer" unique_id=255822779]
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 focus_mode = 3
@@ -286,6 +288,11 @@ button_pressed = true
 text = "S"
 script = ExtResource("8_g3c1a")
 metadata/day_num = 6
+
+[node name="VSeparator2" type="VSeparator" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer" unique_id=1900822450]
+layout_mode = 2
+theme_override_constants/separation = 10
+theme_override_styles/separator = SubResource("StyleBoxLine_uupy0")
 
 [node name="Column_toggles" type="HBoxContainer" parent="PanelContainer/MarginContainer/VBoxContainer/Option_tabs" unique_id=1312466654]
 visible = false
@@ -502,16 +509,16 @@ layout_mode = 2
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Header/pop_out_button" to="." method="_on_pop_out_button_toggled"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Header/toggle_options" to="." method="_on_toggle_options_toggled"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Header/toggle_options" to="PanelContainer/MarginContainer/VBoxContainer/Header/toggle_options" method="_on_toggled"]
-[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_1/Hide disabled" to="." method="_on_hide_disabled_toggled"]
-[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_1/Hide conflicting" to="." method="_on_hide_conflicting_toggled"]
-[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_1/Section previews" to="." method="_on_section_previews_toggled"]
-[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/sun" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/sun" method="_on_toggled"]
-[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/mon" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/mon" method="_on_toggled"]
-[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/tue" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/tue" method="_on_toggled"]
-[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/wed" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/wed" method="_on_toggled"]
-[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/thu" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/thu" method="_on_toggled"]
-[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/fri" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/fri" method="_on_toggled"]
-[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/sat" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/options_row_2/sat" method="_on_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/Hide disabled" to="." method="_on_hide_disabled_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/Hide conflicting" to="." method="_on_hide_conflicting_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/Section previews" to="." method="_on_section_previews_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer/sun" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer/sun" method="_on_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer/mon" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer/mon" method="_on_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer/tue" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer/tue" method="_on_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer/wed" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer/wed" method="_on_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer/thu" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer/thu" method="_on_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer/fri" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer/fri" method="_on_toggled"]
+[connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer/sat" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/List options/HBoxContainer/sat" method="_on_toggled"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles/caps" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles" method="_on_caps_toggled"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles/creds" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles" method="_on_creds_toggled"]
 [connection signal="toggled" from="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles/rooms" to="PanelContainer/MarginContainer/VBoxContainer/Option_tabs/Column_toggles" method="_on_rooms_toggled"]

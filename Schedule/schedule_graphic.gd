@@ -12,6 +12,7 @@ signal columns_ready
 @onready var graph_options: PanelContainer = %Graph_options
 @onready var table_node: PanelContainer = %Table
 @onready var window_on_top_toggle: Button = %window_on_top_toggle
+@onready var table_graphic_splitter: VSplitContainer = %table_grpahic_splitter
 
 
 
@@ -32,6 +33,10 @@ func _ready() -> void:
 	weekend_toggle.toggled.emit(false)
 	window_on_top_toggle.hide()
 	parent_node = get_parent()
+
+	var table_graphic_handle = table_graphic_splitter.get_child(-1,true)
+	table_graphic_handle.modulate = Color(0.5, 0.5, 0.5, 1.0)
+
 
 	selected.selected_course_sections_added.connect(
 		func(code):

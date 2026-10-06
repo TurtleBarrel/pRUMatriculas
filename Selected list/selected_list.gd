@@ -121,14 +121,12 @@ func to_window() -> void:
 	self.position = Vector2(0,0)
 	self.set_anchors_preset(Control.PRESET_FULL_RECT)
 	
-	self.add_theme_constant_override('margin_left',0)
 	self.add_theme_constant_override('margin_top',0)
 	self.add_theme_constant_override('margin_right',0)
 	self.add_theme_constant_override('margin_bottom',0)
 
 func to_list(window_node) -> void:
 	self.reparent(parent_node)
-	self.add_theme_constant_override('margin_left',10)
 	self.add_theme_constant_override('margin_top',10)
 	self.add_theme_constant_override('margin_right',0)
 	self.add_theme_constant_override('margin_bottom',10)

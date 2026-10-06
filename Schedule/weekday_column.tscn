@@ -38,7 +38,7 @@ layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("3_itqya")
 
-[node name="hour_line" type="Panel" parent="VBoxContainer/time_column" unique_id=1008603590]
+[node name="hour_line" type="Panel" parent="VBoxContainer/time_column" unique_id=1008603590 groups=["graph_element"]]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -49,9 +49,8 @@ anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_e3nly")
-metadata/source = true
 
-[node name="time_label" type="Label" parent="VBoxContainer/time_column" unique_id=214190191]
+[node name="time_label" type="Label" parent="VBoxContainer/time_column" unique_id=214190191 groups=["graph_element"]]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -64,4 +63,3 @@ offset_bottom = 23.0
 grow_horizontal = 2
 theme_override_styles/normal = SubResource("StyleBoxFlat_4jr1h")
 text = "time"
-metadata/source = true

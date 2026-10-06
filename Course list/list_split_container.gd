@@ -12,6 +12,11 @@ var dragging:bool = false
 var first_load_split:bool = true
 var first_load_pinned:bool = true
 func _ready() -> void:
+	
+	var pin_split_handle = self.get_child(-1,true)
+	pin_split_handle.modulate = Color(0.5, 0.5, 0.5, 1.0)
+
+
 	self.resized.connect(
 		func():
 			if first_load_split == true:
@@ -29,10 +34,10 @@ func _ready() -> void:
 
 func update_size(added:bool):
 	if added == true:
-		
 		var offsets = self.split_offsets
-		if offsets[0] < -self.size.y/2 + entries_pinned.size.y + 80:
-			offsets[0] = -self.size.y/2 + entries_pinned.size.y + 80
+		var new_offset = -self.size.y/2 + entries_pinned.size.y + 100
+		if offsets[0] < new_offset and new_offset < self.size.y/4:
+			offsets[0] = new_offset
 			self.split_offsets = offsets
 
 func update_vis() -> void:

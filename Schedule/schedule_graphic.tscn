@@ -10,12 +10,13 @@
 [ext_resource type="Texture2D" uid="uid://c4vo3mnlby74r" path="res://Images/gear_white_filled.png" id="5_2lyom"]
 [ext_resource type="PackedScene" uid="uid://dbn4cipt76thq" path="res://Schedule/start_end_override_setter.tscn" id="6_2lyom"]
 [ext_resource type="PackedScene" uid="uid://blsel7v2i4j1m" path="res://Schedule/schedule_table.tscn" id="6_cjyrv"]
+[ext_resource type="Texture2D" uid="uid://b8t6bedw4owwu" path="res://Images/split_grabber_v.svg" id="9_u1046"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qvqpi"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_52iyn"]
-
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_l63jy"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_52iyn"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_cjyrv"]
 
@@ -59,7 +60,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [node name="schedule_graph_node" type="MarginContainer" unique_id=1592528605]
-custom_minimum_size = Vector2(1000, 1010)
+custom_minimum_size = Vector2(500, 1010)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -112,24 +113,6 @@ toggle_mode = true
 icon = ExtResource("4_ljl2l")
 expand_icon = true
 
-[node name="table_toggle" type="Button" parent="graphic_background/MarginContainer/VBoxContainer/Header" unique_id=1525003155]
-custom_minimum_size = Vector2(22, 0)
-layout_mode = 2
-size_flags_horizontal = 8
-tooltip_text = "Hide or show table."
-focus_mode = 3
-theme = ExtResource("4_qowor")
-theme_type_variation = &"blue_toggle"
-theme_override_icons/icon = ExtResource("4_016b7")
-theme_override_styles/normal = SubResource("StyleBoxEmpty_52iyn")
-theme_override_styles/pressed = SubResource("StyleBoxEmpty_52iyn")
-theme_override_styles/hover = SubResource("StyleBoxEmpty_52iyn")
-theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_52iyn")
-theme_override_styles/disabled = SubResource("StyleBoxEmpty_52iyn")
-toggle_mode = true
-button_pressed = true
-expand_icon = true
-
 [node name="Window_toggle" type="Button" parent="graphic_background/MarginContainer/VBoxContainer/Header" unique_id=989707165]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(22, 0)
@@ -146,6 +129,24 @@ theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_l63jy")
 theme_override_styles/disabled = SubResource("StyleBoxEmpty_l63jy")
 theme_override_styles/focus = SubResource("StyleBoxEmpty_l63jy")
 toggle_mode = true
+expand_icon = true
+
+[node name="table_toggle" type="Button" parent="graphic_background/MarginContainer/VBoxContainer/Header" unique_id=1525003155]
+custom_minimum_size = Vector2(22, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+tooltip_text = "Hide or show table."
+focus_mode = 3
+theme = ExtResource("4_qowor")
+theme_type_variation = &"blue_toggle"
+theme_override_icons/icon = ExtResource("4_016b7")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_52iyn")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_52iyn")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_52iyn")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_52iyn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_52iyn")
+toggle_mode = true
+button_pressed = true
 expand_icon = true
 
 [node name="toggle_options" type="Button" parent="graphic_background/MarginContainer/VBoxContainer/Header" unique_id=1232506217]
@@ -174,12 +175,22 @@ theme_override_styles/panel = SubResource("StyleBoxFlat_qowor")
 
 [node name="ScrollContainer" type="ScrollContainer" parent="graphic_background/MarginContainer/VBoxContainer/Graph_options" unique_id=1061990344]
 layout_mode = 2
+theme_override_constants/scrollbar_v_separation = 4
 vertical_scroll_mode = 0
 scroll_horizontal_by_default = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="graphic_background/MarginContainer/VBoxContainer/Graph_options/ScrollContainer" unique_id=959589416]
 layout_mode = 2
 size_flags_vertical = 6
+
+[node name="Start setter" parent="graphic_background/MarginContainer/VBoxContainer/Graph_options/ScrollContainer/HBoxContainer" unique_id=1837185167 node_paths=PackedStringArray("counterpart") instance=ExtResource("6_2lyom")]
+layout_mode = 2
+counterpart = NodePath("../End setter")
+
+[node name="End setter" parent="graphic_background/MarginContainer/VBoxContainer/Graph_options/ScrollContainer/HBoxContainer" unique_id=1534682099 node_paths=PackedStringArray("counterpart") instance=ExtResource("6_2lyom")]
+layout_mode = 2
+mode = "end"
+counterpart = NodePath("../Start setter")
 
 [node name="Weekend toggle panel" type="PanelContainer" parent="graphic_background/MarginContainer/VBoxContainer/Graph_options/ScrollContainer/HBoxContainer" unique_id=1553097437]
 layout_mode = 2
@@ -193,41 +204,35 @@ theme = ExtResource("4_qowor")
 theme_type_variation = &"check_button_plain"
 text = "Weekends"
 
-[node name="Start setter" parent="graphic_background/MarginContainer/VBoxContainer/Graph_options/ScrollContainer/HBoxContainer" unique_id=1837185167 node_paths=PackedStringArray("counterpart") instance=ExtResource("6_2lyom")]
-layout_mode = 2
-counterpart = NodePath("../End setter")
-
-[node name="End setter" parent="graphic_background/MarginContainer/VBoxContainer/Graph_options/ScrollContainer/HBoxContainer" unique_id=1534682099 node_paths=PackedStringArray("counterpart") instance=ExtResource("6_2lyom")]
-layout_mode = 2
-mode = "end"
-counterpart = NodePath("../Start setter")
-
-[node name="VSplitContainer" type="VSplitContainer" parent="graphic_background/MarginContainer/VBoxContainer" unique_id=986620163]
+[node name="table_grpahic_splitter" type="VSplitContainer" parent="graphic_background/MarginContainer/VBoxContainer" unique_id=986620163]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/autohide = 0
+theme_override_icons/grabber = ExtResource("9_u1046")
+theme_override_icons/v_grabber = ExtResource("9_u1046")
 split_offsets = PackedInt32Array(160)
 split_offset = 160
 
-[node name="Table" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer" unique_id=1503008307 instance=ExtResource("6_cjyrv")]
+[node name="Table" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter" unique_id=1503008307 instance=ExtResource("6_cjyrv")]
 unique_name_in_owner = true
 layout_mode = 2
 
-[node name="PanelContainer" type="PanelContainer" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer" unique_id=707388276]
+[node name="Graphic" type="PanelContainer" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter" unique_id=707388276]
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
 
-[node name="Columns" type="HBoxContainer" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer" unique_id=624234161]
+[node name="Columns" type="HBoxContainer" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter/Graphic" unique_id=624234161]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 theme_override_constants/separation = 0
 
-[node name="VSeparator" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=1467907214]
+[node name="VSeparator" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter/Graphic/Columns" unique_id=1467907214]
 layout_mode = 2
 theme = ExtResource("2_l63jy")
 
-[node name="Times" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=2050962960 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
+[node name="Times" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter/Graphic/Columns" unique_id=2050962960 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
@@ -235,84 +240,84 @@ day = "Time"
 is_time_column = true
 graph_node = NodePath("../../../../../../..")
 
-[node name="sun_left" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=1895705914]
+[node name="sun_left" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter/Graphic/Columns" unique_id=1895705914]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_l63jy")
 
-[node name="Sunday" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=2113072952 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
+[node name="Sunday" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter/Graphic/Columns" unique_id=2113072952 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
 unique_name_in_owner = true
 layout_mode = 2
 day = "Sunday"
 graph_node = NodePath("../../../../../../..")
 
-[node name="VSeparator3" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=854923499]
+[node name="VSeparator3" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter/Graphic/Columns" unique_id=854923499]
 layout_mode = 2
 theme = ExtResource("2_l63jy")
 
-[node name="Monday" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=1052532664 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
+[node name="Monday" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter/Graphic/Columns" unique_id=1052532664 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
 unique_name_in_owner = true
 layout_mode = 2
 day = "Monday"
 graph_node = NodePath("../../../../../../..")
 
-[node name="VSeparator4" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=1114563548]
+[node name="VSeparator4" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter/Graphic/Columns" unique_id=1114563548]
 layout_mode = 2
 theme = ExtResource("2_l63jy")
 
-[node name="Tuesday" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=1335083990 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
+[node name="Tuesday" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter/Graphic/Columns" unique_id=1335083990 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
 unique_name_in_owner = true
 layout_mode = 2
 day = "Tuesday"
 graph_node = NodePath("../../../../../../..")
 
-[node name="VSeparator5" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=253105871]
+[node name="VSeparator5" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter/Graphic/Columns" unique_id=253105871]
 layout_mode = 2
 theme = ExtResource("2_l63jy")
 
-[node name="Wednesday" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=389625784 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
+[node name="Wednesday" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter/Graphic/Columns" unique_id=389625784 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
 unique_name_in_owner = true
 layout_mode = 2
 day = "Wednesday"
 graph_node = NodePath("../../../../../../..")
 
-[node name="VSeparator6" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=361177457]
+[node name="VSeparator6" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter/Graphic/Columns" unique_id=361177457]
 layout_mode = 2
 theme = ExtResource("2_l63jy")
 
-[node name="Thursday" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=288448711 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
+[node name="Thursday" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter/Graphic/Columns" unique_id=288448711 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
 unique_name_in_owner = true
 layout_mode = 2
 day = "Thursday"
 graph_node = NodePath("../../../../../../..")
 
-[node name="VSeparator7" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=1919553306]
+[node name="VSeparator7" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter/Graphic/Columns" unique_id=1919553306]
 layout_mode = 2
 theme = ExtResource("2_l63jy")
 
-[node name="Friday" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=1931192077 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
+[node name="Friday" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter/Graphic/Columns" unique_id=1931192077 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
 unique_name_in_owner = true
 layout_mode = 2
 day = "Friday"
 graph_node = NodePath("../../../../../../..")
 
-[node name="sat_left" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=9435270]
+[node name="sat_left" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter/Graphic/Columns" unique_id=9435270]
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_l63jy")
 
-[node name="Saturday" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=1571073919 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
+[node name="Saturday" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter/Graphic/Columns" unique_id=1571073919 node_paths=PackedStringArray("graph_node") instance=ExtResource("2_7q8y2")]
 unique_name_in_owner = true
 layout_mode = 2
 day = "Saturday"
 graph_node = NodePath("../../../../../../..")
 
-[node name="VSeparator9" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/VSplitContainer/PanelContainer/Columns" unique_id=1277177656]
+[node name="VSeparator9" type="VSeparator" parent="graphic_background/MarginContainer/VBoxContainer/table_grpahic_splitter/Graphic/Columns" unique_id=1277177656]
 layout_mode = 2
 theme = ExtResource("2_l63jy")
 
 [connection signal="toggled" from="graphic_background/MarginContainer/VBoxContainer/Header/window_on_top_toggle" to="." method="_on_window_on_top_toggle_toggled"]
-[connection signal="toggled" from="graphic_background/MarginContainer/VBoxContainer/Header/table_toggle" to="." method="_on_table_toggle_toggled"]
 [connection signal="toggled" from="graphic_background/MarginContainer/VBoxContainer/Header/Window_toggle" to="." method="_on_window_toggle_toggled"]
+[connection signal="toggled" from="graphic_background/MarginContainer/VBoxContainer/Header/table_toggle" to="." method="_on_table_toggle_toggled"]
 [connection signal="toggled" from="graphic_background/MarginContainer/VBoxContainer/Header/toggle_options" to="." method="_on_toggle_options_toggled"]
 [connection signal="toggled" from="graphic_background/MarginContainer/VBoxContainer/Graph_options/ScrollContainer/HBoxContainer/Weekend toggle panel/Weekend toggle" to="." method="_on_weekend_toggle_toggled"]

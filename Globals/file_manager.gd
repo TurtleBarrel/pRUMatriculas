@@ -41,8 +41,3 @@ func get_loaded_courses() -> Array:
 		if parsed_array is Array:
 			array = parsed_array
 	return array
-
-#func _process(delta: float) -> void:
-	#if Input.is_action_just_pressed("ui_accept"): ## HACK
-		##save_loaded_courses()
-		#print(get_loaded_courses())

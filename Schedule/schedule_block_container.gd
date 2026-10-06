@@ -1,9 +1,15 @@
 extends Control
 
+@onready var time_label:Label = %time_label.duplicate()
+@onready var hour_line: Panel = %hour_line.duplicate()
+
+
 var line_nodes:Array = []
 var time_label_nodes:Array = []
 
 func _ready() -> void:
+	%hour_line.queue_free()
+	%time_label.queue_free()
 	
 	owner.ready.connect(
 		func():
@@ -18,18 +24,13 @@ func _ready() -> void:
 				update_time_labels()
 	)
 	
-	selected.start_end_hours_changed.connect(
-		func():
-			reset_columns()
-	)
-#
-#func _process(delta: float) -> void:
-	#if Input.is_action_just_pressed("ui_accept"):
-		#reset_columns()
+	selected.start_end_hours_changed.connect(reset_columns)
 
 func reset_columns():
 	for child in get_children():
-		if child.get_meta('source') == false:
+		## Children include the section graphic entries.
+		## graph_element only holds the hour lines and labels
+		if child.is_in_group('graph_element'):
 			child.queue_free()
 	
 	line_nodes.clear()
@@ -57,10 +58,9 @@ func set_time_labels():
 			suffix = 'pm'
 		if time > 12:
 			modifier = -12
-		
-		var label_node = %time_label
+	
 		if i != 0 and i != entry_count-1:
-			var label = label_node.duplicate()
+			var label = time_label.duplicate()
 			label.set_meta('source', false)
 			label.text = str(time+modifier)+':'+'00'+suffix
 			label.visible = true
@@ -80,9 +80,8 @@ func set_lines():
 	var end = graph_node.end
 	
 	var entry_count:int = (end-start)*2+1
-	var line_node = $hour_line
 	for i:int in entry_count:
-		var line = line_node.duplicate()
+		var line = hour_line.duplicate()
 		line.set_meta('source',false)
 		line.size.x = self.size.x
 		line.size.y = 2

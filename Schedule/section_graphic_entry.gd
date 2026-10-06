@@ -1,6 +1,6 @@
 extends PanelContainer
 
-@onready var code_sec_label: Label = %code_sec
+@onready var info_label: Label = %info_label
 @onready var room_label: Label = %room
 @onready var labels: VBoxContainer = %labels
 @onready var deselect_margin: MarginContainer = %deselect_margin
@@ -16,15 +16,16 @@ var end:float
 var sec_num:String
 var sec_dict:Dictionary
 var block_index:int
-#var section_color:Color
-
 
 var first_load:bool = true
 
 func _ready() -> void:
 	sect_block_container.resized.connect(set_block)
-	code_sec_label.text = code+' - '+sec_num
-	room_label.text = sec_dict['rooms'][block_index]
+	info_label.text = code+' - '+sec_num
+	var room_text:String = sec_dict['rooms'][block_index]
+	if room_text.is_empty() == false:
+		info_label.text += '\n'+sec_dict['rooms'][block_index]
+	#room_label.text = sec_dict['rooms'][block_index]
 	selected.start_end_hours_changed.connect(set_block)
 	gs.weekends_toggled.connect(
 		func(toggled_on):

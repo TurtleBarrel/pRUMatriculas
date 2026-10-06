@@ -9,7 +9,9 @@
 [ext_resource type="Script" uid="uid://bb17es7va31no" path="res://Course list/remove_subjects.gd" id="6_5ayeu"]
 [ext_resource type="Texture2D" uid="uid://cv5s6b5d2fc4u" path="res://Images/left_arrow_icon.png" id="6_f6nkj"]
 [ext_resource type="Theme" uid="uid://bo3hdnimo24sr" path="res://themes/buttons.tres" id="7_hmsm6"]
+[ext_resource type="Texture2D" uid="uid://b8t6bedw4owwu" path="res://Images/split_grabber_v.svg" id="7_nd7mx"]
 [ext_resource type="Script" uid="uid://dytab0ri14c12" path="res://Course list/subject_entry.gd" id="7_qvqpi"]
+[ext_resource type="Texture2D" uid="uid://difq15vcsafdt" path="res://Images/split_grabber_h.svg" id="9_m7bhq"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2lyom"]
 
@@ -46,7 +48,7 @@ content_margin_right = 15.0
 content_margin_bottom = 0.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g4v7s"]
-bg_color = Color(0.4117647, 0.4117647, 0.4117647, 1)
+bg_color = Color(0.49803922, 0.49803922, 0.49803922, 1)
 corner_radius_top_left = 5
 corner_radius_top_right = 5
 corner_radius_bottom_right = 5
@@ -262,6 +264,8 @@ theme_override_constants/margin_top = 0
 unique_name_in_owner = true
 layout_mode = 2
 theme = ExtResource("2_jtl8d")
+theme_override_icons/grabber = ExtResource("7_nd7mx")
+theme_override_icons/v_grabber = ExtResource("7_nd7mx")
 split_offsets = PackedInt32Array(-270)
 split_offset = -270
 script = ExtResource("4_kqdee")
@@ -418,6 +422,11 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxFlat_g4v7s")
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer/list/MarginContainer" unique_id=1438261064]
+visible = false
+layout_mode = 2
+texture = ExtResource("9_m7bhq")
 
 [node name="hide_button_margin" type="MarginContainer" parent="HBoxContainer" unique_id=1158320691]
 unique_name_in_owner = true

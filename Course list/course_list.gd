@@ -117,10 +117,6 @@ func _ready() -> void:
 
 	
 func _process(_delta: float) -> void:
-	#if Input.is_action_just_pressed("ui_up"): ## HACK
-		#add_courses(gs.course_info_by_code.duplicate())
-		#alphabetize_unpinned_courses()
-	#
 	if adding_finished == false:
 		var start_time:float = Time.get_unix_time_from_system()
 		course_count_buffer = courses_to_add.size()
