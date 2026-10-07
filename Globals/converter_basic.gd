@@ -9,7 +9,6 @@ var file_filter_string:String = '*json'
 
 
 func create_dicts(file_path:String) -> void:
-	#var start_time = Time.get_unix_time_from_system()
 	var file = FileAccess.open(file_path, FileAccess.READ)
 	var json_text = file.get_as_text()
 	file.close()

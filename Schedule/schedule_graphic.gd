@@ -1,6 +1,7 @@
 extends MarginContainer
 
 signal columns_ready
+signal column_scrolled(value,source)
 
 @onready var weekday_node: PanelContainer = %weekday_node
 @onready var columns:Array = [%Times, %Sunday, %Monday, %Tuesday, %Wednesday, %Thursday, %Friday, %Saturday]
@@ -14,10 +15,6 @@ signal columns_ready
 @onready var window_on_top_toggle: Button = %window_on_top_toggle
 @onready var table_graphic_splitter: VSplitContainer = %table_grpahic_splitter
 
-
-
-#var start_override_value: int = 6 ## Only used to make sure start is before end
-#var end_override_value: int = 20 ## Only used to make sure start is before end
 var start_override:bool = true
 var end_override:bool = true
 var start_margin:int = 1
@@ -119,18 +116,18 @@ func to_window() -> void:
 	window.transient = false
 	window.min_size.x = self.custom_minimum_size.x
 	window.min_size.y = 350
+	if gs.mobile_device == true:
+		window.theme = load("uid://dawkytrj124w4")
 	
 	var scroller = ScrollContainer.new()
 	scroller.set_anchors_preset(Control.PRESET_FULL_RECT)
 	window.add_child(scroller)
 	
 	window.close_requested.connect(func(): pop_out_button.button_pressed = false)
-	window.popup_centered(Vector2i(self.size))
+	window.popup_centered(Vector2i(roundi(self.size.x/1.1),roundi(self.size.y/1.25)))
 	
 	self.reparent(scroller)
-	self.position = Vector2(0,0)
-	self.set_anchors_preset(Control.PRESET_FULL_RECT)
-	
+
 	self.add_theme_constant_override('margin_left',0)
 	self.add_theme_constant_override('margin_top',0)
 	self.add_theme_constant_override('margin_right',0)

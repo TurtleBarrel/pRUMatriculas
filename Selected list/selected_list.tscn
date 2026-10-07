@@ -49,6 +49,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [node name="MarginContainer" type="MarginContainer" unique_id=2081907664]
+custom_minimum_size = Vector2(320, 0)
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
@@ -112,6 +113,7 @@ unique_name_in_owner = true
 custom_minimum_size = Vector2(22, 0)
 layout_mode = 2
 tooltip_text = "Pop out to new window"
+focus_mode = 3
 mouse_default_cursor_shape = 2
 theme_override_icons/icon = ExtResource("6_uupy0")
 toggle_mode = true
@@ -123,6 +125,7 @@ custom_minimum_size = Vector2(25, 25)
 layout_mode = 2
 size_flags_horizontal = 8
 tooltip_text = "Hide or show settings"
+focus_mode = 3
 mouse_default_cursor_shape = 2
 theme = ExtResource("4_wrwl7")
 theme_type_variation = &"blue_toggle"

@@ -2,6 +2,7 @@ extends Control
 
 @onready var time_label:Label = %time_label.duplicate()
 @onready var hour_line: Panel = %hour_line.duplicate()
+@onready var column_scroller: ScrollContainer = %column_scroller
 
 
 var line_nodes:Array = []
@@ -25,6 +26,16 @@ func _ready() -> void:
 	)
 	
 	selected.start_end_hours_changed.connect(reset_columns)
+
+	column_scroller.get_v_scroll_bar().value_changed.connect(func(value):emit_scroll(value,column_scroller))
+	owner.graph_node.column_scrolled.connect(sync_scroll)
+
+
+func emit_scroll(value, source):
+	owner.graph_node.column_scrolled.emit(value,source)
+func sync_scroll(value,source):
+	if source != owner:
+		column_scroller.get_v_scroll_bar().value = value
 
 func reset_columns():
 	for child in get_children():

@@ -191,7 +191,6 @@ func check_overlap() -> void:
 					var start_overlaps:bool = start >= active_time['times_dict']['start'] and start <= active_time['times_dict']['end']
 					var end_overlaps:bool = end >= active_time['times_dict']['start'] and end <= active_time['times_dict']['end']
 					
-					#if own_times: print('SELF POSITIVE')
 					if not own_times and (start_overlaps or end_overlaps):
 						overlapping = true
 						if self.is_selected == true:
@@ -254,9 +253,7 @@ func modulate_blocks(preview:bool):
 		var r:float = randf_range(0,0.6)
 		var g:float = randf_range(0.6-r,0.6-r/3)
 		var b:float = randf_range(0.6-g,0.6)
-		#prints(r,g,b)
-		#print()
-		#self_modulate_temp = Color(randf_range(0.35,0.6),randf_range(0.35,0.6),randf_range(0.35,0.6),0.75)
+
 		self_modulate_temp = Color(r,g,b,0.75)
 
 	for block in graphic_block_nodes:

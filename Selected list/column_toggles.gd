@@ -31,9 +31,6 @@ func _on_days_toggled(toggled_on: bool) -> void:
 	owner.days_shown = toggled_on
 	owner.times_shown = toggled_on
 
-#func _on_times_toggled(toggled_on: bool) -> void:
-	#owner.column_toggled.emit('times',toggled_on)
-	
 func _on_profs_toggled(toggled_on: bool) -> void:
 	owner.column_toggled.emit('professors',toggled_on)
 	prof_title.visible = toggled_on

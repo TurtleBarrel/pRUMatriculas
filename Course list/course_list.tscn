@@ -170,14 +170,14 @@ layout_mode = 2
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Add subject (MATH)"
+placeholder_text = "Add subject (e.g. MATH)"
 keep_editing_on_text_submit = true
 
 [node name="add_course" type="LineEdit" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/adders" unique_id=775478088]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-placeholder_text = "Add course (MATH 101)"
+placeholder_text = "Add course (e.g. MATH 101)"
 keep_editing_on_text_submit = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer" unique_id=635529822]
@@ -200,6 +200,7 @@ expand_icon = true
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 6
+mouse_default_cursor_shape = 2
 text = "Remove subjects..."
 script = ExtResource("6_5ayeu")
 

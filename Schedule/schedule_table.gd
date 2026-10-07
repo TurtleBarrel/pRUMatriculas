@@ -30,6 +30,7 @@ signal scroll_changed(scroller,value)
 func _ready() -> void:
 	selected.section_selected.connect(add_section)
 	selected.section_deselected.connect(remove_section)
+	selected.overlap_updated.connect(update_overlaps)
 	
 	for scroller:ScrollContainer in scrollers:
 		scroller.get_v_scroll_bar().value_changed.connect(func(value):emit_scroll(value,scroller))
@@ -106,19 +107,29 @@ func add_section(code, sec_dict, sec_num) -> void:
 		func():
 			var section_list_entry_node = selected.available_section_nodes[code][sec_num]
 			section_list_entry_node.section_select.button_pressed = false
-			#selected.section_deselected.emit(sec_dict)
 	)
 	
 	section_entry_dicts.append(dict)
-
+	update_overlaps(true)
+	
 func remove_section(sec_dict) -> void:
 	for sec in section_entry_dicts:
 		if sec['dict'] == sec_dict:
 			section_entry_dicts.erase(sec)
 
-			#sec['container'].queue_free()
-
 			for node in sec['nodes']:
 				node.queue_free()
 				section_entry_dicts.erase(sec)
 			break
+
+func update_overlaps(overlapping):
+	if overlapping == true:
+		for entry in section_entry_dicts:
+			var selected_section_node = selected.available_section_nodes[entry['code']][entry['sec_num']]
+			if selected_section_node.overlapping == true:
+				for node in entry['nodes']:
+					node.self_modulate = Color(1.0, 0.447, 0.379, 1.0)
+	else:
+		for entry in section_entry_dicts:
+			for node in entry['nodes']:
+				node.self_modulate = Color.WHITE
