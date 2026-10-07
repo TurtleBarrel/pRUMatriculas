@@ -111,6 +111,8 @@ func to_window() -> void:
 			pop_out_button.toggled.emit(false)
 	)
 	window.popup_centered(Vector2i(300,300))
+	if gs.mobile_device == true:
+		window.theme = load("uid://dawkytrj124w4")
 	
 	var vbox:VBoxContainer = VBoxContainer.new()
 	vbox.add_theme_constant_override('separation',0)
@@ -133,7 +135,6 @@ func to_list() -> void:
 	self.reparent(selected_list_node.entry_container)
 	self.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	section_scroller.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	#section_scroller.custom_minimum_size.y = 0
 	window_node.queue_free()
 	windowed = false
 	

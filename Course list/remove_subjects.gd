@@ -19,7 +19,7 @@ func _on_pressed() -> void:
 	gs.main_scene_node.input_blocker.show()
 	gs.main_scene_node.input_blocker.mouse_default_cursor_shape = Control.CURSOR_ARROW
 	
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if removing_finished == false:
 		window.hide()
 		var start_time =  Time.get_unix_time_from_system()

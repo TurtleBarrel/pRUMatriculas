@@ -94,14 +94,3 @@ func _on_text_submitted(new_text: String) -> void:
 		else: 
 			self.text = old_text
 	self.release_focus()
-
-#func _on_text_changed(new_text: String) -> void:
-	#
-	### Keep editing after clearing text
-	#if text_change_from_clear == false:
-		#self.keep_editing_on_text_submit = false
-	#text_change_from_clear = false
-	#for char_ in new_text:
-		#if allowed_chars.contains(char_) == false:
-			#self.keep_editing_on_text_submit = true
-			#break

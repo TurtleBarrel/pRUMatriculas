@@ -32,13 +32,22 @@ custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text_overrun_behavior = 1
 
-[node name="time_column" type="Control" parent="VBoxContainer" unique_id=990885383]
+[node name="column_scroller" type="ScrollContainer" parent="VBoxContainer" unique_id=1447847107]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="time_column" type="Control" parent="VBoxContainer/column_scroller" unique_id=990885383]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 500)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+mouse_filter = 2
 script = ExtResource("3_itqya")
 
-[node name="hour_line" type="Panel" parent="VBoxContainer/time_column" unique_id=1008603590 groups=["graph_element"]]
+[node name="hour_line" type="Panel" parent="VBoxContainer/column_scroller/time_column" unique_id=1008603590 groups=["graph_element"]]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
@@ -48,9 +57,10 @@ anchor_right = 1.0
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_e3nly")
 
-[node name="time_label" type="Label" parent="VBoxContainer/time_column" unique_id=214190191 groups=["graph_element"]]
+[node name="time_label" type="Label" parent="VBoxContainer/column_scroller/time_column" unique_id=214190191 groups=["graph_element"]]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1

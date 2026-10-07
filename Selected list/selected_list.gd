@@ -52,16 +52,21 @@ func _ready() -> void:
 	selected.course_selected.connect(add_selected)
 	gs.schedule_window_toggled.connect(
 		func(windowed):
-			window_on_top_toggle.visible = windowed
+			if gs.mobile_device == false:
+				window_on_top_toggle.visible = windowed
+			
 			if windowed == false:
 				window_on_top_toggle.button_pressed = false
 	)
+	gs.mobile_detected.connect(pop_out_button.show)
 	options_tabs.hide()
 	hide_disabled.button_pressed = true
 	hide_conflicting.button_pressed = false
 	toggle_options.button_pressed = true
 	section_previews.button_pressed = true
 	caps_button.button_pressed = false
+	
+
 	
 	parent_node = get_parent()
 	gs.component_loaded.emit('selected_list')
@@ -109,18 +114,19 @@ func to_window() -> void:
 	window.visible = false
 	window.force_native = true
 	window.min_size.y = 350
-	
+	window.min_size.x = self.custom_minimum_size.x
+	if gs.mobile_device == true:
+		window.theme = load("uid://dawkytrj124w4")
+		
 	var scroller = ScrollContainer.new()
 	scroller.set_anchors_preset(Control.PRESET_FULL_RECT)
 	window.add_child(scroller)
 	
 	window.close_requested.connect(func(): pop_out_button.button_pressed = false)
-	window.popup_centered(Vector2i(self.size))
+	window.popup_centered(Vector2i(roundi(self.size.x/1.25),roundi(self.size.y/1.25)))
 	
 	self.reparent(scroller)
-	self.position = Vector2(0,0)
-	self.set_anchors_preset(Control.PRESET_FULL_RECT)
-	
+
 	self.add_theme_constant_override('margin_top',0)
 	self.add_theme_constant_override('margin_right',0)
 	self.add_theme_constant_override('margin_bottom',0)

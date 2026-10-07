@@ -60,7 +60,7 @@ corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
 [node name="schedule_graph_node" type="MarginContainer" unique_id=1592528605]
-custom_minimum_size = Vector2(500, 1010)
+custom_minimum_size = Vector2(500, 900)
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -137,6 +137,7 @@ layout_mode = 2
 size_flags_horizontal = 8
 tooltip_text = "Hide or show table."
 focus_mode = 3
+mouse_default_cursor_shape = 2
 theme = ExtResource("4_qowor")
 theme_type_variation = &"blue_toggle"
 theme_override_icons/icon = ExtResource("4_016b7")
@@ -194,6 +195,7 @@ counterpart = NodePath("../Start setter")
 
 [node name="Weekend toggle panel" type="PanelContainer" parent="graphic_background/MarginContainer/VBoxContainer/Graph_options/ScrollContainer/HBoxContainer" unique_id=1553097437]
 layout_mode = 2
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxFlat_2lyom")
 
 [node name="Weekend toggle" type="CheckButton" parent="graphic_background/MarginContainer/VBoxContainer/Graph_options/ScrollContainer/HBoxContainer/Weekend toggle panel" unique_id=1105783135]

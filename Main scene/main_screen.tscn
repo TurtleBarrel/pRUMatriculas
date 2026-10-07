@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://0uvfg2x3shuo" path="res://Schedule/schedule_graphic.tscn" id="3_kwhh3"]
 [ext_resource type="Script" uid="uid://cnfb06xyv5o6f" path="res://Course list/course_list_shade.gd" id="4_ywh4s"]
 [ext_resource type="Texture2D" uid="uid://dukwqdg83adr6" path="res://Images/100px blur.png" id="5_4sclt"]
+[ext_resource type="Theme" uid="uid://dawkytrj124w4" path="res://themes/built_in_windows.tres" id="8_0ga44"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4sclt"]
 bg_color = Color(1, 1, 1, 1)
@@ -23,6 +24,20 @@ func _on_big_pressed() -> void:
 
 func _on_small_pressed() -> void:
 	get_tree().root.content_scale_factor -= 0.2
+
+
+func _on_file_path_1_pressed() -> void:
+	var diag = FileDialog.new()
+	diag.file_mode = FileDialog.FILE_MODE_OPEN_FILE
+	diag.access = FileDialog.ACCESS_FILESYSTEM
+	diag.force_native = true
+	diag.use_native_dialog = true
+	diag.root_subfolder = OS.get_system_dir(OS.SYSTEM_DIR_DOWNLOADS)
+	#diag.root_subfolder = OS.get_user_data_dir()
+	GlobalScene.add_child(diag)
+	diag.popup_centered()
+	
+	diag.close_requested.connect(diag.queue_free)
 "
 
 [node name="Control" type="Control" unique_id=506640660]
@@ -52,10 +67,11 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
 horizontal_scroll_mode = 0
+vertical_scroll_mode = 0
 
 [node name="Schedule_node" parent="sched_and_selected/Schedule_scroller" unique_id=271672865 instance=ExtResource("3_kwhh3")]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(500, 1020)
+custom_minimum_size = Vector2(500, 0)
 layout_mode = 2
 
 [node name="selected_list" parent="sched_and_selected" unique_id=2081907664 instance=ExtResource("2_7a4el")]
@@ -73,11 +89,9 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
 theme_override_constants/separation = 0
-split_offsets = PackedInt32Array(-250)
 dragger_visibility = 1
 drag_area_offset = -133
 drag_area_highlight_in_editor = true
-split_offset = -250
 
 [node name="course_list_control" type="Control" parent="course_list_resizer" unique_id=107093634]
 custom_minimum_size = Vector2(500, 0)
@@ -152,7 +166,9 @@ mouse_default_cursor_shape = 5
 [node name="Window" type="Window" parent="." unique_id=1394416171]
 oversampling_override = 1.0
 initial_position = 2
+size = Vector2i(400, 400)
 visible = false
+theme = ExtResource("8_0ga44")
 script = SubResource("GDScript_g4v7s")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Window" unique_id=730470336]
@@ -167,5 +183,12 @@ text = "big"
 layout_mode = 2
 text = "small"
 
+[node name="file path 1" type="Button" parent="Window/VBoxContainer" unique_id=1799608100]
+layout_mode = 2
+text = "open to path 1"
+
+[node name="FileDialog" type="FileDialog" parent="Window" unique_id=1955589316]
+
 [connection signal="pressed" from="Window/VBoxContainer/big" to="Window" method="_on_big_pressed"]
 [connection signal="pressed" from="Window/VBoxContainer/small" to="Window" method="_on_small_pressed"]
+[connection signal="pressed" from="Window/VBoxContainer/file path 1" to="Window" method="_on_file_path_1_pressed"]

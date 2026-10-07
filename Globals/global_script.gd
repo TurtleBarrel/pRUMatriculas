@@ -11,6 +11,8 @@ signal course_list_toggled
 signal weekends_toggled(toggled_on)
 signal course_removed(code,subject,course_entry)
 signal data_title_set(title)
+signal mobile_detected
+var mobile_device:bool = false
 
 var components_to_load:Array = ['courses_list','selected_list','main_screen']
 var main_scene_node:Control
@@ -25,24 +27,23 @@ var added_course_codes:Array = []
 var main_winow:Window
 var main_window_min_size:Vector2i = Vector2i(1880,350)
 
-#func _process(delta: float) -> void:
-	#if Input.is_action_just_pressed("ui_accept"): ## HACK
-		#get_tree().root.content_scale_factor += 0.2
-		##print(DisplayServer.window_get_min_size())
-		##print(DisplayServer.window_get_size())
-		##print()
-	#elif Input.is_action_just_pressed('ui_up'):
-		#get_tree().root.content_scale_factor -= 0.2
-
-
 func _ready() -> void:
 	component_loaded.connect(
 		func(comp):
 			components_to_load.erase(comp)
 			if components_to_load.is_empty():
 				component_loads_finished.emit()
+				if OS.has_feature('android'):
+					mobile_detected.emit()
+					mobile_device = true
 			
 	)
+	var screen_x = DisplayServer.screen_get_size().x
+	var scale:float = 1.5 * screen_x/1920.0
+	#prints(screen_x,' / ',1920,' = ', scale)
+	if OS.has_feature('android'):
+		get_tree().root.content_scale_factor = scale
+	
 	main_winow = get_window()
 	DisplayServer.window_set_min_size(Vector2i(1880,350))
 

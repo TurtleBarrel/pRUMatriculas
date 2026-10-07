@@ -68,8 +68,8 @@ func _ready() -> void:
 			adders_container.show()
 			var subject = gs.course_info_by_subject.keys().pick_random()
 			var course = gs.course_info_by_subject[subject].keys().pick_random()
-			add_subject.placeholder_text = 'Add subject (Ex. %s)' % subject
-			add_course.placeholder_text = 'Add course (Ex. %s)' % course
+			add_subject.placeholder_text = 'Add subject (e.g. %s)' % subject
+			add_course.placeholder_text = 'Add course (e.g. %s)' % course
 			reset_list()
 			
 			var added_course_codes:Array = files.get_loaded_courses()
@@ -220,7 +220,7 @@ func _on_file_select_button_pressed() -> void:
 	file_dialogue.file_mode = FileDialog.FILE_MODE_OPEN_FILE
 	file_dialogue.use_native_dialog = true
 	var last_loaded_path:String = files.get_data_file_path()
-	if last_loaded_path != 'ERROR':
+	if last_loaded_path != 'ERROR' and gs.mobile_device == false:
 		file_dialogue.current_dir = last_loaded_path.get_base_dir()
 	else:
 		file_dialogue.current_dir = OS.get_system_dir(OS.SYSTEM_DIR_DOWNLOADS)

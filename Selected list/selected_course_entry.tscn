@@ -55,12 +55,14 @@ offset_bottom = 207.0
 grow_horizontal = 2
 size_flags_horizontal = 3
 size_flags_vertical = 0
+mouse_filter = 1
 theme_override_styles/panel = SubResource("StyleBoxEmpty_6xbs4")
 script = ExtResource("1_glm0s")
 
 [node name="FoldableContainer" type="FoldableContainer" parent="." unique_id=1558561278]
 layout_mode = 2
 focus_mode = 3
+mouse_filter = 1
 theme = ExtResource("2_cjgsh")
 title = "course code"
 
