@@ -20,9 +20,9 @@ func create_dicts(file_path:String) -> void:
 	var valid_JSON:bool = error == OK
 	var valid_format:bool = (file_data is Dictionary) and (file_data.has('data')) and (file_data['data'] is Dictionary) and (file_data['data'].size() != 0)
 	var course_sample = file_data['data'].values()[0]
-	var valid_courses = course_sample is Dictionary and course_sample.has('subject') and course_sample.has('name') and course_sample.has('sections') and course_sample['sections'] is Dictionary and course_sample['sections'].size() != 0
+	var valid_courses = course_sample is Dictionary and course_sample.has_all(['subject','name','sections']) and course_sample['sections'] is Dictionary and course_sample['sections'].size() != 0
 	var sec_sample = course_sample['sections'].values()[0]
-	var valid_sections = sec_sample is Dictionary and sec_sample.has('rooms') and sec_sample.has('days') and sec_sample.has('times') and sec_sample.has('creds') and sec_sample.has('prof') and sec_sample.has('cap') and sec_sample.has('async') and sec_sample.has('times_num') and sec_sample.has('days_num')
+	var valid_sections = sec_sample is Dictionary and sec_sample.has_all(['rooms','days','times','creds','profs','cap','async','times_num','days_num'])
 	
 	if not valid_JSON or not valid_format or not valid_courses or not valid_sections: 
 		## If file is not valid JSON or ...
@@ -47,15 +47,11 @@ func create_dicts(file_path:String) -> void:
 		
 		## Creates dictionary to search course data by subject
 		for code:String in formatted_courses.keys():
-			var subject = formatted_courses[code]['subject'] ## Subject code string
+			var subject = formatted_courses[code]['subject'].to_upper() ## Subject code string
+			var code_upper = code.to_upper()
 			gs.course_info_by_subject.get_or_add(subject,{})
-			gs.course_info_by_subject[subject].get_or_add(code,formatted_courses[code])
+			gs.course_info_by_subject[subject].get_or_add(code_upper,formatted_courses[code])
+		
+			gs.course_info_by_code.get_or_add(code_upper,formatted_courses[code])
 
-		#for code in formatted_courses.keys():
-			#print(code, ':')
-			#for sec in formatted_courses[code]['sections']:
-				#print(sec,': ',formatted_courses[code]['sections'][sec])
-			#print()
-			
-		gs.course_info_by_code = formatted_courses
 		gs.info_loaded.emit()

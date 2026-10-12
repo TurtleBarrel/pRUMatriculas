@@ -46,7 +46,7 @@ func _ready() -> void:
 	
 	main_winow = get_window()
 	DisplayServer.window_set_min_size(Vector2i(1880,350))
-
+	
 func reset_main_window_min_size():
 	main_winow.min_size = main_window_min_size
 

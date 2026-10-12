@@ -48,6 +48,7 @@ func _process(_delta: float) -> void:
 						
 func _on_remove_pressed() -> void:
 	for subject in selected_to_remove:
+		subject = subject.to_upper()
 		removal_count_initial += gs.course_nodes_by_subject[subject].size()
 	removal_count_live = removal_count_initial
 	course_list_progress.value = 0
@@ -81,6 +82,7 @@ func _ready() -> void:
 	gs.courses_added.connect(
 		func():
 			for subject in gs.course_nodes_by_subject.keys():
+				subject = subject.to_upper()
 				if active_subject_selectors.has(subject) == false:
 					var subject_select = subject_template.duplicate()
 					subject_select.subject = subject
@@ -96,6 +98,7 @@ func _ready() -> void:
 		func(_course,subject,_node):
 			## When the course's removal function is called, it removes its subject ...
 			## ... from gs.course_nodes_by_subject if it's the last one in the subject
+			subject = subject.to_upper()
 			if gs.course_nodes_by_subject.has(subject) == false:
 				active_subject_selectors[subject].queue_free()
 				active_subject_selectors.erase(subject)

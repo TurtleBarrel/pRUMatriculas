@@ -3,7 +3,7 @@ extends PanelContainer
 @onready var check_box:CheckBox = self.get_child(0)
 
 var subject_remover:Button
-var subject:String
+var subject:String ## Given as upper
 
 func _ready() -> void:
 	check_box.text = subject

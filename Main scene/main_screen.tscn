@@ -16,8 +16,11 @@ bg_color = Color(1, 1, 1, 1)
 script/source = "extends Window
 
 
-
-
+func _ready() -> void:
+	if OS.has_feature('debug') == false:
+		self.hide()
+	$VBoxContainer/Label.text = ProjectSettings.get_setting(\"application/config/version\")
+	#prints('version:',ProjectSettings.get_setting(\"application/config/version\"))
 func _on_big_pressed() -> void:
 	get_tree().root.content_scale_factor += 0.2
 
@@ -163,7 +166,7 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 5
 
-[node name="Window" type="Window" parent="." unique_id=1394416171]
+[node name="debug window" type="Window" parent="." unique_id=1394416171]
 oversampling_override = 1.0
 initial_position = 2
 size = Vector2i(400, 400)
@@ -171,24 +174,25 @@ visible = false
 theme = ExtResource("8_0ga44")
 script = SubResource("GDScript_g4v7s")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Window" unique_id=730470336]
+[node name="VBoxContainer" type="VBoxContainer" parent="debug window" unique_id=730470336]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="big" type="Button" parent="Window/VBoxContainer" unique_id=840648752]
+[node name="big" type="Button" parent="debug window/VBoxContainer" unique_id=840648752]
 layout_mode = 2
 text = "big"
 
-[node name="small" type="Button" parent="Window/VBoxContainer" unique_id=476076415]
+[node name="small" type="Button" parent="debug window/VBoxContainer" unique_id=476076415]
 layout_mode = 2
 text = "small"
 
-[node name="file path 1" type="Button" parent="Window/VBoxContainer" unique_id=1799608100]
+[node name="file path 1" type="Button" parent="debug window/VBoxContainer" unique_id=1799608100]
 layout_mode = 2
 text = "open to path 1"
 
-[node name="FileDialog" type="FileDialog" parent="Window" unique_id=1955589316]
+[node name="Label" type="Label" parent="debug window/VBoxContainer" unique_id=2134372214]
+layout_mode = 2
 
-[connection signal="pressed" from="Window/VBoxContainer/big" to="Window" method="_on_big_pressed"]
-[connection signal="pressed" from="Window/VBoxContainer/small" to="Window" method="_on_small_pressed"]
-[connection signal="pressed" from="Window/VBoxContainer/file path 1" to="Window" method="_on_file_path_1_pressed"]
+[connection signal="pressed" from="debug window/VBoxContainer/big" to="debug window" method="_on_big_pressed"]
+[connection signal="pressed" from="debug window/VBoxContainer/small" to="debug window" method="_on_small_pressed"]
+[connection signal="pressed" from="debug window/VBoxContainer/file path 1" to="debug window" method="_on_file_path_1_pressed"]
