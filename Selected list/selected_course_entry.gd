@@ -71,7 +71,7 @@ func add_sections() -> void:
 				
 			sec_entry.schedules = schedules
 		
-		sec_entry.professors = sec_dict['prof']
+		sec_entry.professors = sec_dict['profs']
 		sec_entry.sec_dict = sec_dict
 		
 		selected.available_section_nodes.get_or_add(code,{})

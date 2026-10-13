@@ -111,8 +111,7 @@ func _ready() -> void:
 
 	gs.data_title_set.connect(
 		func(title:String):
-			if title.is_empty() == false:
-				title_label.text = title
+			title_label.text = title
 	)
 
 	
@@ -128,10 +127,10 @@ func _process(_delta: float) -> void:
 					gs.added_course_codes.append(code)
 
 					var entry = course_entry_scene.instantiate()
-					var subject = courses_to_add[code]['subject']
+					var subject = courses_to_add[code]['subject'].to_upper()
 					
 					entry.code = code
-					entry.subject = courses_to_add[code]['subject']
+					entry.subject = subject
 					entry.course_name = courses_to_add[code]['name']
 					
 					var creds:Array = courses_to_add[code]['sections'].values().map(func(sec):return sec['creds'])
@@ -267,7 +266,6 @@ func pulse_file_select(color:Color) -> void:
 
 	file_select_button.add_theme_stylebox_override("disabled",panel)
 	file_select_button.disabled = true
-	## TODO Add to other panels too
 	var tween = get_tree().create_tween()
 	tween.tween_property(panel,'bg_color',transparent_color,0.75)
 	tween.finished.connect(
@@ -278,11 +276,11 @@ func pulse_file_select(color:Color) -> void:
 
 func _on_add_subject_text_submitted(subject: String) -> void:
 	add_subject.clear()
+	subject = subject.to_upper().strip_edges()
 	var flash_color:Color
-	if gs.course_info_by_subject.has(subject.to_upper()):
+	if gs.course_info_by_subject.has(subject):
 		flash_color = Color(0.493, 1.0, 0.552, 1.0)
-		var courses_dict_by_code:Dictionary = gs.course_info_by_subject[subject.to_upper()]
-		courses_to_add = courses_dict_by_code.duplicate()
+		var courses_dict_by_code:Dictionary = gs.course_info_by_subject[subject]
 		add_courses(courses_dict_by_code.duplicate())
 	else:
 		flash_color = Color(1.0, 0.329, 0.263, 1.0)
@@ -299,10 +297,11 @@ func _on_add_subject_text_submitted(subject: String) -> void:
 
 func _on_add_course_text_submitted(code: String) -> void:
 	add_course.clear()
+	code = code.to_upper().strip_edges()
 	var flash_color:Color
-	if gs.course_info_by_code.has(code.to_upper()):
+	if gs.course_info_by_code.has(code):
 		flash_color = Color(0.493, 1.0, 0.552, 1.0)
-		var course_dicts:Dictionary = {code.to_upper():gs.course_info_by_code[code.to_upper()].duplicate()}
+		var course_dicts:Dictionary = {code:gs.course_info_by_code[code].duplicate()}
 		add_courses(course_dicts.duplicate())
 	else:
 		flash_color = Color(1.0, 0.329, 0.263, 1.0)

@@ -31,8 +31,6 @@ func _ready() -> void:
 		hour_entry.text = '11'
 		minute_entry.text = '59'
 		pm_button.button_pressed = true
-	#if selected_list != null:
-		#selected_list.filters_changed.connect(func(): prints(mode,'wowoa');print())
 
 func _on_hour_entry_text_changed(new_text: String) -> void:
 	fix_invalid('hour', new_text)

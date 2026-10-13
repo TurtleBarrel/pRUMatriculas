@@ -99,8 +99,8 @@ func add_section(code, sec_dict, sec_num) -> void:
 		for block in sec_dict['days'].size():
 			meets_label.text  += sec_dict['rooms'][block]+'  |  '+sec_dict['days'][block]+'  |  '+sec_dict['times'][block]+'\n'
 		meets_label.text = meets_label.text.strip_edges()
-	for block in sec_dict['prof'].size():
-		profs_label.text += sec_dict['prof'][block]+'\n'
+	for block in sec_dict['profs'].size():
+		profs_label.text += sec_dict['profs'][block]+'\n'
 	profs_label.text = profs_label.text.strip_edges()
 	
 	x_button.pressed.connect(
