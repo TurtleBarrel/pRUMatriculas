@@ -6,4 +6,4 @@ Use of the application requires a file containing the information of all the cou
 
 # Attribution
 Gear icons created by Freepik - Flaticon, https://www.flaticon.com/free-icons/gear
-Globe icons created by srip - Flaticon, https://www.flaticon.com/free-icons/globe
+\nGlobe icons created by srip - Flaticon, https://www.flaticon.com/free-icons/globe
