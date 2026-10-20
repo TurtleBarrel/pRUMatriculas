@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://cnfb06xyv5o6f" path="res://Course list/course_list_shade.gd" id="4_ywh4s"]
 [ext_resource type="Texture2D" uid="uid://dukwqdg83adr6" path="res://Images/100px blur.png" id="5_4sclt"]
 [ext_resource type="Theme" uid="uid://dawkytrj124w4" path="res://themes/built_in_windows.tres" id="8_0ga44"]
+[ext_resource type="StyleBox" uid="uid://4j4a7ivlhtgg" path="res://Resource files/input_blocker.tres" id="8_2lwgu"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4sclt"]
 bg_color = Color(1, 1, 1, 1)
@@ -19,15 +20,21 @@ script/source = "extends Window
 func _ready() -> void:
 	if OS.has_feature('debug') == false:
 		self.hide()
+		
 	$VBoxContainer/Label.text = ProjectSettings.get_setting(\"application/config/version\")
+	
+	## DEBUG 
 	#prints('version:',ProjectSettings.get_setting(\"application/config/version\"))
+	#OS.shell_open(converter.website_url)
+	#$HTTPRequest.request_completed.connect(_on_request_completed)
+	#$HTTPRequest.request(\"https://api.github.com/repos/godotengine/godot/releases/latest\")
+	#$HTTPRequest.request(\"https://api.github.com/repos/TurtleBarrel/pRUMatriculas/releases/latest\")
+
 func _on_big_pressed() -> void:
 	get_tree().root.content_scale_factor += 0.2
 
-
 func _on_small_pressed() -> void:
 	get_tree().root.content_scale_factor -= 0.2
-
 
 func _on_file_path_1_pressed() -> void:
 	var diag = FileDialog.new()
@@ -37,13 +44,13 @@ func _on_file_path_1_pressed() -> void:
 	diag.use_native_dialog = true
 	diag.root_subfolder = OS.get_system_dir(OS.SYSTEM_DIR_DOWNLOADS)
 	#diag.root_subfolder = OS.get_user_data_dir()
-	GlobalScene.add_child(diag)
+	popups.add_child(diag)
 	diag.popup_centered()
 	
 	diag.close_requested.connect(diag.queue_free)
 "
 
-[node name="Control" type="Control" unique_id=506640660]
+[node name="main_scene" type="Control" unique_id=506640660]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -165,6 +172,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 5
+theme_override_styles/panel = ExtResource("8_2lwgu")
 
 [node name="debug window" type="Window" parent="." unique_id=1394416171]
 oversampling_override = 1.0
@@ -193,6 +201,9 @@ text = "open to path 1"
 [node name="Label" type="Label" parent="debug window/VBoxContainer" unique_id=2134372214]
 layout_mode = 2
 
+[node name="HTTPRequest" type="HTTPRequest" parent="debug window" unique_id=1027184199]
+
 [connection signal="pressed" from="debug window/VBoxContainer/big" to="debug window" method="_on_big_pressed"]
 [connection signal="pressed" from="debug window/VBoxContainer/small" to="debug window" method="_on_small_pressed"]
 [connection signal="pressed" from="debug window/VBoxContainer/file path 1" to="debug window" method="_on_file_path_1_pressed"]
+[connection signal="request_completed" from="debug window/HTTPRequest" to="debug window" method="_on_request_completed"]

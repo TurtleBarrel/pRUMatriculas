@@ -108,7 +108,7 @@ func _on_window_toggle_toggled(toggled_on: bool) -> void:
 func to_window() -> void:
 	var window = Window.new()
 	#gs.main_scene_node.add_child(window)
-	GlobalScene.add_child(window)
+	popups.add_child(window)
 	
 	win_node = window
 	window.visible = false

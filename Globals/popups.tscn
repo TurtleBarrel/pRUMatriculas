@@ -1,0 +1,192 @@
+[gd_scene format=3 uid="uid://c631qyyy7h2vr"]
+
+[ext_resource type="StyleBox" uid="uid://4j4a7ivlhtgg" path="res://Resource files/input_blocker.tres" id="1_mityc"]
+[ext_resource type="Script" uid="uid://v1yx3gi2dw0" path="res://Globals/popups.gd" id="1_o6r2o"]
+[ext_resource type="Theme" uid="uid://bo3hdnimo24sr" path="res://themes/buttons.tres" id="2_36fhp"]
+[ext_resource type="StyleBox" uid="uid://csrwkxkwg3a1l" path="res://Resource files/popup_outer_panel.tres" id="3_1c1bk"]
+[ext_resource type="StyleBox" uid="uid://ckt7fr3hxp5vi" path="res://Resource files/popup_inner_pannel.tres" id="4_d7fip"]
+[ext_resource type="Script" uid="uid://bjpvrprywcnao" path="res://Globals/update_popup.gd" id="4_q4hvw"]
+[ext_resource type="Script" uid="uid://b57oeqs8ma7lk" path="res://Globals/website_popup.gd" id="6_symm6"]
+
+[node name="popups" type="Node" unique_id=953044749]
+script = ExtResource("1_o6r2o")
+
+[node name="popup_shade" type="PanelContainer" parent="." unique_id=1780179174]
+unique_name_in_owner = true
+z_index = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = ExtResource("1_mityc")
+
+[node name="CenterContainer" type="CenterContainer" parent="popup_shade" unique_id=1710323590]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="popup_tabs" type="TabContainer" parent="popup_shade/CenterContainer" unique_id=1171608023]
+layout_mode = 2
+current_tab = 0
+tabs_visible = false
+
+[node name="update_popup" type="PanelContainer" parent="popup_shade/CenterContainer/popup_tabs" unique_id=228981470]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_1c1bk")
+script = ExtResource("4_q4hvw")
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="popup_shade/CenterContainer/popup_tabs/update_popup" unique_id=1544215486]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="popup_shade/CenterContainer/popup_tabs/update_popup/MarginContainer" unique_id=946652887]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="update_title" type="Label" parent="popup_shade/CenterContainer/popup_tabs/update_popup/MarginContainer/VBoxContainer" unique_id=1058574268]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Update available!"
+horizontal_alignment = 1
+
+[node name="version" type="Label" parent="popup_shade/CenterContainer/popup_tabs/update_popup/MarginContainer/VBoxContainer" unique_id=1826534431]
+unique_name_in_owner = true
+layout_mode = 2
+text = "0.0.0"
+horizontal_alignment = 1
+autowrap_mode = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="popup_shade/CenterContainer/popup_tabs/update_popup/MarginContainer/VBoxContainer" unique_id=862053515]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_styles/panel = ExtResource("4_d7fip")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="popup_shade/CenterContainer/popup_tabs/update_popup/MarginContainer/VBoxContainer/PanelContainer" unique_id=1106507715]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="Changelog" type="Label" parent="popup_shade/CenterContainer/popup_tabs/update_popup/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer" unique_id=1824781532]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "- Change
+- Change
+- Change
+- Change
+- Change
+- Change
+- Change
+- Change
+- Change
+- Change
+- Change
+- Change
+- Change
+- Change
+- Change
+- Change
+- Change
+- Change
+- Change
+- Change
+- Change
+"
+autowrap_mode = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="popup_shade/CenterContainer/popup_tabs/update_popup/MarginContainer/VBoxContainer" unique_id=1005360127]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 10
+
+[node name="dismiss" type="Button" parent="popup_shade/CenterContainer/popup_tabs/update_popup/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1787797085]
+layout_mode = 2
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_36fhp")
+theme_type_variation = &"simple_press_button"
+text = "Dismiss
+"
+
+[node name="website" type="Button" parent="popup_shade/CenterContainer/popup_tabs/update_popup/MarginContainer/VBoxContainer/HBoxContainer" unique_id=2033550285]
+layout_mode = 2
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_36fhp")
+theme_type_variation = &"simple_press_button"
+text = "Visit website"
+
+[node name="website_popup" type="PanelContainer" parent="popup_shade/CenterContainer/popup_tabs" unique_id=167582298]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+theme_override_styles/panel = ExtResource("3_1c1bk")
+script = ExtResource("6_symm6")
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="popup_shade/CenterContainer/popup_tabs/website_popup" unique_id=663919210]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="popup_shade/CenterContainer/popup_tabs/website_popup/MarginContainer" unique_id=904725032]
+layout_mode = 2
+
+[node name="leaving_title" type="Label" parent="popup_shade/CenterContainer/popup_tabs/website_popup/MarginContainer/VBoxContainer" unique_id=1257624034]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "You're about to leave this app."
+horizontal_alignment = 1
+
+[node name="leaving_subtitle" type="Label" parent="popup_shade/CenterContainer/popup_tabs/website_popup/MarginContainer/VBoxContainer" unique_id=1052986619]
+layout_mode = 2
+text = "Going to this link:"
+horizontal_alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="popup_shade/CenterContainer/popup_tabs/website_popup/MarginContainer/VBoxContainer" unique_id=1007428779]
+layout_mode = 2
+theme_override_styles/panel = ExtResource("4_d7fip")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="popup_shade/CenterContainer/popup_tabs/website_popup/MarginContainer/VBoxContainer/PanelContainer" unique_id=1187376708]
+layout_mode = 2
+vertical_scroll_mode = 0
+
+[node name="link_label" type="Label" parent="popup_shade/CenterContainer/popup_tabs/website_popup/MarginContainer/VBoxContainer/PanelContainer/ScrollContainer" unique_id=490343724]
+unique_name_in_owner = true
+layout_mode = 2
+text = "link"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="popup_shade/CenterContainer/popup_tabs/website_popup/MarginContainer/VBoxContainer" unique_id=1562814225]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="cancel" type="Button" parent="popup_shade/CenterContainer/popup_tabs/website_popup/MarginContainer/VBoxContainer/HBoxContainer" unique_id=14310161]
+layout_mode = 2
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_36fhp")
+theme_type_variation = &"simple_press_button"
+text = "Cancel"
+
+[node name="continue" type="Button" parent="popup_shade/CenterContainer/popup_tabs/website_popup/MarginContainer/VBoxContainer/HBoxContainer" unique_id=717314578]
+layout_mode = 2
+focus_mode = 3
+mouse_default_cursor_shape = 2
+theme = ExtResource("2_36fhp")
+theme_type_variation = &"simple_press_button"
+text = "Continue"
+
+[connection signal="pressed" from="popup_shade/CenterContainer/popup_tabs/update_popup/MarginContainer/VBoxContainer/HBoxContainer/dismiss" to="popup_shade/CenterContainer/popup_tabs/update_popup" method="_on_dismiss_update_pressed"]
+[connection signal="pressed" from="popup_shade/CenterContainer/popup_tabs/update_popup/MarginContainer/VBoxContainer/HBoxContainer/website" to="popup_shade/CenterContainer/popup_tabs/update_popup" method="_on_website_pressed"]
+[connection signal="pressed" from="popup_shade/CenterContainer/popup_tabs/website_popup/MarginContainer/VBoxContainer/HBoxContainer/cancel" to="popup_shade/CenterContainer/popup_tabs/website_popup" method="_on_cancel_pressed"]
+[connection signal="pressed" from="popup_shade/CenterContainer/popup_tabs/website_popup/MarginContainer/VBoxContainer/HBoxContainer/continue" to="popup_shade/CenterContainer/popup_tabs/website_popup" method="_on_ok_pressed"]

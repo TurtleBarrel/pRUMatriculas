@@ -12,6 +12,7 @@ signal weekends_toggled(toggled_on)
 signal course_removed(code,subject,course_entry)
 signal data_title_set(title)
 signal mobile_detected
+#signal update_found(release_dict)
 var mobile_device:bool = false
 
 var components_to_load:Array = ['courses_list','selected_list','main_screen']
@@ -33,11 +34,13 @@ func _ready() -> void:
 			components_to_load.erase(comp)
 			if components_to_load.is_empty():
 				component_loads_finished.emit()
+				
 				if OS.has_feature('android'):
 					mobile_detected.emit()
 					mobile_device = true
 			
 	)
+	
 	var screen_x = DisplayServer.screen_get_size().x
 	var scale:float = 1.5 * screen_x/1920.0
 	#prints(screen_x,' / ',1920,' = ', scale)

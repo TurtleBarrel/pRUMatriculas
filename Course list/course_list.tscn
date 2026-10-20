@@ -5,13 +5,17 @@
 [ext_resource type="Texture2D" uid="uid://dhbsit6q2488o" path="res://Images/search_icon.png" id="3_f6nkj"]
 [ext_resource type="Script" uid="uid://dwj23mulb1l3c" path="res://Course list/course_search.gd" id="3_fle51"]
 [ext_resource type="Script" uid="uid://c5j3g13bt260x" path="res://Course list/list_split_container.gd" id="4_kqdee"]
+[ext_resource type="Texture2D" uid="uid://c534yvobcq6cy" path="res://Images/globe_white_thick.png" id="5_hq6id"]
 [ext_resource type="Texture2D" uid="uid://cnaejo0x7qq43" path="res://Images/files_icon.png" id="5_t1mx4"]
 [ext_resource type="Script" uid="uid://bb17es7va31no" path="res://Course list/remove_subjects.gd" id="6_5ayeu"]
 [ext_resource type="Texture2D" uid="uid://cv5s6b5d2fc4u" path="res://Images/left_arrow_icon.png" id="6_f6nkj"]
+[ext_resource type="Script" uid="uid://cvl3a0m4wkmqu" path="res://Course list/visit_website_button.gd" id="6_wc414"]
 [ext_resource type="Theme" uid="uid://bo3hdnimo24sr" path="res://themes/buttons.tres" id="7_hmsm6"]
 [ext_resource type="Texture2D" uid="uid://b8t6bedw4owwu" path="res://Images/split_grabber_v.svg" id="7_nd7mx"]
 [ext_resource type="Script" uid="uid://dytab0ri14c12" path="res://Course list/subject_entry.gd" id="7_qvqpi"]
 [ext_resource type="Texture2D" uid="uid://difq15vcsafdt" path="res://Images/split_grabber_h.svg" id="9_m7bhq"]
+[ext_resource type="StyleBox" uid="uid://csrwkxkwg3a1l" path="res://Resource files/popup_outer_panel.tres" id="11_r1jxw"]
+[ext_resource type="StyleBox" uid="uid://ckt7fr3hxp5vi" path="res://Resource files/popup_inner_pannel.tres" id="12_acsy5"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2lyom"]
 
@@ -61,36 +65,6 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mm5i1"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t1mx4"]
-content_margin_left = 10.0
-content_margin_top = 10.0
-content_margin_right = 10.0
-content_margin_bottom = 10.0
-bg_color = Color(0.22238228, 0.2223823, 0.22238225, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_r1jxw"]
-content_margin_left = 5.0
-content_margin_top = 5.0
-content_margin_right = 5.0
-content_margin_bottom = 5.0
-bg_color = Color(0.1254902, 0.1254902, 0.1254902, 1)
-border_width_left = 2
-border_width_top = 2
-border_width_right = 2
-border_width_bottom = 2
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5ayeu"]
 content_margin_left = 5.0
@@ -152,7 +126,10 @@ layout_mode = 2
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="search" type="LineEdit" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer" unique_id=1344840012]
+[node name="search_and_site" type="HBoxContainer" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer" unique_id=476211987]
+layout_mode = 2
+
+[node name="search" type="LineEdit" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/search_and_site" unique_id=1344840012]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
@@ -161,6 +138,16 @@ placeholder_text = "Search courses "
 right_icon = ExtResource("3_f6nkj")
 icon_expand_mode = 1
 script = ExtResource("3_fle51")
+
+[node name="visit_website_button" type="Button" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer/search_and_site" unique_id=86730268]
+custom_minimum_size = Vector2(30, 0)
+layout_mode = 2
+tooltip_text = "Visit website"
+focus_mode = 3
+mouse_default_cursor_shape = 2
+icon = ExtResource("5_hq6id")
+expand_icon = true
+script = ExtResource("6_wc414")
 
 [node name="adders" type="HBoxContainer" parent="HBoxContainer/list/List/List header margins/List options/VBoxContainer" unique_id=166549953]
 unique_name_in_owner = true
@@ -476,7 +463,7 @@ theme_override_styles/embedded_unfocused_border = SubResource("StyleBoxEmpty_mm5
 custom_minimum_size = Vector2(400, 400)
 offset_right = 400.0
 offset_bottom = 400.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_t1mx4")
+theme_override_styles/panel = ExtResource("11_r1jxw")
 metadata/_tab_index = 0
 
 [node name="Subjects_vbox" type="VBoxContainer" parent="subjects_window/Subjects_box" unique_id=2144978989]
@@ -493,7 +480,7 @@ horizontal_alignment = 1
 [node name="ScrollContainer" type="ScrollContainer" parent="subjects_window/Subjects_box/Subjects_vbox" unique_id=5540245]
 layout_mode = 2
 size_flags_vertical = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_r1jxw")
+theme_override_styles/panel = ExtResource("12_acsy5")
 horizontal_scroll_mode = 0
 
 [node name="Subjects_container" type="GridContainer" parent="subjects_window/Subjects_box/Subjects_vbox/ScrollContainer" unique_id=555077590]
@@ -537,7 +524,8 @@ theme = ExtResource("7_hmsm6")
 theme_type_variation = &"simple_press_button"
 text = "Remove selected"
 
-[connection signal="text_changed" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/search" to="HBoxContainer/list/List/List header margins/List options/VBoxContainer/search" method="_on_text_changed"]
+[connection signal="text_changed" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/search_and_site/search" to="HBoxContainer/list/List/List header margins/List options/VBoxContainer/search_and_site/search" method="_on_text_changed"]
+[connection signal="pressed" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/search_and_site/visit_website_button" to="HBoxContainer/list/List/List header margins/List options/VBoxContainer/search_and_site/visit_website_button" method="_on_pressed"]
 [connection signal="text_submitted" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/adders/add_subject" to="." method="_on_add_subject_text_submitted"]
 [connection signal="text_submitted" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/adders/add_course" to="." method="_on_add_course_text_submitted"]
 [connection signal="pressed" from="HBoxContainer/list/List/List header margins/List options/VBoxContainer/HBoxContainer/file_select_button" to="." method="_on_file_select_button_pressed"]

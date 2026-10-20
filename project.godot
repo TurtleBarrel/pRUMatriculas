@@ -11,23 +11,30 @@ config_version=5
 [application]
 
 config/name="pRUMatricula"
-config/version="0.1.0-alpha"
+config/version="1.0.0-release"
 run/main_scene="uid://c76arg1crwejv"
 config/features=PackedStringArray("4.7", "GL Compatibility")
+run/low_processor_mode=true
 boot_splash/show_image=false
+config/icon="uid://brj3ra8emv3xv"
+
+[audio]
+
+driver/driver="Dummy"
 
 [autoload]
 
 gs="*uid://b56kdfv7wn31g"
 selected="*uid://dvy7if6pjvpnx"
-GlobalScene="*uid://c631qyyy7h2vr"
 files="*uid://civv3qdigtx65"
 converter="*uid://crs67d3xbdl0g"
+popups="*uid://c631qyyy7h2vr"
 
 [display]
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
+window/energy_saving/keep_screen_on=false
 window/stretch/aspect="expand"
 
 [input]
@@ -44,7 +51,8 @@ limits/debugger/max_chars_per_second=500000
 
 [physics]
 
-3d/physics_engine="Jolt Physics"
+2d/physics_engine="Dummy"
+3d/physics_engine="Dummy"
 
 [rendering]
 
