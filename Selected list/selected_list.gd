@@ -58,6 +58,7 @@ func _ready() -> void:
 			if windowed == false:
 				window_on_top_toggle.button_pressed = false
 	)
+	pop_out_button.hide()
 	gs.mobile_detected.connect(pop_out_button.show)
 	options_tabs.hide()
 	hide_disabled.button_pressed = true
@@ -109,7 +110,7 @@ func _on_pop_out_button_toggled(toggled_on: bool) -> void:
 
 func to_window() -> void:
 	var window = Window.new()
-	GlobalScene.add_child(window)
+	popups.add_child(window)
 	
 	window.visible = false
 	window.force_native = true

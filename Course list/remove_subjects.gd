@@ -15,7 +15,7 @@ var removal_count_live:int = 0
 
 func _on_pressed() -> void:
 	window.popup_centered()
-	#gs.main_scene_node.input_blocker.modulate.a = 1
+	gs.main_scene_node.input_blocker.modulate.a = 1
 	gs.main_scene_node.input_blocker.show()
 	gs.main_scene_node.input_blocker.mouse_default_cursor_shape = Control.CURSOR_ARROW
 	
@@ -76,6 +76,7 @@ func alphabetize_entries() -> void:
 		subjects_container.move_child(entry,-1)
 
 func _ready() -> void:
+	window.hide()
 	subject_template = subject_template.duplicate()
 	%subject_template.queue_free()
 	
