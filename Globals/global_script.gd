@@ -12,7 +12,6 @@ signal weekends_toggled(toggled_on)
 signal course_removed(code,subject,course_entry)
 signal data_title_set(title)
 signal mobile_detected
-#signal update_found(release_dict)
 var mobile_device:bool = false
 
 var components_to_load:Array = ['courses_list','selected_list','main_screen']

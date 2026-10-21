@@ -31,13 +31,18 @@ func _process(_delta: float) -> void:
 					if course_node.is_pinned == false and course_node.is_selected == false:
 						gs.course_nodes_by_subject[subject][code]._on_remove_course_pressed()
 						## The course node's function removes it from the dictionaries as well
-					else:
-						selected_to_remove.erase(subject)
-					
 				else:
 					break
 				removal_count_live -= 1
 				course_list_progress.value = 1 - float(removal_count_live)/removal_count_initial
+			var subject_cleared:bool = true
+			for code in gs.course_nodes_by_subject[subject].keys():
+				if gs.course_nodes_by_subject[subject][code].is_selected == false:
+					subject_cleared = false
+					break
+			if subject_cleared == true:
+				selected_to_remove.erase(subject)
+
 		if selected_to_remove.is_empty() == true:
 			removing_finished = true
 			removal_count_initial = 0

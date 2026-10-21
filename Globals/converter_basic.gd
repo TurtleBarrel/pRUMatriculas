@@ -9,6 +9,7 @@ var file_filter_string:String = '*json'
 var release_url:String = ''
 var website_button_active:bool = false
 var website_url:String = ''
+var day_letters:Array = ['Su','M','T','W','R','F','S']
 
 func create_dicts(file_path:String) -> void:
 	var file = FileAccess.open(file_path, FileAccess.READ)

@@ -12,6 +12,7 @@ func _ready() -> void:
 					self.mouse_default_cursor_shape = Control.CURSOR_ARROW
 				
 	)
+	self.text = converter.day_letters[self.get_meta("day_num")]
 
 func _on_toggled(toggled_on: bool) -> void:
 	if toggled_on == true: 
