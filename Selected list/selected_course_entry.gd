@@ -138,17 +138,20 @@ func alphabetize_unpinned_sections() -> void:
 		sec_container.move_child(unpinned_sec_nodes[i],i+pinned_sect_count)
 
 
-func _on_pop_out_toggled(toggled_on: bool) -> void:
-	window_on_top_button.visible = toggled_on
-	
-	if toggled_on == true:
-		to_window()
+func set_popout_display(popped_out):
+	if popped_out == true:
 		pop_out_button.icon = load("uid://fgt0bd733r21")
-		pop_out_button.tooltip_text = 'Send back to main window'
+		pop_out_button.tooltip_text = 'Send back to list'
 	else:
-		to_list()
 		pop_out_button.icon = load("uid://e4f8wj4uohht")
 		pop_out_button.tooltip_text = 'Pop out to new window'
+func _on_pop_out_toggled(toggled_on: bool) -> void:
+	window_on_top_button.visible = toggled_on
+	set_popout_display(toggled_on)
+	if toggled_on == true:
+		to_window()
+	else:
+		to_list()
 		window_on_top_button.set_pressed_no_signal(false)
 
 func _on_window_on_top_toggle_toggled(toggled_on: bool) -> void:

@@ -92,23 +92,26 @@ func _on_section_previews_toggled(toggled_on: bool) -> void:
 
 
 #region Window pop out
-func _on_pop_out_button_toggled(toggled_on: bool) -> void:
-	gs.selected_list_window_toggled.emit(toggled_on)
-	window_on_top_toggle.visible = toggled_on
-	if toggled_on == true:
-		to_window()
+func set_popout_display(popped_out):
+	if popped_out == true:
 		pop_out_button.icon = load("uid://fgt0bd733r21")
 		pop_out_button.tooltip_text = 'Send back to main window'
 	else:
-		close_window()
 		pop_out_button.icon = load("uid://e4f8wj4uohht")
 		pop_out_button.tooltip_text = 'Pop out to new window'
+func _on_pop_out_button_toggled(toggled_on: bool) -> void:
+	gs.selected_list_window_toggled.emit(toggled_on)
+	window_on_top_toggle.visible = toggled_on
+	set_popout_display(toggled_on)
+	if toggled_on == true:
+		to_window()
+	else:
+		close_window()
 		window_on_top_toggle.set_pressed_no_signal(false)
 
 func to_window() -> void:
 	var window_closer = close_window
 	var window = popups.create_popout_window(window_closer,Vector2i(roundi(self.custom_minimum_size.x),350))
-	print('window created')
 
 	var scroller = ScrollContainer.new()
 	scroller.set_anchors_preset(Control.PRESET_FULL_RECT)
@@ -123,23 +126,23 @@ func to_window() -> void:
 
 func close_window() -> void:
 	get_window().call_deferred('queue_free')
+	self.window_on_top_toggle.visible = false
+	self.window_on_top_toggle.button_pressed = false
+	self.set_popout_display(false)
 	if gs.mobile_device == true:
 		self.reparent(parent_node)
 		self.add_theme_constant_override('margin_top',10)
 		self.add_theme_constant_override('margin_right',0)
 		self.add_theme_constant_override('margin_bottom',10)
 		self.pop_out_button.set_pressed_no_signal(false)
-		self.pop_out_button.icon = load("uid://e4f8wj4uohht")
-		self.pop_out_button.tooltip_text = 'Pop out to new window'
-		self.window_on_top_toggle.visible = false
-		self.window_on_top_toggle.button_pressed = false
 	else:
 		## TODO Fix margins when changing window
 		var sched_window = schedule_node.get_window()
 		if self.get_window() == sched_window:
 			get_tree().quit()
 		else:
-			self.get_window().call_deferred('queue_free')
+			## Move main_scene (selected list's scene) to the schedule window
+			## Move schedule back to main_scene
 			gs.main_scene_node.reparent(sched_window)
 			gs.main_window = sched_window
 			gs.reset_main_window_min_size()
@@ -150,24 +153,9 @@ func close_window() -> void:
 			schedule_node.parent_node.show()
 			schedule_node.window_on_top_toggle.visible = false
 			schedule_node.window_on_top_toggle.button_pressed = false
-			self.window_on_top_toggle.visible = false
-			self.window_on_top_toggle.button_pressed = false
-			schedule_node.pop_out_button.add_theme_icon_override('icon',load("uid://e4f8wj4uohht"))
-			schedule_node.pop_out_button.tooltip_text = 'Pop out to new window'
 			schedule_node.pop_out_button.set_pressed_no_signal(false)
-			print('sched un-popout')
-			schedule_node.window_on_top_toggle.set_pressed_no_signal(false)
+			schedule_node.set_popout_display(false)
 		
-		
-		
-		## Selected list is always on main_screen on PC (cannot be popped out)
-		## If Selected list and graphic node don't have the same window, graphic node is popped out
-		## If selected list's window is closed, main_screen's window is closed
-		
-		## Move schedule node to parent node in main_screen, ...
-		## ... and move main_screen to schedule_node's window
-		## Set new gs.main_window
-	
 #endregion
 
 

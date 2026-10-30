@@ -88,22 +88,21 @@ func _on_weekend_toggle_toggled(toggled_on: bool) -> void:
 	sat_left_separator.visible = toggled_on
 
 #region Window popout
-
+func set_popout_display(popped_out):
+	if popped_out == true:
+		pop_out_button.icon = load("uid://fgt0bd733r21")
+		pop_out_button.tooltip_text = 'Send back to main window'
+	else:
+		pop_out_button.icon = load("uid://e4f8wj4uohht")
+		pop_out_button.tooltip_text = 'Pop out to new window'
 func _on_window_toggle_toggled(toggled_on: bool) -> void:
-	print('sched window toggled ',toggled_on)
 	gs.schedule_window_toggled.emit(toggled_on)
 	window_on_top_toggle.visible = toggled_on
+	set_popout_display(toggled_on)
 	if toggled_on == true:
 		to_window()
-		print('windowing')
-		pop_out_button.add_theme_icon_override('icon',load("uid://fgt0bd733r21"))
-		pop_out_button.tooltip_text = 'Send back to main window'
-		
 	else:
 		close_window()
-		print('main screening')
-		pop_out_button.add_theme_icon_override('icon',load("uid://e4f8wj4uohht"))
-		pop_out_button.tooltip_text = 'Pop out to new window'
 		window_on_top_toggle.set_pressed_no_signal(false)
 		gs.reset_main_window_min_size()
 		
@@ -113,6 +112,7 @@ func to_window() -> void:
 	if get_window().close_requested.is_connected(unpop_button):
 		get_window().close_requested.disconnect(unpop_button)
 		get_window().close_requested.connect(selected_list.close_window)
+	
 	var window = popups.create_popout_window(unpop_button, Vector2i(self.custom_minimum_size))
 	
 	var scroller = ScrollContainer.new()

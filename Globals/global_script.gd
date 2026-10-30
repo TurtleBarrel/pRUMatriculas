@@ -14,7 +14,7 @@ signal data_title_set(title)
 signal platform_detected(is_mobile)
 var mobile_device:bool = false
 
-var components_to_load:Array = ['courses_list','selected_list','main_screen']
+var components_to_load:Array = ['courses_list','selected_list','main_scene']
 var main_scene_node:Control
 
 var course_info_by_code:Dictionary

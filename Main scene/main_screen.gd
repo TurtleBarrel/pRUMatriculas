@@ -30,7 +30,7 @@ func _ready() -> void:
 				set_pc_windows()
 	)
 	
-	gs.component_loaded.emit('main_screen')
+	gs.component_loaded.emit('main_scene')
 	
 func sched_window_toggled(windowed):
 	set_window_min_size(windowed)
