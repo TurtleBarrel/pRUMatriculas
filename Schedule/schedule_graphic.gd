@@ -15,6 +15,9 @@ signal column_scrolled(value,source)
 @onready var window_on_top_toggle: Button = %window_on_top_toggle
 @onready var table_graphic_splitter: VSplitContainer = %table_grpahic_splitter
 
+@export var parent_node:ScrollContainer
+@export var selected_list:MarginContainer
+
 var start_override:bool = true
 var end_override:bool = true
 var start_margin:int = 1
@@ -22,14 +25,11 @@ var end_margin:int = 1
 var start:int = 6
 var end:int = 20
 
-var parent_node
-var win_node:Window
 
 func _ready() -> void:
 	weekend_toggle.button_pressed = false
 	weekend_toggle.toggled.emit(false)
 	window_on_top_toggle.hide()
-	parent_node = get_parent()
 
 	var table_graphic_handle = table_graphic_splitter.get_child(-1,true)
 	table_graphic_handle.modulate = Color(0.5, 0.5, 0.5, 1.0)
@@ -90,57 +90,52 @@ func _on_weekend_toggle_toggled(toggled_on: bool) -> void:
 #region Window popout
 
 func _on_window_toggle_toggled(toggled_on: bool) -> void:
+	print('sched window toggled ',toggled_on)
 	gs.schedule_window_toggled.emit(toggled_on)
 	window_on_top_toggle.visible = toggled_on
 	if toggled_on == true:
 		to_window()
+		print('windowing')
 		pop_out_button.add_theme_icon_override('icon',load("uid://fgt0bd733r21"))
 		pop_out_button.tooltip_text = 'Send back to main window'
 		
 	else:
-		to_list(self.get_window())
+		close_window()
+		print('main screening')
 		pop_out_button.add_theme_icon_override('icon',load("uid://e4f8wj4uohht"))
 		pop_out_button.tooltip_text = 'Pop out to new window'
 		window_on_top_toggle.set_pressed_no_signal(false)
 		gs.reset_main_window_min_size()
 		
 
+func unpop_button(): pop_out_button.button_pressed = false
 func to_window() -> void:
-	var window = Window.new()
-	#gs.main_scene_node.add_child(window)
-	popups.add_child(window)
-	
-	win_node = window
-	window.visible = false
-	window.force_native = true
-	window.transient = false
-	window.min_size.x = self.custom_minimum_size.x
-	window.min_size.y = 350
-	if gs.mobile_device == true:
-		window.theme = load("uid://dawkytrj124w4")
+	if get_window().close_requested.is_connected(unpop_button):
+		get_window().close_requested.disconnect(unpop_button)
+		get_window().close_requested.connect(selected_list.close_window)
+	var window = popups.create_popout_window(unpop_button, Vector2i(self.custom_minimum_size))
 	
 	var scroller = ScrollContainer.new()
 	scroller.set_anchors_preset(Control.PRESET_FULL_RECT)
 	window.add_child(scroller)
-	
-	window.close_requested.connect(func(): pop_out_button.button_pressed = false)
-	window.popup_centered(Vector2i(roundi(self.size.x/1.1),roundi(self.size.y/1.25)))
-	
 	self.reparent(scroller)
-
 	self.add_theme_constant_override('margin_left',0)
 	self.add_theme_constant_override('margin_top',0)
 	self.add_theme_constant_override('margin_right',0)
 	self.add_theme_constant_override('margin_bottom',0)
+	selected_list.add_theme_constant_override('margin_left',20)
+	
+	window.popup_centered(Vector2i(roundi(self.size.x/1.1),roundi(self.size.y/1.25)))
 
-func to_list(window_node) -> void:
+func close_window(kill_window:bool = true) -> void:
+	if kill_window == true:
+		get_window().call_deferred('queue_free')
 	self.reparent(parent_node)
-	parent_node.move_child(self,1)
+	parent_node.move_child(self,0)
 	self.add_theme_constant_override('margin_left',25)
 	self.add_theme_constant_override('margin_top',10)
 	self.add_theme_constant_override('margin_right',0)
 	self.add_theme_constant_override('margin_bottom',10)
-	window_node.queue_free()
 
 func _on_window_on_top_toggle_toggled(toggled_on: bool) -> void:
 	self.get_window().visible = false

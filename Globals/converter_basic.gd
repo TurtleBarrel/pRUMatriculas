@@ -6,10 +6,10 @@ extends Node
 ## 
 
 var file_filter_string:String = '*json'
-var release_url:String = ''
-var website_button_active:bool = false
-var website_url:String = ''
-var day_letters:Array = ['Su','M','T','W','R','F','S']
+var release_url:String = 'https://api.github.com/repos/TurtleBarrel/pRUMatriculas/releases/latest'
+var website_button_active:bool = true
+var website_url:String = 'https://prumatriculas.carrd.co/'
+var day_letters:Array = ['D','L','M','W','J','V','S']
 
 func create_dicts(file_path:String) -> void:
 	var file = FileAccess.open(file_path, FileAccess.READ)
@@ -20,12 +20,22 @@ func create_dicts(file_path:String) -> void:
 	var error = sections_info_JSON.parse(json_text)
 	var file_data = sections_info_JSON.data ## Null if parse failed
 	
+	
 	var valid_JSON:bool = error == OK
-	var valid_format:bool = (file_data is Dictionary) and (file_data.has('data')) and (file_data['data'] is Dictionary) and (file_data['data'].size() != 0)
-	var course_sample = file_data['data'].values()[0]
-	var valid_courses = course_sample is Dictionary and course_sample.has_all(['subject','name','sections']) and course_sample['sections'] is Dictionary and course_sample['sections'].size() != 0
-	var sec_sample = course_sample['sections'].values()[0]
-	var valid_sections = sec_sample is Dictionary and sec_sample.has_all(['rooms','days','times','creds','profs','cap','async','times_num','days_num'])
+	var valid_format:bool = false
+	var course_sample = false
+	var valid_courses:bool = false
+	var sec_sample = false
+	var valid_sections:bool = false
+	if valid_JSON == true:
+		valid_format = (file_data is Dictionary) and (file_data.has('data')) and (file_data['data'] is Dictionary) and (file_data['data'].size() != 0)
+		if valid_format == true:
+			course_sample = file_data['data'].values()[0]
+			valid_courses = course_sample is Dictionary and course_sample.has_all(['subject','name','sections']) and course_sample['sections'] is Dictionary and course_sample['sections'].size() != 0
+			if valid_courses == true:
+				sec_sample = course_sample['sections'].values()[0]
+				valid_sections = sec_sample is Dictionary and sec_sample.has_all(['rooms','days','times','creds','profs','cap','async','times_num','days_num'])
+
 	
 	if not valid_JSON or not valid_format or not valid_courses or not valid_sections: 
 		## If file is not valid JSON or ...

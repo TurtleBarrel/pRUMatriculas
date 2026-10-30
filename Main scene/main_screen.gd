@@ -18,11 +18,19 @@ func _ready() -> void:
 		func(hid):
 			course_list_resizer.dragging_enabled = !hid
 	)
+
 	
-	gs.component_loaded.emit('main_screen')
 	
 	var main_split_handle = main_split_container.get_child(-1,true)
 	main_split_handle.modulate = Color(0.5, 0.5, 0.5, 1.0)
+	
+	gs.platform_detected.connect(
+		func(is_mobile):
+			if is_mobile == false:
+				set_pc_windows()
+	)
+	
+	gs.component_loaded.emit('main_screen')
 	
 func sched_window_toggled(windowed):
 	set_window_min_size(windowed)
@@ -33,3 +41,28 @@ func sched_window_toggled(windowed):
 func set_window_min_size(selected_windowed):
 	if selected_windowed == true:
 		self.get_window().min_size.x = 800
+
+func set_pc_windows() -> void:
+	var old_window = get_window()
+	
+
+	var new_main_window = Window.new()
+	new_main_window.visible = false
+	new_main_window.force_native = true
+	new_main_window.mode = Window.MODE_MAXIMIZED
+	new_main_window.min_size = gs.main_window_min_size
+	new_main_window.close_requested.connect(selected_list.close_window)
+	files.connect_file_drop_signal(new_main_window)
+	
+	self.call_deferred('reparent',new_main_window)
+	new_main_window.call_deferred('popup_centered')
+	gs.main_window = new_main_window
+	popups.add_child(new_main_window)
+
+	old_window.unfocusable = true
+	old_window.set_deferred('mode',Window.MODE_MINIMIZED)
+	## TODO: When schedule or selected list windows are closed ...
+	## ... check if they're in the same window and ...
+	## ... close the app if they are. Only on PC.
+
+	

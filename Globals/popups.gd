@@ -10,3 +10,17 @@ func _ready() -> void:
 		func():
 			get_parent().call_deferred("move_child",self,-1)
 	)
+
+func create_popout_window(close_func,min_size = Vector2i.ZERO) -> Window:
+	var window = Window.new()
+	window.visible = false
+	window.min_size = min_size
+	window.force_native = true
+	window.close_requested.connect(close_func)
+	
+	if gs.mobile_device == true:
+		window.theme = load("uid://dawkytrj124w4")
+	
+	self.add_child(window)
+	
+	return window

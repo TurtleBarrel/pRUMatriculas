@@ -113,8 +113,9 @@ func _ready() -> void:
 		func(title:String):
 			title_label.text = title
 	)
-
 	
+	files.connect_file_drop_signal(self.get_window())
+
 func _process(_delta: float) -> void:
 	if adding_finished == false:
 		var start_time:float = Time.get_unix_time_from_system()

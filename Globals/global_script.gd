@@ -11,7 +11,7 @@ signal course_list_toggled
 signal weekends_toggled(toggled_on)
 signal course_removed(code,subject,course_entry)
 signal data_title_set(title)
-signal mobile_detected
+signal platform_detected(is_mobile)
 var mobile_device:bool = false
 
 var components_to_load:Array = ['courses_list','selected_list','main_screen']
@@ -24,8 +24,8 @@ var course_nodes_by_subject:Dictionary
 var course_nodes_by_code:Dictionary
 var added_course_codes:Array = []
 
-var main_winow:Window
-var main_window_min_size:Vector2i = Vector2i(1880,350)
+var main_window:Window
+var main_window_min_size:Vector2i = Vector2i(1200,500)
 
 func _ready() -> void:
 	component_loaded.connect(
@@ -34,10 +34,9 @@ func _ready() -> void:
 			if components_to_load.is_empty():
 				component_loads_finished.emit()
 				
-				if OS.has_feature('android'):
-					mobile_detected.emit()
-					mobile_device = true
-			
+				var is_mobile = OS.has_feature('android')
+				platform_detected.emit(is_mobile)
+				mobile_device = is_mobile
 	)
 	
 	var screen_x = DisplayServer.screen_get_size().x
@@ -45,12 +44,11 @@ func _ready() -> void:
 	#prints(screen_x,' / ',1920,' = ', scale)
 	if OS.has_feature('android'):
 		get_tree().root.content_scale_factor = scale
-	
-	main_winow = get_window()
+		main_window = get_window()
 	DisplayServer.window_set_min_size(Vector2i(1880,350))
 	
 func reset_main_window_min_size():
-	main_winow.min_size = main_window_min_size
+	main_window.min_size = main_window_min_size
 
 func clear_courses() -> void:
 	for course_code in selected.selected_course_nodes.keys():

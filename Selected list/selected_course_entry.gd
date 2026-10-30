@@ -24,7 +24,6 @@ var disabled_count:int = 0
 var disabled_gray = Color(0.4, 0.4, 0.4, 1.0)
 var disabled_red = Color(1.0, 0.245, 0.188, 1.0)
 
-var window_node:Window
 var windowed:bool = false
 
 func _ready() -> void:
@@ -99,20 +98,8 @@ func update_filter() -> void:
 		self.visible = false
 
 func to_window() -> void:
-	var window = Window.new()
-	popups.add_child(window)
-	window_node = window
-	window.visible = false
-	window.force_native = true
-	window.min_size = Vector2(600,150)
-	window.close_requested.connect(
-		func():
-			pop_out_button.button_pressed = false
-			pop_out_button.toggled.emit(false)
-	)
-	window.popup_centered(Vector2i(300,300))
-	if gs.mobile_device == true:
-		window.theme = load("uid://dawkytrj124w4")
+	var window_closer = func(): pop_out_button.button_pressed = false
+	var window = popups.create_popout_window(window_closer,Vector2i(400,50))
 	
 	var vbox:VBoxContainer = VBoxContainer.new()
 	vbox.add_theme_constant_override('separation',0)
@@ -128,14 +115,16 @@ func to_window() -> void:
 	window.add_child(vbox)
 	self.reparent(vbox)
 	
+	window.popup_centered(Vector2i(600,300))
+	
 	section_scroller.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_AUTO
 	windowed = true
 	
 func to_list() -> void:
+	get_window().call_deferred('queue_free')
 	self.reparent(selected_list_node.entry_container)
 	self.size_flags_vertical = Control.SIZE_SHRINK_BEGIN
 	section_scroller.vertical_scroll_mode = ScrollContainer.SCROLL_MODE_DISABLED
-	window_node.queue_free()
 	windowed = false
 	
 func alphabetize_unpinned_sections() -> void:

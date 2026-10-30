@@ -16,6 +16,9 @@ signal search_changed
 @onready var column_titles_margins: MarginContainer = %column_titles_margins
 @onready var window_on_top_toggle: Button = %window_on_top_toggle
 
+@export var parent_node:HSplitContainer
+@export var schedule_node:MarginContainer
+@export var course_list:MarginContainer
 
 var caps_shown:bool = false
 var creds_shown:bool = true
@@ -23,8 +26,6 @@ var rooms_shown:bool = true
 var days_shown:bool = true
 var times_shown:bool = true
 var professors_shown:bool = true
-
-var parent_node
 
 ## Set by columns
 var sections_size:Vector2 = Vector2(0,0)
@@ -54,12 +55,11 @@ func _ready() -> void:
 		func(windowed):
 			if gs.mobile_device == false:
 				window_on_top_toggle.visible = windowed
-			
 			if windowed == false:
 				window_on_top_toggle.button_pressed = false
 	)
 	pop_out_button.hide()
-	gs.mobile_detected.connect(pop_out_button.show)
+	gs.platform_detected.connect(func(is_mobile): pop_out_button.visible = is_mobile)
 	options_tabs.hide()
 	hide_disabled.button_pressed = true
 	hide_conflicting.button_pressed = false
@@ -67,9 +67,6 @@ func _ready() -> void:
 	section_previews.button_pressed = true
 	caps_button.button_pressed = false
 	
-
-	
-	parent_node = get_parent()
 	gs.component_loaded.emit('selected_list')
 	
 func add_selected(code, course_node) -> void:
@@ -103,41 +100,74 @@ func _on_pop_out_button_toggled(toggled_on: bool) -> void:
 		pop_out_button.icon = load("uid://fgt0bd733r21")
 		pop_out_button.tooltip_text = 'Send back to main window'
 	else:
-		to_list(self.get_window())
+		close_window()
 		pop_out_button.icon = load("uid://e4f8wj4uohht")
 		pop_out_button.tooltip_text = 'Pop out to new window'
 		window_on_top_toggle.set_pressed_no_signal(false)
 
 func to_window() -> void:
-	var window = Window.new()
-	popups.add_child(window)
-	
-	window.visible = false
-	window.force_native = true
-	window.min_size.y = 350
-	window.min_size.x = self.custom_minimum_size.x
-	if gs.mobile_device == true:
-		window.theme = load("uid://dawkytrj124w4")
-		
+	var window_closer = close_window
+	var window = popups.create_popout_window(window_closer,Vector2i(roundi(self.custom_minimum_size.x),350))
+	print('window created')
+
 	var scroller = ScrollContainer.new()
 	scroller.set_anchors_preset(Control.PRESET_FULL_RECT)
 	window.add_child(scroller)
-	
-	window.close_requested.connect(func(): pop_out_button.button_pressed = false)
-	window.popup_centered(Vector2i(roundi(self.size.x/1.25),roundi(self.size.y/1.25)))
-	
 	self.reparent(scroller)
-
 	self.add_theme_constant_override('margin_top',0)
 	self.add_theme_constant_override('margin_right',0)
 	self.add_theme_constant_override('margin_bottom',0)
 
-func to_list(window_node) -> void:
-	self.reparent(parent_node)
-	self.add_theme_constant_override('margin_top',10)
-	self.add_theme_constant_override('margin_right',0)
-	self.add_theme_constant_override('margin_bottom',10)
-	window_node.queue_free()
+	window.popup_centered(Vector2i(roundi(self.size.x/1.25),roundi(self.size.y/1.25)))
+
+
+func close_window() -> void:
+	get_window().call_deferred('queue_free')
+	if gs.mobile_device == true:
+		self.reparent(parent_node)
+		self.add_theme_constant_override('margin_top',10)
+		self.add_theme_constant_override('margin_right',0)
+		self.add_theme_constant_override('margin_bottom',10)
+		self.pop_out_button.set_pressed_no_signal(false)
+		self.pop_out_button.icon = load("uid://e4f8wj4uohht")
+		self.pop_out_button.tooltip_text = 'Pop out to new window'
+		self.window_on_top_toggle.visible = false
+		self.window_on_top_toggle.button_pressed = false
+	else:
+		## TODO Fix margins when changing window
+		var sched_window = schedule_node.get_window()
+		if self.get_window() == sched_window:
+			get_tree().quit()
+		else:
+			self.get_window().call_deferred('queue_free')
+			gs.main_scene_node.reparent(sched_window)
+			gs.main_window = sched_window
+			gs.reset_main_window_min_size()
+			sched_window.close_requested.connect(close_window)
+			files.connect_file_drop_signal(sched_window)
+			
+			schedule_node.reparent(schedule_node.parent_node)
+			schedule_node.parent_node.show()
+			schedule_node.window_on_top_toggle.visible = false
+			schedule_node.window_on_top_toggle.button_pressed = false
+			self.window_on_top_toggle.visible = false
+			self.window_on_top_toggle.button_pressed = false
+			schedule_node.pop_out_button.add_theme_icon_override('icon',load("uid://e4f8wj4uohht"))
+			schedule_node.pop_out_button.tooltip_text = 'Pop out to new window'
+			schedule_node.pop_out_button.set_pressed_no_signal(false)
+			print('sched un-popout')
+			schedule_node.window_on_top_toggle.set_pressed_no_signal(false)
+		
+		
+		
+		## Selected list is always on main_screen on PC (cannot be popped out)
+		## If Selected list and graphic node don't have the same window, graphic node is popped out
+		## If selected list's window is closed, main_screen's window is closed
+		
+		## Move schedule node to parent node in main_screen, ...
+		## ... and move main_screen to schedule_node's window
+		## Set new gs.main_window
+	
 #endregion
 
 
