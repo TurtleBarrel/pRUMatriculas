@@ -55,3 +55,24 @@ func clear_courses() -> void:
 		selected.course_deselected.emit(course_code)
 	course_info_by_code.clear()
 	course_info_by_subject.clear()
+
+func set_component_margins(component:MarginContainer, mode:String):
+	var margins:Dictionary
+	match mode:
+		'main_screen_solo':  margins = {'t':10,'r':10,'b':10,'l':25}
+		## ^ On Mobile, when only component is un-windowed
+		## On PC, given to selected_list when schedule_node is windowed
+		'windowed':          margins = {'t':0, 'r':0, 'b':0, 'l':0 }
+		## ^ On Mobile, when component is windowed
+		## On PC, given to schedule_node when it is windowed
+		'main_screen_left':  margins = {'t':10,'r':0, 'b':10,'l':25}
+		## ^ On Mobile, given to left-side component when both are un-windowed
+		## On PC, given to schedule_node when it is un-windowed
+		'main_screen_right': margins = {'t':10,'r':10,'b':10,'l':0 }
+		## ^ On Mobile, given to right-side component when both are un-windowed
+		## On PC, given to selected_list when it is un-windowed
+			
+	component.add_theme_constant_override('margin_top',margins['t'])
+	component.add_theme_constant_override('margin_right',margins['r'])
+	component.add_theme_constant_override('margin_bottom',margins['b'])
+	component.add_theme_constant_override('margin_left',margins['l'])

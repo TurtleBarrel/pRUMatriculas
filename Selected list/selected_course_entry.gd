@@ -100,6 +100,7 @@ func update_filter() -> void:
 func to_window() -> void:
 	var window_closer = func(): pop_out_button.button_pressed = false
 	var window = popups.create_popout_window(window_closer,Vector2i(400,50))
+	window.title = self.code
 	
 	var vbox:VBoxContainer = VBoxContainer.new()
 	vbox.add_theme_constant_override('separation',0)

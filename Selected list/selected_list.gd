@@ -42,12 +42,13 @@ var disabled_hidden:bool = true
 var overlapping_hidden:bool = false
 var earliest_filtered:bool = false
 var latest_filtered:bool = false
+var preview_sections:bool = true
 
 var earliest:float = 0
 var latest:float = 23 + 59.0/60.0
 var selected_days:Array = [0,1,2,3,4,5,6]
 
-var preview_sections:bool = true
+var windowed:bool = false
 
 func _ready() -> void:
 	selected.course_selected.connect(add_selected)
@@ -96,9 +97,23 @@ func set_popout_display(popped_out):
 	if popped_out == true:
 		pop_out_button.icon = load("uid://fgt0bd733r21")
 		pop_out_button.tooltip_text = 'Send back to main window'
+		self.add_theme_constant_override('margin_top',0)
+		self.add_theme_constant_override('margin_right',0)
+		self.add_theme_constant_override('margin_bottom',0)
+		if schedule_node.windowed == false:
+			schedule_node.add_theme_constant_override('margin_right',10)
+		
 	else:
 		pop_out_button.icon = load("uid://e4f8wj4uohht")
 		pop_out_button.tooltip_text = 'Pop out to new window'
+		self.add_theme_constant_override('margin_top',10)
+		self.add_theme_constant_override('margin_right',10)
+		self.add_theme_constant_override('margin_bottom',10)
+		schedule_node.add_theme_constant_override('margin_right',0)
+		if schedule_node.windowed == true:
+			self.add_theme_constant_override('margin_left',25)
+		
+		
 func _on_pop_out_button_toggled(toggled_on: bool) -> void:
 	gs.selected_list_window_toggled.emit(toggled_on)
 	window_on_top_toggle.visible = toggled_on
@@ -109,17 +124,19 @@ func _on_pop_out_button_toggled(toggled_on: bool) -> void:
 		close_window()
 		window_on_top_toggle.set_pressed_no_signal(false)
 
+
+
 func to_window() -> void:
+	## Can only run in mobile version; button is hidden on PC.
 	var window_closer = close_window
 	var window = popups.create_popout_window(window_closer,Vector2i(roundi(self.custom_minimum_size.x),350))
-
+	self.windowed = true
+	self.add_theme_constant_override('margin_left',0)
 	var scroller = ScrollContainer.new()
 	scroller.set_anchors_preset(Control.PRESET_FULL_RECT)
 	window.add_child(scroller)
 	self.reparent(scroller)
-	self.add_theme_constant_override('margin_top',0)
-	self.add_theme_constant_override('margin_right',0)
-	self.add_theme_constant_override('margin_bottom',0)
+
 
 	window.popup_centered(Vector2i(roundi(self.size.x/1.25),roundi(self.size.y/1.25)))
 
@@ -129,11 +146,9 @@ func close_window() -> void:
 	self.window_on_top_toggle.visible = false
 	self.window_on_top_toggle.button_pressed = false
 	self.set_popout_display(false)
+	self.windowed = false
 	if gs.mobile_device == true:
 		self.reparent(parent_node)
-		self.add_theme_constant_override('margin_top',10)
-		self.add_theme_constant_override('margin_right',0)
-		self.add_theme_constant_override('margin_bottom',10)
 		self.pop_out_button.set_pressed_no_signal(false)
 	else:
 		## TODO Fix margins when changing window

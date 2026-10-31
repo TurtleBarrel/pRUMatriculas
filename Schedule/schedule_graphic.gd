@@ -25,6 +25,7 @@ var end_margin:int = 1
 var start:int = 6
 var end:int = 20
 
+var windowed:bool = false
 
 func _ready() -> void:
 	weekend_toggle.button_pressed = false
@@ -92,9 +93,23 @@ func set_popout_display(popped_out):
 	if popped_out == true:
 		pop_out_button.icon = load("uid://fgt0bd733r21")
 		pop_out_button.tooltip_text = 'Send back to main window'
+		self.add_theme_constant_override('margin_left',0)
+		self.add_theme_constant_override('margin_top',0)
+		self.add_theme_constant_override('margin_right',0)
+		self.add_theme_constant_override('margin_bottom',0)
+		if selected_list.windowed == false:
+			selected_list.add_theme_constant_override('margin_left',25)
 	else:
 		pop_out_button.icon = load("uid://e4f8wj4uohht")
 		pop_out_button.tooltip_text = 'Pop out to new window'
+		self.add_theme_constant_override('margin_left',25)
+		self.add_theme_constant_override('margin_top',10)
+		self.add_theme_constant_override('margin_right',0)
+		self.add_theme_constant_override('margin_bottom',10)
+		selected_list.add_theme_constant_override('margin_left',0)
+		if selected_list.windowed == true:
+			self.add_theme_constant_override('margin_right',10)
+			
 func _on_window_toggle_toggled(toggled_on: bool) -> void:
 	gs.schedule_window_toggled.emit(toggled_on)
 	window_on_top_toggle.visible = toggled_on
@@ -109,33 +124,25 @@ func _on_window_toggle_toggled(toggled_on: bool) -> void:
 
 func unpop_button(): pop_out_button.button_pressed = false
 func to_window() -> void:
+	windowed = true
 	if get_window().close_requested.is_connected(unpop_button):
 		get_window().close_requested.disconnect(unpop_button)
 		get_window().close_requested.connect(selected_list.close_window)
-	
 	var window = popups.create_popout_window(unpop_button, Vector2i(self.custom_minimum_size))
 	
 	var scroller = ScrollContainer.new()
 	scroller.set_anchors_preset(Control.PRESET_FULL_RECT)
 	window.add_child(scroller)
 	self.reparent(scroller)
-	self.add_theme_constant_override('margin_left',0)
-	self.add_theme_constant_override('margin_top',0)
-	self.add_theme_constant_override('margin_right',0)
-	self.add_theme_constant_override('margin_bottom',0)
-	selected_list.add_theme_constant_override('margin_left',20)
-	
 	window.popup_centered(Vector2i(roundi(self.size.x/1.1),roundi(self.size.y/1.25)))
 
 func close_window(kill_window:bool = true) -> void:
+	windowed = false
 	if kill_window == true:
 		get_window().call_deferred('queue_free')
 	self.reparent(parent_node)
 	parent_node.move_child(self,0)
-	self.add_theme_constant_override('margin_left',25)
-	self.add_theme_constant_override('margin_top',10)
-	self.add_theme_constant_override('margin_right',0)
-	self.add_theme_constant_override('margin_bottom',10)
+
 
 func _on_window_on_top_toggle_toggled(toggled_on: bool) -> void:
 	self.get_window().visible = false
