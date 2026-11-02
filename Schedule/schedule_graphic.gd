@@ -15,6 +15,10 @@ signal column_scrolled(value,source)
 @onready var window_on_top_toggle: Button = %window_on_top_toggle
 @onready var table_graphic_splitter: VSplitContainer = %table_grpahic_splitter
 
+@export var parent_node:ScrollContainer
+@export var selected_list:MarginContainer
+@export var course_list:MarginContainer
+
 var start_override:bool = true
 var end_override:bool = true
 var start_margin:int = 1
@@ -22,14 +26,10 @@ var end_margin:int = 1
 var start:int = 6
 var end:int = 20
 
-var parent_node
-var win_node:Window
-
 func _ready() -> void:
 	weekend_toggle.button_pressed = false
 	weekend_toggle.toggled.emit(false)
 	window_on_top_toggle.hide()
-	parent_node = get_parent()
 
 	var table_graphic_handle = table_graphic_splitter.get_child(-1,true)
 	table_graphic_handle.modulate = Color(0.5, 0.5, 0.5, 1.0)
@@ -88,59 +88,63 @@ func _on_weekend_toggle_toggled(toggled_on: bool) -> void:
 	sat_left_separator.visible = toggled_on
 
 #region Window popout
+func set_popout_display(popped_out):
+	if popped_out == true:
+		pop_out_button.icon = load("uid://fgt0bd733r21")
+		pop_out_button.tooltip_text = 'Send back to main window'
+	else:
+		pop_out_button.icon = load("uid://e4f8wj4uohht")
+		pop_out_button.tooltip_text = 'Pop out to new window'
 
 func _on_window_toggle_toggled(toggled_on: bool) -> void:
 	gs.schedule_window_toggled.emit(toggled_on)
 	window_on_top_toggle.visible = toggled_on
+	parent_node.visible = !toggled_on
+	course_list.hide_list_button.button_pressed = true
+	set_popout_display(toggled_on)
+	
+	if gs.mobile_device == false:
+		selected_list.window_on_top_toggle.visible = toggled_on
+	
+	
 	if toggled_on == true:
 		to_window()
-		pop_out_button.add_theme_icon_override('icon',load("uid://fgt0bd733r21"))
-		pop_out_button.tooltip_text = 'Send back to main window'
-		
 	else:
-		to_list(self.get_window())
-		pop_out_button.add_theme_icon_override('icon',load("uid://e4f8wj4uohht"))
-		pop_out_button.tooltip_text = 'Pop out to new window'
-		window_on_top_toggle.set_pressed_no_signal(false)
-		gs.reset_main_window_min_size()
+		close_window()
 		
-
+func unpop_button(): pop_out_button.button_pressed = false
 func to_window() -> void:
-	var window = Window.new()
-	#gs.main_scene_node.add_child(window)
-	popups.add_child(window)
-	
-	win_node = window
-	window.visible = false
-	window.force_native = true
-	window.transient = false
-	window.min_size.x = self.custom_minimum_size.x
-	window.min_size.y = 350
-	if gs.mobile_device == true:
-		window.theme = load("uid://dawkytrj124w4")
-	
+	if get_window().close_requested.is_connected(unpop_button):
+		get_window().close_requested.disconnect(unpop_button)
+		get_window().close_requested.connect(selected_list.close_window)
+	var window = popups.create_popout_window(unpop_button, Vector2i(self.custom_minimum_size))
+
+	gs.set_component_margins(self,'windowed')
+	if selected_list.get_window() == gs.main_window: ## Always true on PC
+		gs.set_component_margins(selected_list,'main_screen_solo')
+		gs.main_window.min_size.x = 510
+
 	var scroller = ScrollContainer.new()
 	scroller.set_anchors_preset(Control.PRESET_FULL_RECT)
 	window.add_child(scroller)
-	
-	window.close_requested.connect(func(): pop_out_button.button_pressed = false)
-	window.popup_centered(Vector2i(roundi(self.size.x/1.1),roundi(self.size.y/1.25)))
-	
 	self.reparent(scroller)
+	window.popup_centered(Vector2i(roundi(self.size.x/1.1),roundi(self.size.y/1.25)))
 
-	self.add_theme_constant_override('margin_left',0)
-	self.add_theme_constant_override('margin_top',0)
-	self.add_theme_constant_override('margin_right',0)
-	self.add_theme_constant_override('margin_bottom',0)
-
-func to_list(window_node) -> void:
+func close_window() -> void:
+	get_window().call_deferred('queue_free')
+	window_on_top_toggle.set_pressed_no_signal(false)
+	selected_list.window_on_top_toggle.button_pressed = false
+	gs.reset_main_window_min_size()
+	
 	self.reparent(parent_node)
-	parent_node.move_child(self,1)
-	self.add_theme_constant_override('margin_left',25)
-	self.add_theme_constant_override('margin_top',10)
-	self.add_theme_constant_override('margin_right',0)
-	self.add_theme_constant_override('margin_bottom',10)
-	window_node.queue_free()
+	parent_node.move_child(self,0)
+	
+	if gs.mobile_device == false or selected_list.get_window() == gs.main_window:
+		gs.set_component_margins(self,'main_screen_left')
+		gs.set_component_margins(selected_list,'main_screen_right')
+	else: ## If platform is mobile and selected_list is windowed.
+		gs.set_component_margins(self,'main_screen_solo')
+		
 
 func _on_window_on_top_toggle_toggled(toggled_on: bool) -> void:
 	self.get_window().visible = false

@@ -16,6 +16,9 @@ signal search_changed
 @onready var column_titles_margins: MarginContainer = %column_titles_margins
 @onready var window_on_top_toggle: Button = %window_on_top_toggle
 
+@export var parent_node:HSplitContainer
+@export var schedule_node:MarginContainer
+@export var course_list:MarginContainer
 
 var caps_shown:bool = false
 var creds_shown:bool = true
@@ -23,8 +26,6 @@ var rooms_shown:bool = true
 var days_shown:bool = true
 var times_shown:bool = true
 var professors_shown:bool = true
-
-var parent_node
 
 ## Set by columns
 var sections_size:Vector2 = Vector2(0,0)
@@ -41,25 +42,16 @@ var disabled_hidden:bool = true
 var overlapping_hidden:bool = false
 var earliest_filtered:bool = false
 var latest_filtered:bool = false
+var preview_sections:bool = true
 
 var earliest:float = 0
 var latest:float = 23 + 59.0/60.0
 var selected_days:Array = [0,1,2,3,4,5,6]
 
-var preview_sections:bool = true
-
 func _ready() -> void:
 	selected.course_selected.connect(add_selected)
-	gs.schedule_window_toggled.connect(
-		func(windowed):
-			if gs.mobile_device == false:
-				window_on_top_toggle.visible = windowed
-			
-			if windowed == false:
-				window_on_top_toggle.button_pressed = false
-	)
 	pop_out_button.hide()
-	gs.mobile_detected.connect(pop_out_button.show)
+	gs.platform_detected.connect(func(is_mobile): pop_out_button.visible = is_mobile)
 	options_tabs.hide()
 	hide_disabled.button_pressed = true
 	hide_conflicting.button_pressed = false
@@ -67,9 +59,6 @@ func _ready() -> void:
 	section_previews.button_pressed = true
 	caps_button.button_pressed = false
 	
-
-	
-	parent_node = get_parent()
 	gs.component_loaded.emit('selected_list')
 	
 func add_selected(code, course_node) -> void:
@@ -95,49 +84,80 @@ func _on_section_previews_toggled(toggled_on: bool) -> void:
 
 
 #region Window pop out
-func _on_pop_out_button_toggled(toggled_on: bool) -> void:
-	gs.selected_list_window_toggled.emit(toggled_on)
-	window_on_top_toggle.visible = toggled_on
-	if toggled_on == true:
-		to_window()
+func set_popout_display(popped_out):
+	if popped_out == true:
 		pop_out_button.icon = load("uid://fgt0bd733r21")
 		pop_out_button.tooltip_text = 'Send back to main window'
 	else:
-		to_list(self.get_window())
 		pop_out_button.icon = load("uid://e4f8wj4uohht")
 		pop_out_button.tooltip_text = 'Pop out to new window'
-		window_on_top_toggle.set_pressed_no_signal(false)
+
+func _on_pop_out_button_toggled(toggled_on: bool) -> void:
+	gs.selected_list_window_toggled.emit(toggled_on)
+	window_on_top_toggle.visible = toggled_on
+	course_list.hide_list_button.button_pressed = true
+	set_popout_display(toggled_on)
+	
+	if toggled_on == true:
+		to_window()
+	else:
+		close_window()
+		
+
 
 func to_window() -> void:
-	var window = Window.new()
-	popups.add_child(window)
+	## Can only run in mobile version; button is hidden on PC.
+	gs.set_component_margins(self,'windowed')
+	if gs.mobile_device == true: ## Redundant
+		if schedule_node.get_window() == gs.main_window:
+			gs.set_component_margins(schedule_node,'main_screen_solo')
+
 	
-	window.visible = false
-	window.force_native = true
-	window.min_size.y = 350
-	window.min_size.x = self.custom_minimum_size.x
-	if gs.mobile_device == true:
-		window.theme = load("uid://dawkytrj124w4")
-		
+	var window_closer = close_window
+	var window = popups.create_popout_window(window_closer,Vector2i(roundi(self.custom_minimum_size.x),350))
 	var scroller = ScrollContainer.new()
 	scroller.set_anchors_preset(Control.PRESET_FULL_RECT)
 	window.add_child(scroller)
-	
-	window.close_requested.connect(func(): pop_out_button.button_pressed = false)
-	window.popup_centered(Vector2i(roundi(self.size.x/1.25),roundi(self.size.y/1.25)))
-	
 	self.reparent(scroller)
 
-	self.add_theme_constant_override('margin_top',0)
-	self.add_theme_constant_override('margin_right',0)
-	self.add_theme_constant_override('margin_bottom',0)
+	window.popup_centered(Vector2i(roundi(self.size.x/1.25),roundi(self.size.y/1.25)))
 
-func to_list(window_node) -> void:
-	self.reparent(parent_node)
-	self.add_theme_constant_override('margin_top',10)
-	self.add_theme_constant_override('margin_right',0)
-	self.add_theme_constant_override('margin_bottom',10)
-	window_node.queue_free()
+
+func close_window() -> void:
+	get_window().call_deferred('queue_free')
+	self.window_on_top_toggle.visible = false
+	self.window_on_top_toggle.button_pressed = false
+	self.set_popout_display(false)
+	
+	if gs.mobile_device == false or schedule_node.get_window() == gs.main_window:
+		gs.set_component_margins(schedule_node,'main_screen_left')
+		gs.set_component_margins(self,'main_screen_right')
+	else: ## If platform is mobile and schedule_node is windowed.
+		gs.set_component_margins(self,'main_screen_solo')
+	
+	if gs.mobile_device == true:
+		self.reparent(parent_node)
+		self.pop_out_button.set_pressed_no_signal(false)
+	else:
+		var sched_window = schedule_node.get_window()
+		if self.get_window() == sched_window:
+			get_tree().quit()
+		else:
+			## Move main_scene (selected list's scene) to the schedule window
+			## Move schedule back to main_scene
+			gs.main_scene_node.reparent(sched_window)
+			gs.main_window = sched_window
+			gs.main_window.close_requested.connect(close_window)
+			gs.reset_main_window_min_size()
+			files.connect_file_drop_signal(gs.main_window)
+			
+			schedule_node.reparent(schedule_node.parent_node)
+			schedule_node.parent_node.show()
+			schedule_node.window_on_top_toggle.visible = false
+			schedule_node.window_on_top_toggle.button_pressed = false
+			schedule_node.pop_out_button.set_pressed_no_signal(false)
+			schedule_node.set_popout_display(false)
+		
 #endregion
 
 

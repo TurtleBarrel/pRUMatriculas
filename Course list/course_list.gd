@@ -113,8 +113,9 @@ func _ready() -> void:
 		func(title:String):
 			title_label.text = title
 	)
-
 	
+	files.connect_file_drop_signal(self.get_window())
+
 func _process(_delta: float) -> void:
 	if adding_finished == false:
 		var start_time:float = Time.get_unix_time_from_system()
@@ -150,7 +151,7 @@ func _process(_delta: float) -> void:
 
 			else: 
 				break
-					
+			
 			courses_to_add.erase(code)
 		
 		if courses_to_add.is_empty() == true:
@@ -161,7 +162,7 @@ func _process(_delta: float) -> void:
 
 func alphabetize_unpinned_courses() -> void:
 	### Sets entries in alphabetical order
-	## BUG Crashes??
+	## BUG Potentially caused a crash once.
 	var entry_nodes = entries_unpinned.get_children()
 	entry_nodes.sort_custom(
 		func(one, two):
@@ -173,7 +174,6 @@ func alphabetize_unpinned_courses() -> void:
 		entries_unpinned.move_child(entry,i)
 	gs.courses_added.emit()
 	
-
 func add_courses(course_dicts_dupe) -> void:
 	gs.main_scene_node.input_blocker.show()
 	courses_to_add = course_dicts_dupe

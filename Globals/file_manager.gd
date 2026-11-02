@@ -14,6 +14,16 @@ func _ready() -> void:
 	#prints('data file path',FileAccess.open(data_file_path_file, FileAccess.READ))
 	#prints('active courses file',FileAccess.open(active_courses_file, FileAccess.READ))
 
+func connect_file_drop_signal(window:Window):
+	window.files_dropped.connect(
+		func(dropped:PackedStringArray):
+			gs.main_scene_node.course_list.hide_list_button.button_pressed = false
+			if dropped.size() == 1:
+				converter.create_dicts(dropped[0])
+			else:
+				files.invalid_file_loaded.emit()
+	)
+
 func save_data_file_path(path) -> void:
 	if FileAccess.file_exists(data_file_path_file) == false:
 		FileAccess.open(data_file_path_file, FileAccess.WRITE)
