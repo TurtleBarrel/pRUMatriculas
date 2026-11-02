@@ -79,11 +79,12 @@ size_flags_horizontal = 3
 horizontal_scroll_mode = 0
 vertical_scroll_mode = 0
 
-[node name="Schedule_node" parent="sched_and_selected/Schedule_scroller" unique_id=271672865 node_paths=PackedStringArray("parent_node", "selected_list") instance=ExtResource("3_kwhh3")]
+[node name="Schedule_node" parent="sched_and_selected/Schedule_scroller" unique_id=271672865 node_paths=PackedStringArray("parent_node", "selected_list", "course_list") instance=ExtResource("3_kwhh3")]
 unique_name_in_owner = true
 layout_mode = 2
 parent_node = NodePath("..")
 selected_list = NodePath("../../selected_list")
+course_list = NodePath("../../../course_list_resizer/course_list_control/course_list_container/course_list")
 
 [node name="selected_list" parent="sched_and_selected" unique_id=2081907664 node_paths=PackedStringArray("parent_node", "schedule_node", "course_list") instance=ExtResource("2_7a4el")]
 unique_name_in_owner = true

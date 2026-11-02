@@ -17,6 +17,7 @@ signal column_scrolled(value,source)
 
 @export var parent_node:ScrollContainer
 @export var selected_list:MarginContainer
+@export var course_list:MarginContainer
 
 var start_override:bool = true
 var end_override:bool = true
@@ -24,8 +25,6 @@ var start_margin:int = 1
 var end_margin:int = 1
 var start:int = 6
 var end:int = 20
-
-var windowed:bool = false
 
 func _ready() -> void:
 	weekend_toggle.button_pressed = false
@@ -93,56 +92,59 @@ func set_popout_display(popped_out):
 	if popped_out == true:
 		pop_out_button.icon = load("uid://fgt0bd733r21")
 		pop_out_button.tooltip_text = 'Send back to main window'
-		self.add_theme_constant_override('margin_left',0)
-		self.add_theme_constant_override('margin_top',0)
-		self.add_theme_constant_override('margin_right',0)
-		self.add_theme_constant_override('margin_bottom',0)
-		if selected_list.windowed == false:
-			selected_list.add_theme_constant_override('margin_left',25)
 	else:
 		pop_out_button.icon = load("uid://e4f8wj4uohht")
 		pop_out_button.tooltip_text = 'Pop out to new window'
-		self.add_theme_constant_override('margin_left',25)
-		self.add_theme_constant_override('margin_top',10)
-		self.add_theme_constant_override('margin_right',0)
-		self.add_theme_constant_override('margin_bottom',10)
-		selected_list.add_theme_constant_override('margin_left',0)
-		if selected_list.windowed == true:
-			self.add_theme_constant_override('margin_right',10)
-			
+
 func _on_window_toggle_toggled(toggled_on: bool) -> void:
 	gs.schedule_window_toggled.emit(toggled_on)
 	window_on_top_toggle.visible = toggled_on
+	parent_node.visible = !toggled_on
+	course_list.hide_list_button.button_pressed = true
 	set_popout_display(toggled_on)
+	
+	if gs.mobile_device == false:
+		selected_list.window_on_top_toggle.visible = toggled_on
+	
+	
 	if toggled_on == true:
 		to_window()
 	else:
 		close_window()
-		window_on_top_toggle.set_pressed_no_signal(false)
-		gs.reset_main_window_min_size()
 		
-
 func unpop_button(): pop_out_button.button_pressed = false
 func to_window() -> void:
-	windowed = true
 	if get_window().close_requested.is_connected(unpop_button):
 		get_window().close_requested.disconnect(unpop_button)
 		get_window().close_requested.connect(selected_list.close_window)
 	var window = popups.create_popout_window(unpop_button, Vector2i(self.custom_minimum_size))
-	
+
+	gs.set_component_margins(self,'windowed')
+	if selected_list.get_window() == gs.main_window: ## Always true on PC
+		gs.set_component_margins(selected_list,'main_screen_solo')
+		gs.main_window.min_size.x = 510
+
 	var scroller = ScrollContainer.new()
 	scroller.set_anchors_preset(Control.PRESET_FULL_RECT)
 	window.add_child(scroller)
 	self.reparent(scroller)
 	window.popup_centered(Vector2i(roundi(self.size.x/1.1),roundi(self.size.y/1.25)))
 
-func close_window(kill_window:bool = true) -> void:
-	windowed = false
-	if kill_window == true:
-		get_window().call_deferred('queue_free')
+func close_window() -> void:
+	get_window().call_deferred('queue_free')
+	window_on_top_toggle.set_pressed_no_signal(false)
+	selected_list.window_on_top_toggle.button_pressed = false
+	gs.reset_main_window_min_size()
+	
 	self.reparent(parent_node)
 	parent_node.move_child(self,0)
-
+	
+	if gs.mobile_device == false or selected_list.get_window() == gs.main_window:
+		gs.set_component_margins(self,'main_screen_left')
+		gs.set_component_margins(selected_list,'main_screen_right')
+	else: ## If platform is mobile and selected_list is windowed.
+		gs.set_component_margins(self,'main_screen_solo')
+		
 
 func _on_window_on_top_toggle_toggled(toggled_on: bool) -> void:
 	self.get_window().visible = false

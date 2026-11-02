@@ -13,7 +13,6 @@ extends Control
 
 func _ready() -> void:
 	gs.main_scene_node = self
-	gs.schedule_window_toggled.connect(sched_window_toggled)
 	gs.course_list_toggled.connect(
 		func(hid):
 			course_list_resizer.dragging_enabled = !hid
@@ -32,20 +31,9 @@ func _ready() -> void:
 	
 	gs.component_loaded.emit('main_scene')
 	
-func sched_window_toggled(windowed):
-	set_window_min_size(windowed)
-	course_list.hide_list_button.button_pressed = true
-	schedule_scroller.visible = !windowed
-
-
-func set_window_min_size(selected_windowed):
-	if selected_windowed == true:
-		self.get_window().min_size.x = 800
-
 func set_pc_windows() -> void:
 	var old_window = get_window()
 	
-
 	var new_main_window = Window.new()
 	new_main_window.visible = false
 	new_main_window.force_native = true
@@ -61,8 +49,4 @@ func set_pc_windows() -> void:
 
 	old_window.unfocusable = true
 	old_window.set_deferred('mode',Window.MODE_MINIMIZED)
-	## TODO: When schedule or selected list windows are closed ...
-	## ... check if they're in the same window and ...
-	## ... close the app if they are. Only on PC.
-
 	
