@@ -3,13 +3,12 @@ extends Node
 ## Reads file containing all the information of every section of ...
 ## ... every course, and turns it into two dictionaries 
 ## Verifies that file is valid, and emits signal if not
-## 
 
 var file_filter_string:String = '*json'
-var release_url:String = 'https://api.github.com/repos/TurtleBarrel/pRUMatriculas/releases/latest'
-var website_button_active:bool = true
-var website_url:String = 'https://prumatriculas.carrd.co/'
-var day_letters:Array = ['D','L','M','W','J','V','S']
+var release_url:String = ''
+var website_button_active:bool = false
+var website_url:String = ''
+var day_letters:Array = ['Su','M','T','W','R','F','S']
 
 func create_dicts(file_path:String) -> void:
 	var file = FileAccess.open(file_path, FileAccess.READ)
